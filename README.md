@@ -16,9 +16,3 @@ This program lacks some critical functionality that I plan to build out in the f
 
 1. Currently, no errors are shown when the user inputs invalid data. Instead, the same screen is displayed with no indication as to what happened. 
 2. There is currently now way for new users to be created outside of phpMyAdmin (i.e., it must be done manually). Also, once a user is created, there is no way to update that user.
-
-<<<<<<< HEAD
-A project like this makes a lot more sense in Rails, so I may rebuild it in that as my skills progress.
-=======
-A project like this makes a lot more sense in Rails, so I may rebuild it in that as my skills progress.
->>>>>>> 626aa44c04c47f46af2fcdad6decb90328ba46c8
