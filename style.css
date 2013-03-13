@@ -2,16 +2,26 @@
 
 html, body {
 	overflow: hidden;
+	background: url(images/mochaGrunge.png);
 	height: 100%;
+}
+
+#fakewrap {
+	height: 100%;
+	overflow: auto;
 }
 
 #wrap {
-	overflow: auto;
-	height: 100%;
+	width: 980px;
+	margin: 0px auto;
+	background: white;
+	-webkit-box-shadow: 0 0px 11px rgba(26, 26, 26, 1.0);
+	box-shadow: 0 0px 11px rgba(26, 26, 26, 1.0);
+	padding: 0 0 30px 0;
 }
 
 body {
-	font: 16px/26px  'proxima-nova-soft', Arial; 
+	font: 16px/26px 'proxima-nova-soft', Helvetica, Arial; 
 }
 
 table.breakdown td.name {
@@ -24,11 +34,11 @@ table.breakdown td.hour {
 }
 
 #nav {
-	width: 980px;
+	width: 940px;
 	margin: 0 auto 30px auto;
-	padding: 20px 0;
+	padding: 20px;
 	overflow: hidden;
-	border-bottom: 1px solid #ffab3c;
+	border-bottom: 1px solid rgb(228, 228, 228);
 }
 
 #nav li {
@@ -44,13 +54,12 @@ padding: 0;
 
 
 #content {
-		width: 980px;
-		margin: 0 auto;
+		padding: 0 30px;
 }
 
 .view .expenses {
 	margin: 15px 0 15px 0;
-	border-bottom: 1px solid #ccc;
+	border-bottom: 1px solid #e4e4e4;
 	padding: 0 0 20px 0;
 }
 
@@ -66,18 +75,60 @@ padding: 0;
 }
 
 .view .comments {
-	float: left;
-	width: 820px;
 }
 
 .view .comments a {
 	color: #aaa;
 }
 
+/* Calendar Idea -----------------------------------*/
+
+
+.calendar {
+	background: url(images/calendar.png?ss) no-repeat;
+	width: 70px;
+	height: 70px;
+	text-align: center;
+	float: left;
+	margin: 0 20px 12px 0;
+}
+
+.month {
+	display: block;
+	font-size: 11px;
+	line-height: 13px;
+	width: 68px;
+	margin: 0 auto;
+	padding: 6px 0 10px 0;
+	color: #fff;
+}
+
+.day {
+	font-size: 25px;
+}
+
+.view .minutes {
+	color: #ccc;
+}
+
+.view .overflow_hidden:hover .minutes {
+	display: inline;
+}
+
+.view .right {
+	float: right;
+	width: 830px;
+}
+
+
 label {
 	font-size: 14px;
 	font-weight: bold;
 	display: block;
+}
+
+hr {
+	border-top: 1px solid #e4e4e4;
 }
 
 hr.orange {
@@ -86,7 +137,7 @@ hr.orange {
 	border: none;
 }
 
-input[type="text"], textarea, input[type="password"] {
+input[type="text"].normal, textarea, input[type="password"] {
 	display: block;
 	font: 16px 'proxima-nova-soft', Arial;
 	margin: 0 0 12px 0;
@@ -94,7 +145,7 @@ input[type="text"], textarea, input[type="password"] {
 	border: none;
 	border: 1px solid #CCC;
 	border-radius: 3px;
-	padding: 8px;
+	padding: 9px 9px 8px;
 	-webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
 -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
 -ms-transition: border linear 0.2s, box-shadow linear 0.2s;
@@ -105,8 +156,8 @@ transition: border linear 0.2s, box-shadow linear 0.2s;
 box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-select {
-	margin: 0 0 12px 0;
+select, .select2-container {
+	margin: 0 0 20px 0;
 	display: block;
 }
 
@@ -125,7 +176,7 @@ select {
 	margin: 25px 0;
 }
 
-input[type="text"]:focus, textarea:focus, input[type="password"]:focus {
+input[type="text"].normal:focus, textarea:focus, input[type="password"]:focus {
     outline: 0;
     border-color: rgba(115, 189, 78, 0.8);
     -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(115, 189, 78, 0.6);
@@ -136,11 +187,11 @@ input[type="text"]:focus, textarea:focus, input[type="password"]:focus {
 textarea {
 	resize: none;
 	display: block;
-	width: 400px;
+	width: 890px;
 }
 
 input[type="submit"]  {
-	font: bold 14px/1  'proxima-nova-soft', Arial;
+	font: 300 14px/1  'proxima-nova-soft', Helvetica, Arial;
 	margin: 10px 0 30px;
 background-color: #8BC48B;
             background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#8BC48B), to(#027402)); 
@@ -305,35 +356,52 @@ display: block;
 margin: 4px 6px 0 0;
 }
 
-.fee input[type="text"] {
+.fee input[type="text"].normal {
 	width: 60px;
 }
 
 /* Time Page --------------------------------------- */
 
-.time input[type="text"] {
-	width: 38px;
+.time input[type="text"].normal {
+width: 30px;
+float: left;
+margin: 0 10px 15px 0;
+display: inline;
+text-align: right;}
+
+.time .left {
 	float: left;
-	margin: 0 10px 15px 0;
+	width: 250px;
 }
+
+.time .right {
+	float: left;
+	width: 250px;
+}
+
+
+.time .overflow_hidden {
+	padding: 0;
+}
+
 
 .time .both {
 	overflow: hidden;
 	margin: 0 0 0 -5px;
-padding: 4px 0 0 5px;
+	padding: 4px 0 0 5px;
 }
 
 .time .seconds {
-	float: left;
-	margin: 6px 10px 0 0;
-	width: 25px;
+float: left;
+margin: 7px 10px 0 0;
+width: 25px;
 }
 
 #startstop {
-	float: left;
-	margin: 0 10px 0 0;
-	width: 87px;
-	text-align: center;
+margin: 0 10px 30px 0;
+text-align: center;
+display: block;
+float: left;
 }
 
 .time input[type="submit"][value="Start"] {
@@ -387,7 +455,7 @@ input[type="submit"][value="Stop"]#startstop:hover {
 	margin: 3px 6px 0 0;
 }
 
-.expense input[type="text"] {
+.expense input[type="text"].normal {
 	width: 66px;
 }
 

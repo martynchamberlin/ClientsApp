@@ -151,7 +151,7 @@ WHERE L.date >= ' . $begin . '
 		AND L.date < ' . $end . ' 
     AND L.userID = ' . $_SESSION['loggedIn']['id'] . '
 AND C.clientID = "' . $id . '"
-ORDER BY L.date DESC';
+ORDER BY L.date DESC, postID DESC';
 //ORDER BY TA.taskName, L.date';
 //echo $sql;
 		$core = Core::getInstance();

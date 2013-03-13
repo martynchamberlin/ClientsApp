@@ -46,8 +46,10 @@ class Core
 	static function echoPageURL()
 	{
 		$pageURL = $_SERVER["REQUEST_URI"]; 
-		$pageURL = array_shift(explode('?', $pageURL));
-		$pageURL = array_shift(explode('.', $pageURL));
+		$pageURL = explode('?', $pageURL);
+		$pageURL = array_shift($pageURL);
+		$pageURL = explode('.', $pageURL);
+		$pageURL = array_shift($pageURL);
 		$pageURL = basename($pageURL);
 		echo (empty($pageURL)) ? 'home' : $pageURL;
 	}

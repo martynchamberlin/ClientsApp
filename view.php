@@ -24,6 +24,7 @@ else if (!isset($_SESSION['print']) && isset($_POST['print']))
 
 $totalTime = 0;
 $tasks = array();
+$lastdate = "";
 foreach ($clientArray as $row)
 {
 	if (!isset($tasks[$row['taskID']]))
@@ -38,17 +39,30 @@ foreach ($clientArray as $row)
 
 	$tasks[$row['taskID']]['name'] = $row['taskName'];
 
-	$time = Time::roundToHours(($row['timeAmount']));
+	//$time = Time::roundToHours(($row['timeAmount']));
+	$time = $row['timeAmount'];
+	$date = $row['date'];
+
 	$totalTime = !isset($totalTime) ? $row['timeAmount'] : $totalTime + $row['timeAmount'];
 
-	echo '<div class="overflow_hidden"><div class="left-column"> ' . date('M j', $row['date'])  . ' &bull; ';
-	echo $time . ' hours </div> ';
-	echo '<div class="comments"><strong>' . $row['taskName'] . '</strong> &bull; ' . $row['comments'] . '';
+	echo '<div class="overflow_hidden">';
+	if ($lastdate != $date): 
+	echo'
+
+	<div class="calendar"><span class="month">'
+	. date('M', $row['date']) . 
+	'</span><span class="day">' . date('j', $row['date']) . '</span></div>';
+	endif;
+	echo '
+	<div class="right"><strong> ' . $row['taskName'] . '</strong> — ' . $row['comments'];
 	if (!isset($_SESSION['print']))
 	{
 		echo ' <a href="/time/?time=' . $row['timeID'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '">(edit)</a> <a href="/delete/?time=' . $row['timeID'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '" class="delete">(delete)</a>';
 	}
-	echo '</div></div><!-- end .overflow_hidden -->';
+	echo '<br/><span class="minutes"> ' . $time . ' minutes</span>';
+
+	echo '</div><!-- end .right --></div><!-- end .overflow_hidden -->';
+	$lastdate = $date;
 }
 
 if ( !empty($clientArray))

@@ -1,6 +1,18 @@
 var unload = false;
 
 $(document).ready(function() {
+	// Get some defauls in there before you call the select2 function!
+	$('input[type=text]').each(function()
+	{
+		$(this).addClass('normal');
+	});
+
+	$('select').each(function()
+	{
+		$(this).css('width', '200px');
+	});
+
+	$('select').select2();
 
 	$('#getPeriod select').change(function()
 	{

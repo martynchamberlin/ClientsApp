@@ -26,34 +26,11 @@ if ($edit)
 else
 	echo '<input type="hidden" name="addTime"/>';
 ?>
-<label for="first">Year/Month</label>
-<select name="monthSelect">
-	<? $months = Time::showMonths(12);
-	for ($i = 0; $i < count($months); $i++)
-	{
-	echo '<option ';
-	echo ($months[$i] == Time::getPeriod('F o') && ! $edit || $edit && $months[$i] == date('F o', $time['date'])) ? 'selected="selected" ' : '';
-	echo 'value="' . $months[$i] . '">' . $months[$i] . '</option>';
-}
-?>
-</select>
-
-<label for="daySelect">Day</label>
-
-<select name="daySelect" id="daySelect">
-
-<?php	for ($i = 1; $i <= 31; $i++)
-	{
-	echo '<option ';
-	echo ($i == date('j') && ! $edit || $edit && $i == date('j', $time['date'])) ? 'selected="selected" ' : '';
-	echo 'value="' . $i . '">' . $i . '</option>';
-}
-?>
-</select>
-
+<div  class="overflow_hidden">
+<div class="left">
 <label>Client</label>
 
-<select name="clientID">
+<select name="clientID" tabindex="501">
 <? $clientList = Client::showClientList(); 
 if (empty($clientList))
 {
@@ -73,7 +50,7 @@ foreach ($clientList as $instance)
 
 <label>Task</label>
 
-<select name="taskID">
+<select name="taskID" tabindex="502">
 
 <? $taskList = Task::showTaskList(); 
 if (empty($taskList))
@@ -90,15 +67,44 @@ foreach ($taskList as $instance)
 }
 ?>
 </select>
+</div><!-- end .left -->
+<div class="right">
+<label for="first">Year/Month</label>
+<select name="monthSelect" tabindex="1001">
+	<? $months = Time::showMonths(12);
+	for ($i = 0; $i < count($months); $i++)
+	{
+	echo '<option ';
+	echo ($months[$i] == Time::getPeriod('F o') && ! $edit || $edit && $months[$i] == date('F o', $time['date'])) ? 'selected="selected" ' : '';
+	echo 'value="' . $months[$i] . '">' . $months[$i] . '</option>';
+}
+?>
+</select>
+
+<label for="daySelect">Day</label>
+
+<select name="daySelect" id="daySelect" tabindex="1002">
+
+<?php	for ($i = 1; $i <= 31; $i++)
+	{
+	echo '<option ';
+	echo ($i == date('j') && ! $edit || $edit && $i == date('j', $time['date'])) ? 'selected="selected" ' : '';
+	echo 'value="' . $i . '">' . $i . '</option>';
+}
+?>
+</select>
+</div>
+
+</div><!-- end .overflow_hidden -->
 
 <label for="minutes">Time amount (minutes : seconds)</label>
 <div class="both">
-<input type="text" tabindex="501" name="timeAmount" id="minutes" value="<?= $edit ? $time['timeAmount'] : ''?>"/>
-<div class="seconds">:<span id="seconds"></span></div>
-<input type="submit" value="Start" id="startstop">
+<input type="submit" value="Start" id="startstop"><input type="text" tabindex="1" name="timeAmount" id="minutes" value="<?= $edit ? $time['timeAmount'] : ''?>"/>
+<div class="seconds">:&nbsp;<span id="seconds"></span></div>
+
 </div>
 <label for="accomplish">What did you accomplish?</label>
-<textarea id="accomplish" tabindex="502" name="comments"><?= $edit ? $time['comments'] : '' ?></textarea>
+<textarea id="accomplish" tabindex="2" name="comments"><?= $edit ? $time['comments'] : '' ?></textarea>
 <input type="submit" value="Save">
 </form>
 

@@ -27,6 +27,8 @@ if (!empty($stuff))
 	echo '
 	<table class="main">
 	<tr class="head">
+	<th></th>
+
 	<th>Name</th>
 	<th>Time</th>
 	<th>Money</th>
@@ -37,10 +39,13 @@ if (!empty($stuff))
 
 foreach ($stuff as $row)
 {
+	static $i = 1;
 	$expenses = !empty($row['expenseAmount']) ? $row['expenseAmount'] : 0;
 	$money = $expenses + Time::calculateTotal($row['timeAmount'], $row['rate']);
-
 	echo '<tr>';
+	echo '<td>' . $i . '</td>';
+	$i++;
+
 	echo '<td><a href="/client/?edit=' . $row['clientID'] . '">';
 	echo $row['first'] . ' ' . $row['last'] . '</a></td>';
 
