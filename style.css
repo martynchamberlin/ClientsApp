@@ -585,3 +585,13 @@ input[type="file"] {
 	margin: 15px 0 5px 0;
 	font: 12px Arial;
 }
+
+
+/* Retina Display --------------------------------------- */
+
+@media screen and (-webkit-min-device-pixel-ratio: 2) {
+	body {
+		background: url(images/mochaGrunge_@2X.png);
+		background-size: 400px;
+	}
+}
