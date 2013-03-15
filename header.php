@@ -4,13 +4,14 @@
 	<head>
 		<title>Title of the Document</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<link rel="stylesheet" href="/reset.css" type="text/css" media="screen" />
-		<link rel="stylesheet" href="/style.css" type="text/css" media="screen" />
-		<link rel="stylesheet" href="/select2.css" type="text/css" media="screen" />
-		<meta name='robots' content='noindex,nofollow' />
-		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>	
+		<link rel="stylesheet" href="/css/reset.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="/css/style.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="/css/select2.css" type="text/css" media="screen" />
+		<script type='text/javascript' src='/js/jquery.js'></script>	
 		<script src="/js/jquery.text-expander.js"></script>
 		<script src="/js/textarea.js"></script>
+		<script type='text/javascript' src='/js/superfish.js'></script>
+
 		<script src="/js/site.js"></script>
 		<script src="/js/jquery.hotkeys-0.7.9.js"></script>
 		<script src="/js/select2.js"></script>
@@ -21,26 +22,70 @@
 		<div id="fakewrap">
 		<div id="wrap">
 	<div id="nav">
+		<? if ( User::logged_in() === true ) : ?>
 				<ul>
 					<li>
-						<a <? if (Core::isPage('')) echo 'class="current" '; ?>href="/">Home</a>
+						<a id="home" <? if (Core::isPage('')) echo 'class="current" '; ?>href="/">Clients <strong>App</strong></a>
 					</li>
 					<li>
-						<a <? if (Core::isPage('time')) echo 'class="current" '; ?>href="/time/">New Time</a>
+						<a href="#">New...</a>
+						<ul>
+							<? $clients = Client::showClientList(); ?>
+							<li><a href="/<?= ! empty($clients) ? 'time/">' : '#time" class="no-time dead">' ?>Time Log</a></li>
+							<li><a href="/client/">Client</a></li>
+
+							<li><a href="/task/">Frequent Task</a></li>
+							<li><a href="/<?= ! empty($clients) ? 'fee/">' : '#fee" class="no-fee dead">' ?>One-time Fee</a></li>
+						</ul>
+
 					</li>
 					<li>
-						<a <? if (Core::isPage('task')) echo 'class="current" '; ?>href="/task/">New Task</a>
+						<a <? if (Core::isPage('clients')) echo 'class="current" '; ?>href="/clients/">Clients</a>
 					</li>
+				
 					<li>
-						<a <? if (Core::isPage('fee')) echo 'class="current" '; ?>href="/fee/">New Fee</a>
-					</li>
-					<li>
-						<a <? if (Core::isPage('client')) echo 'class="current" '; ?>href="/client/">New Client</a>
-					</li>
+						<a <? if (Core::isPage('tasks')) echo 'class="current" '; ?>href="/tasks/">Tasks</a>
+					</li>		
+
+				
+
+
+										<li class="account-settings">
+						<a href="/account/">Account</a>
+						<ul>
 					<li class="logout">
 						<a href="/logout/">Logout</a>
 					</li>
+
+						</ul>
+					</li>
+
+	<li class="period">
+									<form action="" method="POST" id="getPeriod">
+							<select name="monthSelect">
+							<? $months = Time::showMonths(12);
+							for ($i = 0; $i < count($months); $i++)
+							{
+							echo '<option ';
+							echo ($months[$i] == Time::getPeriod('F Y')) ? 'selected="selected" ' : '';
+							echo 'value="' . $months[$i] . '">' . $months[$i] . '</option>';
+						}
+						?>
+						</select>
+						</form>
+					</li>
+
 				</ul>
+		<? else: ?>
+
+	<ul>
+					<li>
+						<a id="home" <? if (Core::isPage('')) echo 'class="current" '; ?>href="/">Clients <strong>App</strong></a>
+					<li class="logout">
+						<a href="/login/">Login</a>
+					</li>
+				</ul>
+		<? endif; ?>
 			</div><! -- end #nav -->	
 				<div id="content">
 				<div class="entry-content">

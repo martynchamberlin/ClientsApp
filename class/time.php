@@ -53,36 +53,74 @@ AND L.postType = "time"';
 	}
  
 	static function addTime()
-	{
-		$sql = 'INSERT INTO times SET 
-			clientID = :clientID, 
-			userID = :userID, 
-			timeAmount = :timeAmount,
-			taskID = :taskID,
-			comments = :comments';
+	{		
+		
 		$core = Core::getInstance();
-		$s = $core->pdo->prepare($sql);
-		$s->bindValue('clientID', $_POST['clientID']);
-		$s->bindValue('userID', $_SESSION['loggedIn']['id']);
-		$s->bindValue('timeAmount', $_POST['timeAmount']);
-		$s->bindValue('taskID', $_POST['taskID']);
-		$s->bindValue('comments', $_POST['comments']);
-		$s->execute();
-		$postID = $core->pdo->lastInsertId();
 
-		// We've got the actual content in there, and now we have to populate the lookup table. 
-		$sql = 'INSERT INTO lookup SET 
-			userID = :userID, 
-			clientID = :clientID, 
-			postID = :postID, 
-			date = :date, 
-			postType = "time"';
+		$sql = 'SELECT * FROM times T
+			INNER JOIN lookup L
+				ON T.id = L.postID
+			WHERE
+			T.clientID = :clientID AND
+			T.userID = :userID AND
+			T.taskID = :taskID AND
+			L.date = :date';
 		$s = $core->pdo->prepare($sql);
-		$s->bindValue('date', strtotime($_POST['daySelect'] . ' ' . $_POST['monthSelect']));
+		$s->bindValue('taskID', $_POST['taskID']);
 		$s->bindValue('clientID', $_POST['clientID']);
 		$s->bindValue('userID', $_SESSION['loggedIn']['id']);
-		$s->bindValue('postID', $postID);
+		$s->bindValue('date', strtotime($_POST['daySelect'] . ' ' . $_POST['monthSelect']));
 		$s->execute();
+		$row = $s->fetch();
+		if ( $s->rowCount() > 0 )
+		{
+			$comments = trim($row['comments']);
+			$comments .= "\n\n&#182; " . $_POST['comments'];
+			$time = $row['timeAmount'];
+			$time += $_POST['timeAmount'];
+			$sql = 'UPDATE times SET 
+				comments = :comments,
+				timeAmount = :timeAmount
+					WHERE 
+				id = :id';
+			$s = $core->pdo->prepare($sql);
+			$s->bindValue('comments', $comments);
+			$s->bindValue('timeAmount', $time);
+			$s->bindValue('id', $row['postID']);
+			$s->execute();
+		}
+		else
+		{
+			$sql = 'INSERT INTO times SET 
+				clientID = :clientID, 
+				userID = :userID, 
+				timeAmount = :timeAmount,
+				taskID = :taskID,
+				comments = :comments';
+			$core = Core::getInstance();
+			$s = $core->pdo->prepare($sql);
+			$s->bindValue('clientID', $_POST['clientID']);
+			$s->bindValue('userID', $_SESSION['loggedIn']['id']);
+			$s->bindValue('timeAmount', $_POST['timeAmount']);
+			$s->bindValue('taskID', $_POST['taskID']);
+			$s->bindValue('comments', $_POST['comments']);
+			$s->execute();
+			$postID = $core->pdo->lastInsertId();
+
+			// We've got the actual content in there, and now we have to populate the lookup table. 
+			$sql = 'INSERT INTO lookup SET 
+				userID = :userID, 
+				clientID = :clientID, 
+				postID = :postID, 
+				date = :date, 
+				postType = "time"';
+			$s = $core->pdo->prepare($sql);
+			$s->bindValue('date', strtotime($_POST['daySelect'] . ' ' . $_POST['monthSelect']));
+			$s->bindValue('clientID', $_POST['clientID']);
+			$s->bindValue('userID', $_SESSION['loggedIn']['id']);
+			$s->bindValue('postID', $postID);
+			$s->execute();
+		}
 		header('Location: /view/?clientID=' . $_POST['clientID']);
 		exit;
 	}

@@ -3,19 +3,7 @@ require 'includes.php';
 require 'header.php'; 
 
 ?>
-					<form action="" method="POST" id="getPeriod">
-							<select name="monthSelect">
-							<? $months = Time::showMonths(12);
-							for ($i = 0; $i < count($months); $i++)
-							{
-							echo '<option ';
-							echo ($months[$i] == Time::getPeriod('F Y')) ? 'selected="selected" ' : '';
-							echo 'value="' . $months[$i] . '">' . $months[$i] . '</option>';
-						}
-						?>
-						</select>
-						</form>
-
+	
 
 
 <?= '<h1>' . Time::getPeriod() . '\'s Clients</h1>';
@@ -26,6 +14,7 @@ if (!empty($stuff))
 {
 	echo '
 	<table class="main">
+	<thead>
 	<tr class="head">
 	<th></th>
 
@@ -33,7 +22,8 @@ if (!empty($stuff))
 	<th>Time</th>
 	<th>Money</th>
 	<th>Fees</th>
-	</tr>';
+	</tr>
+	</thead>';
 
 
 

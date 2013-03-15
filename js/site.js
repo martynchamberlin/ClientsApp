@@ -1,6 +1,39 @@
 var unload = false;
 
-$(document).ready(function() {
+jQuery(document).ready(function($) {
+
+	// Give some sanity to the tables
+	$('table tr:odd').addClass('grey');
+	// Handles people on the dropdown trying to go to either the "new time" or the "new fee" pages ... both of which require a client and in the case of time, also a task
+	$('#nav .no-time').click(function()
+	{
+		alert('You must create a client and a task before you can create a time log.');	
+		return false;
+	});
+	
+	$('#nav .no-fee').click(function()
+	{
+		alert('You must create a client before you can create a fee.');
+		return false;
+	});
+
+	// Implementing the Superfish jQuery plugin, which gives us our dropdown menus
+	$('#nav ul').superfish({
+		delay:       100,								// 0.1 second delay on mouseout 
+		animation:   {opacity:'show',height:'show'},	// fade-in and slide-down animation 
+		dropShadows: false								// disable drop shadows 
+	});
+	
+
+
+	// Thanks to Markdown, it's time for some new jQuery magic
+	$('.view .right').each(function()
+	{
+			$(this).find('p').first().css('display', 'inline');
+			$(this).find('p:eq(1)').css('padding-top', '20px');
+			$(this).find('p').last().css('display', 'inline');
+	});
+
 	// Get some defauls in there before you call the select2 function!
 	$('input[type=text]').each(function()
 	{
@@ -34,9 +67,8 @@ $(document).ready(function() {
 		if (!yes) {
 			return false;
 		}
-});
+	});
 
-$(document).ready(function() {
 	
 	var timer = false;
 	var interval;
@@ -147,15 +179,12 @@ $(document).ready(function() {
 			return "Sure you want to leave?\n\nYour time entry will be permanently lost if you do.";
 		}
 	};
-
-});
-
-
 	$(document).bind('keydown', 'ctrl+s', function(){ 
 		unload = true;
 		$('form').submit();
 
 	});
+
 	$(document).bind('keydown', 'ctrl+n', function(){ window.location = "/time";});
 	$(document).bind('keydown', 'ctrl+w', function(){ window.location = "/";});
 	var postID = $('#noteID').val();
@@ -164,86 +193,13 @@ $(document).ready(function() {
 	$(document).bind('keydown', 'ctrl+v', function(){ window.location = "/" + postURL; });
 	var searchForm = $('.search_form input');
 	$(document).bind('keydown', 'ctrl+f', function(){ searchForm.focus(); });
-//window.location = "/edit?id=" + $('#noteID').value
 
-
-$(document).ready(function() {
-	//$("textarea").tabby();
-
-	/*
-	setInterval(timer, 100);
-	function timer() {
-		var content = $('textarea').val();
-
-		$.ajax({
-		  type: "POST",
-		  url: "/word_count.php",
-			data: {
-				'content': content
-			},
-
-		  success: function(html){
-				$('#word_count')
-				.html('')
-				.append(html);
-			}
-		});
-	}
-	*/
-
+	
 	$('textarea').autosize(); 
 
-	// Make the white background as tall as the window. This is just cool
-	var h = $('#wrap').outerHeight();
-	var padding = parseInt(jQuery(".inner").css("padding-top"));
-	padding += parseInt(jQuery(".inner").css("padding-bottom"));
-	padding += parseInt(jQuery(".inner").css("margin-top"));
-	padding += parseInt(jQuery(".inner").css("margin-bottom"));
-	padding += parseInt(jQuery("#wrap").css("padding-top"));
-	padding += parseInt(jQuery("#wrap").css("padding-bottom"));
-	padding += parseInt(jQuery("#wrap").css("margin-top"));
-	padding += parseInt(jQuery("#wrap").css("margin-bottom"));
-
-	if (h < $(window).height())
-	{
-		$('.inner').css("min-height", $(window).height() - padding + "px");
-	}
-
-	$('#content').css("min-height", $('.inner').innerHeight() - 87);
-
-	$('textarea').css("height", document.getElementById('editTextarea').scrollHeight + "px");
 });
 
-/*	$('.add-submit').click(function() {
-		var text = $(".contentEditable").html();
-
-		var text = text.replace( /<div><br><\/div>/g, '\n');
-		var text = text.replace( /<div>/g, '\n');
-		var text = text.replace( "<br>\n", '<br>');
-
-		var text = text.replace( /<\/div>/g, '');
-		var text = text.replace( /<p>/g, '');
-		var text = text.replace( /<\/p>/g, '<br><br>');
-		var text = text.replace( /<br>/g, '\n' );
-		var text = text.replace( "<span style=\"background-color: rgb(255, 255, 255); \">", '' );
-		var text = text.replace("style=\"background-color: rgb(255, 255, 255); border-width: initial; border-color: initial; \"", '');
-		var text = text.replace( /<\/span>/g, '');
-		var text = text.replace( /<\/span>/g, '');
-		var text = text.replace( /&lt;/g, '<');
-		var text = text.replace( /&gt;/g, '>');
-		var text = text.replace( /&amp;/g, '&');
-		var text = text.replace( /&nbsp;/g, '');
 
 
 
-		$("textarea.hidden").val(text);
-
-		var textarea_val = $("textarea.hidden").val();
-
-
-		alert(textarea_val);
-		return true;
-		});
-*/
-});
 

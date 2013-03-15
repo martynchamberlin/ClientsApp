@@ -2,23 +2,34 @@
 
 abstract class Client
 {
+	static $client_list = array();
+	// Flag for ensuring method is only invoked once in page request
+	static $bool_client_list = false;
+	
 	static function showClientList()
 	{
-		$period = $_SESSION['period'];
-		$begin = strtotime($period);
+		Time::getPeriod();
+		if ( ! ( self::$bool_client_list ) )
+		{
+			$period = $_SESSION['period'];
+			$begin = strtotime($period);
+			$end = strtotime('+1 month', $begin);
 
-		$sql = 'SELECT count(L.postID) as primarySort, count(L2.postID) as secondarySort, C.first, C.last, C.clientID FROM clients C
-LEFT JOIN lookup L on C.clientID = L.clientID AND L.date >= ' . $begin . '
+			$sql = 'SELECT count(DISTINCT L.postID) as primarySort, count(DISTINCT L2.postID) as secondarySort, C.first, C.last, C.rate, C.email, C.clientID FROM clients C
+		LEFT JOIN lookup L on C.clientID = L.clientID AND L.date >= ' . $begin . ' AND L.date < ' . $end . '
 
-LEFT JOIN lookup L2 on C.clientID = L2.clientID 
+		LEFT JOIN lookup L2 on C.clientID = L2.clientID 
 
-WHERE C.userID = ' . $_SESSION['loggedIn']['id'] . ' 
-GROUP BY C.clientID
-ORDER BY primarySort DESC, secondarySort DESC, last, first';
-
-		$core = Core::getInstance(); 
-		$s = $core->pdo->query($sql); 
-		return $s->fetchAll();
+		WHERE C.userID = ' . $_SESSION['loggedIn']['id'] . ' 
+		GROUP BY C.clientID
+		ORDER BY primarySort DESC, secondarySort DESC, last, first';
+			$core = Core::getInstance(); 
+			$s = $core->pdo->query($sql); 
+			$data = $s->fetchAll();
+			self::$client_list = $data;
+			self::$bool_client_list = true;
+		}
+		return self::$client_list;
 	}
 
 	static function replaceClient()

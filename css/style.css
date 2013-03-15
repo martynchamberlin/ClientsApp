@@ -1,0 +1,721 @@
+/* Bare Essentials --------------------------------------- */
+
+html, body {
+	overflow: hidden;
+	background: url(/images/mochaGrunge.png);
+	height: 100%;
+}
+
+#fakewrap {
+	height: 100%;
+	overflow: auto;
+}
+
+#wrap {
+	width: 980px;
+	margin: 0px auto;
+	background: white;
+	-webkit-box-shadow: 0 0px 11px rgba(26, 26, 26, 1.0);
+	box-shadow: 0 0px 11px rgba(26, 26, 26, 1.0);
+	padding: 0 0 30px 0;
+	overflow: hidden;
+}
+
+body {
+	font: 16px/24px 'proxima-nova-soft', Helvetica, Arial; 
+}
+
+table.breakdown td.name {
+	padding-right: 16px;
+}
+
+table.breakdown td.hour {
+	text-align: right;
+	padding-right: 7px;
+}
+
+#nav {
+	width: 940px;
+	margin: 0 auto 30px auto;
+	padding: 10px 0;
+	overflow: hidden;
+	border-bottom: 1px solid rgb(228, 228, 228);
+}
+
+#nav li {
+	list-style-type: none;
+	float: left;
+}
+
+#nav li a {
+	padding: 10px 18px;
+	display: block;
+}
+
+#nav li.period {
+	float: right;
+	margin: 8px 0 0;
+}
+
+#nav li.period .select2-container {
+	margin: 0 10px;
+}
+
+#nav li.period a {
+	padding: 0 10px;
+}
+
+#nav li.account-settings {
+	float: right;
+}
+
+#nav li.logout {
+float: right;
+padding: 0;
+}
+
+#nav ul ul {
+	background: white;
+padding: 6px 0;
+border: 1px solid #C4C4C4;
+-webkit-box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.2);
+-moz-box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.2);
+box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.2);
+border-radius: 5px; 
+	margin: 0 0 0 15px;
+}
+
+#nav li a .sf-sub-indicator {
+	display: block;
+	text-indent: -9999px;
+	overflow: hidden;
+	position: absolute;
+}
+	
+
+#nav li li {
+	border: none;
+}
+
+#nav li li a {
+	width: 158px; 
+	margin: 0;
+	padding: 3px 10px;
+	border-bottom: 1px solid #fff;
+	text-transform: none;
+	position: relative;
+	display: block;
+	color: #111;
+}
+
+#nav li li a.dead:hover {
+	background: #ccc;
+	cursor: default;
+}
+
+	
+#nav li ul {
+	z-index: 9999;
+	position: absolute;
+	left: -999em;
+	height: auto;
+	width: 180px;
+padding: 6px 0;
+	}
+
+#nav li.account-settings ul {
+	width: 100px;
+	text-align: center;
+	margin: 0;
+}
+
+#nav li.account-settings ul li a {
+	width: 100px;
+	padding: 3px 0;
+}
+
+#nav li li a:hover {
+color: white;
+	background: #3a6ff3;
+}
+
+#nav li ul a { 
+	width: 160px;
+	}
+
+#nav li:hover ul ul, #nav li:hover ul ul ul, #nav li.sfHover ul ul, #nav li.sfHover ul ul ul {
+	left: -999em;
+	}
+
+#nav li:hover ul, #nav li li:hover ul, #nav li li li:hover ul, #nav li.sfHover ul, #nav li li.sfHover ul, #nav li li li.sfHover ul {
+	left: auto;
+	}
+
+#nav ul ul ul {
+	margin: 0 0 0 180px;
+}
+
+
+
+#content {
+		padding: 0 30px;
+}
+
+.view .expenses {
+	margin: 15px 0 15px 0;
+	border-bottom: 1px solid #e4e4e4;
+	padding: 0 0 20px 0;
+}
+
+.view .expenses h2, .view .breakdown {
+	border: none;
+	margin: 0 0 2px 0;
+}
+
+
+.view .left-column {
+	float: left;
+	min-width: 150px;
+}
+
+.view .comments {
+}
+
+.view .comments a {
+	color: #aaa;
+}
+
+/* Calendar Idea -----------------------------------*/
+
+
+.calendar {
+	background: url(/images/calendar.png?ss) no-repeat;
+	width: 70px;
+	height: 70px;
+	text-align: center;
+	float: left;
+	margin: 0 20px 12px 0;
+}
+
+.month {
+	display: block;
+	font-size: 11px;
+	line-height: 13px;
+	width: 68px;
+	margin: 0 auto;
+	padding: 6px 0 10px 0;
+	color: #fff;
+}
+
+.day {
+	font-size: 25px;
+}
+
+.view .minutes {
+	color: #ccc;
+}
+
+.view .overflow_hidden:hover .minutes {
+	display: inline;
+}
+
+.view .right {
+	float: right;
+	width: 830px;
+}
+
+
+label {
+	font-size: 14px;
+	font-weight: bold;
+	display: block;
+}
+
+hr {
+	border-top: 1px solid #e4e4e4;
+}
+
+hr.orange {
+	height: 1px;
+	background: #fdab3c;
+	border: none;
+}
+
+input[type="text"].normal, textarea, input[type="password"] {
+	display: block;
+	font: 16px 'proxima-nova-soft', Arial;
+	margin: 0 0 12px 0;
+	width: 230px;
+	border: none;
+	border: 1px solid #CCC;
+	border-radius: 3px;
+	padding: 9px 9px 8px;
+	-webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+-moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+-ms-transition: border linear 0.2s, box-shadow linear 0.2s;
+-o-transition: border linear 0.2s, box-shadow linear 0.2s;
+transition: border linear 0.2s, box-shadow linear 0.2s;
+-webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+-moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+select, .select2-container {
+	margin: 0 0 20px 0;
+	display: block;
+}
+
+#delete_label {
+	line-height: 11px;
+	float: left;
+	margin-right: 4px;
+}
+
+.overflow_hidden {
+	overflow: hidden;
+	padding: 4px 0;
+}
+
+.home select {
+	margin: 25px 0;
+}
+
+input[type="text"].normal:focus, textarea:focus, input[type="password"]:focus {
+    outline: 0;
+    border-color: rgba(115, 189, 78, 0.8);
+    -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(115, 189, 78, 0.6);
+    -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(115, 189, 78, 0.6);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(115, 189, 78, 0.6);
+}
+
+textarea {
+	resize: none;
+	display: block;
+	width: 890px;
+}
+
+input[type="submit"]  {
+	font: 300 14px/1  'proxima-nova-soft', Helvetica, Arial;
+	margin: 10px 0 30px;
+background-color: #8BC48B;
+            background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#8BC48B), to(#027402)); 
+            background: -webkit-linear-gradient(center top, #8BC48B, #027402); 
+            background: -moz-linear-gradient(center top, #8BC48B, #027402);
+            background: -ms-linear-gradient(center top, #8BC48B, #027402); 
+            background: -o-linear-gradient(center top, #8BC48B, #027402);
+            border-color: #038A03 #038A03 #025C02;
+            border-radius: 3px;
+            border-style: solid;
+            border-width: 0px;
+            box-shadow: 0 1px 0 0 #92CE92 inset;
+            color: #FFFFFF;
+						padding: 12px 24px;
+            text-align: center;
+            text-shadow: 0 -1px 0 #038A03;
+            opacity: 0.9;
+}
+
+input[type="submit"]:hover {
+ opacity: 1; 
+            cursor: pointer;
+            -webkit-box-shadow:0 0 5px #63ac64; 
+            -moz-box-shadow: 0 0 5px #63ac64; 
+            box-shadow:0 0 5px #63ac64; 
+}
+
+
+p {
+	margin-bottom: 25px;
+}
+
+h1 {
+	font-size: 30px;
+	margin: 0 0 30px;
+	font-weight: bold;
+	line-height: 36px;
+	font-weight:300;
+	font-family: Helvetica;
+}
+
+h2 {
+	font-size: 20px;
+	margin: 0 0 30px 0;
+	font-family: Arial;
+	font-weight: bold;
+	border-bottom: 1px solid #ddd;
+	padding: 0 0 10px;
+}
+
+a {
+	text-decoration: none;
+	color: #ff9100;
+}
+
+a.current {
+	color: #aaa;
+}
+
+#content ul, #content ol {
+	margin: 0 0 25px 29px;
+}
+
+ul br, ol br {
+	display: none;
+}
+
+ul li br {
+	display: block;
+}
+
+ul em, ol em {
+}
+  
+/* Content --------------------------------------- */
+
+.single .content {
+	overflow: hidden;
+	width: 550px;
+	float: right;
+	padding: 0 50px 0 0
+}
+
+/* Home --------------------------------------- */
+
+thead tr {
+	background: #fd9026;
+	text-align: left;
+	color: #fff;
+}
+
+tr.grey {
+	background: #fdf4e9;
+}
+
+thead th {
+	padding: 4px 0 4px 8px;
+}
+
+
+td {
+	padding: 2px 0 2px 8px;
+}
+
+table.total {
+	margin-bottom: 20px;
+	width: 300px;
+}
+
+table.total td {
+	padding-right: 15px;
+}
+
+.search_form input[type="search"] {
+		box-shadow: inset 0 1px 1px 1px #999;
+		padding: 7px;
+		border-radius: 2px;
+		width: 150px;
+		/*-webkit-appearance: textfield;*/
+}
+
+
+.home .title {
+	font-weight: bold;
+}
+
+
+.excerpt {
+	margin: 15px 0 15px 30px;
+}
+
+.actions a {
+	color: #ddd;
+	font-size: 12px;
+	font-family: Arial;
+}
+
+.light {
+	color: #ccc;
+}
+
+
+/* Landing Page --------------------------------------- */
+
+table {
+	width: 100%;
+}
+
+
+
+/* Landing Page --------------------------------------- */
+
+.landing h1, .landing h2 {
+	text-align: center;
+}
+
+
+.landing h2 {
+	padding: 0 0 35px 0;
+}
+
+.landing .left {
+	width: 500px;
+	float: left;
+}
+
+.landing .right {
+	width: 376px;
+	float: right;
+}
+
+.landing .right form {
+	background: #eee;
+	padding: 35px 66px 3px;
+}
+
+#home {
+	color: black;
+	font-weight: 300;
+}
+
+/* Login Page --------------------------------------- */
+
+.login .both {	
+	overflow: hidden;
+	width: 230px;
+}
+
+.login .both label {
+	float: left;
+}
+
+.login .both input[type="checkbox"] {
+	vertical-align: bottom;
+margin: 7px 6px 0 0;
+float: left;
+}
+
+.error {
+	color: red;
+}
+
+/* Fee page _____________ */
+
+.fee .both span {
+	float: left;
+display: block;
+margin: 4px 6px 0 0;
+}
+
+.fee input[type="text"].normal {
+	width: 60px;
+}
+
+/* Time Page --------------------------------------- */
+
+.time input[type="text"].normal {
+width: 30px;
+float: left;
+margin: 0 10px 15px 0;
+display: inline;
+text-align: right;}
+
+.time .left {
+	float: left;
+	width: 250px;
+}
+
+.time .right {
+	float: left;
+	width: 250px;
+}
+
+
+.time .overflow_hidden {
+	padding: 0;
+}
+
+
+.time .both {
+	overflow: hidden;
+	margin: 0 0 0 -5px;
+	padding: 4px 0 0 5px;
+}
+
+.time .seconds {
+float: left;
+margin: 7px 10px 0 0;
+width: 25px;
+}
+
+#startstop {
+margin: 0 10px 30px 0;
+text-align: center;
+display: block;
+float: left;
+}
+
+.time input[type="submit"][value="Start"] {
+background-image: linear-gradient(bottom, #FA8E00 0%, #FF9B21 50%, #FFB452 100%);
+background-image: -o-linear-gradient(bottom, #FA8E00 0%, #FF9B21 50%, #FFB452 100%);
+background-image: -moz-linear-gradient(bottom, #FA8E00 0%, #FF9B21 50%, #FFB452 100%);
+background-image: -webkit-linear-gradient(bottom, #FA8E00 0%, #FF9B21 50%, #FFB452 100%);
+background-image: -ms-linear-gradient(bottom, #FA8E00 0%, #FF9B21 50%, #FFB452 100%);
+background-image: -webkit-gradient( linear, left bottom, left top, color-stop(0, #FA8E00), color-stop(0.5, #FF9B21), color-stop(1, #FFB452) );
+text-shadow: 0 -1px 0 #e78e23;
+box-shadow: 0 1px 0 0 #fda73b inset;
+}
+
+
+input[type="submit"][value="Start"]#startstop:hover {
+ opacity: 1; 
+            cursor: pointer;
+            -webkit-box-shadow:0 0 5px #fda73b; 
+            -moz-box-shadow: 0 0 5px #fda73b 
+            box-shadow:0 0 5px #fda73b; 
+}
+
+
+#startstop[value="Stop"] {
+text-shadow: 0 -1px 0 #860000;
+box-shadow: 0 1px 0 0 #c10000 inset;
+background-color: #d10000;
+background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#d10000), to(#860000));
+background: -webkit-linear-gradient(center top, #d10000, #860000);
+background: -moz-linear-gradient(center top, #d10000, #860000);
+background: -ms-linear-gradient(center top, #d10000, #860000);
+background: -o-linear-gradient(center top, #d10000, #860000);
+border-color: #038A03 #038A03 #025C02;
+
+}
+
+input[type="submit"][value="Stop"]#startstop:hover {
+ opacity: 1; 
+            cursor: pointer;
+            -webkit-box-shadow:0 0 5px #b71a19; 
+            -moz-box-shadow: 0 0 5px #b71a19 
+            box-shadow:0 0 5px #b71a19; 
+}
+
+
+/* Expense Page --------------------------------------- */
+
+.expense .both span {
+	display: block;
+	float: left;
+	margin: 3px 6px 0 0;
+}
+
+.expense input[type="text"].normal {
+	width: 66px;
+}
+
+/* Elements --------------------------------------- */
+
+.root {
+	overflow: auto;
+	height: 100%;
+}
+
+.paginate .item {
+	padding: 0 10px 0;
+	float: left;
+}
+
+.post {
+	margin: 20px 0;
+	padding: 0 0 20px 0;
+	border-bottom: 1px solid #eee;
+}
+
+.dates {
+	color: #aaa;
+	font: 12px Arial;
+	overflow: hidden;
+}
+
+.dates > div {
+	float: left;
+}
+
+.modify-date {
+	margin-left: 10px;
+}
+
+/* Elements --------------------------------------- */
+
+.post .dates, .post form {
+	visibility: hidden;
+}
+
+.post:hover .dates, .post:hover form {
+	visibility: visible;
+}
+
+/* Post Inputs --------------------------------------- */
+
+
+
+input[type="submit"]::-moz-focus-inner {border:0;}
+
+input.remove {
+	color: #aaa;
+
+}
+
+input.edit {
+	margin-right: 5px;
+	float: left;
+}
+
+	
+/* Add Post --------------------------------------- */
+
+.word_count {
+	margin: 15px 0 0;
+}
+
+textarea.hidden {
+	display: none;
+}
+
+.edit textarea {
+	height: 220px;
+}
+.add, .edit {
+	width: 700px;
+	margin: 20px auto;
+	padding: 0 0 20px 0;
+	overflow: hidden;
+}
+
+.add input[type="submit"], .edit input[type="submit"], .cancel, .edit .delete a {
+	float: left;
+	margin: 10px 7px 0 0;
+	font: 12px Arial;
+	background: #369 url(//images/nav.png) repeat-x -5px 0px;
+	color: #fff;
+	padding: 10px 15px;
+	border-radius: 5px
+}
+
+.add input[type="submit"]:hover, .edit input[type="submit"]:hover, .cancel:hover, .edit .delete a:hover {
+	text-decoration: none;
+	color: #fff;
+}
+
+/* Upload file Input magic --------------------------------------- */
+
+input[type="file"] {
+	margin: 15px 0 5px 0;
+	font: 12px Arial;
+}
+
+
+/* Retina Display --------------------------------------- */
+
+@media screen and (-webkit-min-device-pixel-ratio: 2) {
+	body {
+		background: url(/images/mochaGrunge_@2X.png);
+		background-size: 400px;
+	}
+}

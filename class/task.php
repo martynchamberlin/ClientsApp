@@ -4,11 +4,14 @@ abstract class Task
 {
 	static function showTaskList()
 	{
+
+		Time::getPeriod();
 		$clientList = array();
 		$period = $_SESSION['period'];
 		$begin = strtotime($period);
+		$end = strtotime('+1 month', $begin);
 
-		$sql = 'SELECT count(L.postID) as primarySort, count(TA.taskID) as secondarySort, taskName, TA.taskID FROM tasks TA LEFT JOIN times T ON TA.taskID = T.taskID LEFT JOIN lookup L on T.id = L.postID AND L.date >= ' . $begin . ' WHERE TA.userID = ' . $_SESSION['loggedIn']['id'] . ' GROUP BY TA.taskID ORDER BY count(L.postID) DESC, count(TA.taskID) DESC, taskName';
+		$sql = 'SELECT count(L.postID) as primarySort, count(TA.taskID) as secondarySort, taskName, TA.taskID FROM tasks TA LEFT JOIN times T ON TA.taskID = T.taskID LEFT JOIN lookup L on T.id = L.postID AND L.date >= ' . $begin . ' AND L.date < ' . $end . ' WHERE TA.userID = ' . $_SESSION['loggedIn']['id'] . ' GROUP BY TA.taskID ORDER BY count(L.postID) DESC, count(TA.taskID) DESC, taskName';
 
 		$core = Core::getInstance(); 
 		$s = $core->pdo->query($sql);

@@ -1,6 +1,25 @@
 <? 
 
 require 'includes.php'; 
+
+// If they're entering a new time for a specific client
+if(isset($_POST['addTime']))
+{
+	$array = array('clientID', 'timeAmount', 'comments', 'taskID');
+	$errors = Validate::genVal($array);
+	if (empty($errors))
+		Time::addTime();
+}
+
+// If they're modifying a previously entered time
+else if(isset($_POST['updateTime']))
+{
+	$array = array('clientID', 'timeAmount', 'comments', 'taskID');
+	$errors = Validate::genVal($array);
+	if (empty($errors))
+		Time::updateTime($_POST['id'], urldecode($_POST['redirect']));
+}
+
 require 'header.php'; 
 
 if (isset($_GET['time']))
@@ -104,7 +123,7 @@ foreach ($taskList as $instance)
 
 </div>
 <label for="accomplish">What did you accomplish?</label>
-<textarea id="accomplish" tabindex="2" name="comments"><?= $edit ? $time['comments'] : '' ?></textarea>
+<textarea id="accomplish" tabindex="2" name="comments"><?= $edit ? htmlspecialchars($time['comments']) : '' ?></textarea>
 <input type="submit" value="Save">
 </form>
 

@@ -54,7 +54,7 @@ foreach ($clientArray as $row)
 	'</span><span class="day">' . date('j', $row['date']) . '</span></div>';
 	endif;
 	echo '
-	<div class="right"><strong> ' . $row['taskName'] . '</strong> — ' . $row['comments'];
+	<div class="right"><strong> ' . $row['taskName'] . '</strong> — ' . markdown($row['comments']);
 	if (!isset($_SESSION['print']))
 	{
 		echo ' <a href="/time/?time=' . $row['timeID'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '">(edit)</a> <a href="/delete/?time=' . $row['timeID'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '" class="delete">(delete)</a>';

@@ -8,6 +8,11 @@ require 'header.php';
 
 <h1>Log In</h1>
 
+<? if (isset( User::$login_error_message ) )
+{
+	echo '<p class="error">' . User::$login_error_message . '</p>';
+}
+?>
 <form action="" method="post">
 <input type="hidden" name="login">
 <label for="email">Email</labeL>
