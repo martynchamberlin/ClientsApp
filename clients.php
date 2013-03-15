@@ -19,24 +19,28 @@ if (empty($clients) )
 <table>
 <thead>
 <tr>
+	<th>&nbsp;</th>
 	<th>First name</th>
 	<th>Last name</th>
 	<th>Email</th>
 	<th>Rate</th>
 	<th>All time</th>
 	<th><?= Time::getPeriod() ?></th>
-	<th>&nbsp;</th>
+
 </tr>
 </thead>
 <? foreach ( $clients as $client ) : ?>
 	<tr>
+		<td><a href="/client?edit=<?= $client['clientID']; ?>">(Edit)</a></td>
+
 		<td><?= $client['first']; ?></td>
 		<td><?= $client['last']; ?></td>
 		<td><?= $client['email']; ?></td>
 		<td><?= $client['rate']; ?></td>
 		<td><?= $client['secondarySort']; ?></td>
-		<td><?= $client['primarySort']; ?></td>
-		<td><a href="/client?edit=<?= $client['clientID']; ?>">(Edit)</a></td>
+		<td><? if ($client['primarySort'] > 0 ) : ?>
+			<a href="/view/?clientID=<?= $client['clientID']; ?>"><? endif; ?><?= $client['primarySort']; ?></a></td>
+
 	</tr>
 <? endforeach; 
 

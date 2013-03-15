@@ -30,8 +30,8 @@
 					<li>
 						<a href="#">New...</a>
 						<ul>
-							<? $clients = Client::showClientList(); ?>
-							<li><a href="/<?= ! empty($clients) ? 'time/">' : '#time" class="no-time dead">' ?>Time Log</a></li>
+							<? $clients = Client::showClientList(); $tasks = Task::showTaskList(); ?>
+							<li><a href="/<?= ! empty($clients) && !empty($tasks) ? 'time/">' : '#time" class="no-time dead">' ?>Time Log</a></li>
 							<li><a href="/client/">Client</a></li>
 
 							<li><a href="/task/">Frequent Task</a></li>
