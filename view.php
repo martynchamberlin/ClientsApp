@@ -5,7 +5,7 @@ require 'header.php';
 
 $clientArray = Time::showSinglePeriod($_GET['clientID']);
 $client = Client::retrieveClient($_GET['clientID']);
-$client = $client[0];
+$client;
 
 if (isset($_SESSION['print']) && isset($_POST['print']))
 {

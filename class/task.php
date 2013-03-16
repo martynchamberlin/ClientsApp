@@ -37,9 +37,10 @@ abstract class Task
 			// Are they trying to update?
 			if (isset($_POST['taskID']))
 			{
-				$sql = 'UPDATE tasks SET taskName = :taskName WHERE taskID = :taskID';
+				$sql = 'UPDATE tasks SET taskName = :taskName WHERE taskID = :taskID AND userID = :userID';
 				$s = $core->pdo->prepare($sql);
 				$s->bindValue('taskName', $_POST['taskName']);
+				$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
 				$s->bindValue('taskID', $_POST['taskID']);
 			}
 			else
@@ -59,10 +60,11 @@ abstract class Task
 	static function removeTask($id)
 	{		
 	
-		$sql = 'DELETE tasks, times, lookup FROM tasks LEFT JOIN times on times.taskID = tasks.taskID WHERE tasks.taskID = :taskID LEFT JOIN lookup on times.id = lookup.postID AND lookup.postType="time"';
+		$sql = 'DELETE tasks, times, lookup FROM tasks LEFT JOIN times on times.taskID = tasks.taskID WHERE tasks.taskID = :taskID LEFT JOIN lookup on times.id = lookup.postID AND lookup.postType="time" AND tasks.userID = :userID';
 		$core = Core::getInstance();
 		$s = $core->pdo->prepare($sql);
 		$s->bindValue('taskID', $id);
+		$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
 		$s->execute();
 	}
 

@@ -34,13 +34,30 @@ abstract class Client
 
 	static function replaceClient()
 	{
+		// Was originally using an `ON DUPLICATE KEY` clause to combine the `update`	 and `insert` queries, but it was too vunerable from a security standpoint
+
+		// They're deleting a client record
 		if (isset($_POST['delete']))
 		{
 			self::removeClient($_POST['clientID']);
 		}
+		// They're updating a client record
+		else if (isset($_POST['clientID'] ) )
+		{
+			$sql = 'UPDATE clients SET clientID = :clientID, first = :first, last = :last, email = :email, rate=:rate WHERE userID = :userID';
+			$core = Core::getInstance();
+			$s = $core->pdo->prepare($sql);
+			$s->bindValue('clientID', $clientID);
+			$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
+			$s->bindValue('first', $_POST['first']);
+			$s->bindValue('last', $_POST['last']);
+			$s->bindValue('email', $_POST['email']);
+			$s->bindValue('rate', $_POST['rate']);
+		}
+		// They're creating a new client record
 		else
 		{
-			$sql = 'INSERT INTO clients SET clientID = :clientID, userID = :userID, first = :first, last = :last, email = :email, rate=:rate ON DUPLICATE KEY UPDATE first = :first, last = :last, email = :email, rate = :rate';
+			$sql = 'INSERT INTO clients SET clientID = :clientID, userID = :userID, first = :first, last = :last, email = :email, rate=:rate';
 			$core = Core::getInstance();
 			$s = $core->pdo->prepare($sql);
 			$clientID = isset($_POST['clientID']) ? $_POST['clientID'] : substr(md5(microtime()), 0, 10);
@@ -59,10 +76,11 @@ abstract class Client
 	static function removeClient($id)
 	{		
 	
-		$sql = 'DELETE C, T, L, E FROM clients C LEFT JOIN lookup L on L.clientID = C.clientID LEFT JOIN times T on T.id = L.postID LEFT JOIN expenses E on E.id = L.postID WHERE C.clientID = :clientID';
+		$sql = 'DELETE C, T, L, E FROM clients C LEFT JOIN lookup L on L.clientID = C.clientID LEFT JOIN times T on T.id = L.postID LEFT JOIN expenses E on E.id = L.postID WHERE C.clientID = :clientID AND C.userID = :userID';
 		$core = Core::getInstance();
 		$s = $core->pdo->prepare($sql);
 		$s->bindValue('clientID', $id);
+		$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
 		$s->execute();
 	}
 
@@ -81,6 +99,6 @@ abstract class Client
 		$s = $core->pdo->prepare($sql);
 		$s->bindValue('clientID', $id);
 		$s->execute();
-		return $s->fetchALL();
+		return $s->fetch();
 	}
 }

@@ -7,6 +7,12 @@ if (isset($_GET['edit']))
 {
 	$edit = true;
 	$task = Task::retrieveTask($_GET['edit']); 
+	if ($task['userID'] != $_SESSION['loggedIn']['userID'] )
+	{
+		echo '<h1>Silly hacker!</h1>
+		<p>Oops, this task doesn\'t belong to you!</p>';
+		exit;
+	}
 }
 else
 	$edit = false;

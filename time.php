@@ -25,7 +25,13 @@ require 'header.php';
 if (isset($_GET['time']))
 {
 	$edit = true;
-	$time = Time::getSpecificTime($_GET['time']); 
+	$time = Time::getSpecificTime($_GET['time']);
+	if ($time['userID'] != $_SESSION['loggedIn']['userID'] )
+	{
+		echo '<h1>Silly hacker!</h1>
+		<p>Oops, this time doesn\'t belong to you!</p>';
+		exit;
+	}
 }
 else
 	$edit = false;

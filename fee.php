@@ -23,7 +23,14 @@ require 'header.php';
 if (isset($_GET['expense']))
 {
 	$edit = true;
-	$expense = Expense::getSpecificExpense($_GET['expense']); 
+	$expense = Expense::getSpecificExpense($_GET['expense']);
+	if ($expense['userID'] != $_SESSION['loggedIn']['userID'] )
+	{
+		echo '<h1>Silly hacker!</h1>
+		<p>Oops, this expense doesn\'t belong to you!</p>';
+		exit;
+	}
+
 }
 else
 	$edit = false;

@@ -149,12 +149,13 @@ AND L.postType = "time"';
 		$sql = 'UPDATE lookup SET 
 			clientID = :clientID, 
 			date = :date 
-			WHERE postType = "time" AND postID = :postID';
+			WHERE postType = "time" AND postID = :postID AND userID = :userID';
 		
 		$s = $core->pdo->prepare($sql);
 		$s->bindValue('date', strtotime($_POST['daySelect'] . ' ' . $_POST['monthSelect']));
 		$s->bindValue('clientID', $_POST['clientID']);
 		$s->bindValue('postID', $id);
+		$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
 		$s->execute();
 
 		header('Location: /view/?clientID=' . $_POST['clientID']);
