@@ -20,8 +20,7 @@ if (empty($clients) )
 <thead>
 <tr>
 	<th>&nbsp;</th>
-	<th>First name</th>
-	<th>Last name</th>
+	<th>Name</th>
 	<th>Email</th>
 	<th>Rate</th>
 	<th>All time</th>
@@ -29,12 +28,11 @@ if (empty($clients) )
 
 </tr>
 </thead>
-<? foreach ( $clients as $client ) : ?>
+<? foreach ( $clients as $client ) : static $i = 1;?>
 	<tr>
-		<td><a href="/client?edit=<?= $client['clientID']; ?>">(Edit)</a></td>
 
-		<td><?= $client['first']; ?></td>
-		<td><?= $client['last']; ?></td>
+		<td><?= $i++; ?></td>
+		<td><a href="/client?edit=<?= $client['clientID']; ?>"><?= $client['first'] . " " . $client['last'] ?></a></td>
 		<td><?= $client['email']; ?></td>
 		<td><?= $client['rate']; ?></td>
 		<td><?= $client['secondarySort']; ?></td>
