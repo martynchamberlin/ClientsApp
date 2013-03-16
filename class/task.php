@@ -11,8 +11,12 @@ abstract class Task
 		$begin = strtotime($period);
 		$end = strtotime('+1 month', $begin);
 
-		$sql = 'SELECT count(L.postID) as primarySort, count(TA.taskID) as secondarySort, taskName, TA.taskID FROM tasks TA LEFT JOIN times T ON TA.taskID = T.taskID LEFT JOIN lookup L on T.id = L.postID AND L.date >= ' . $begin . ' AND L.date < ' . $end . ' WHERE TA.userID = ' . $_SESSION['loggedIn']['userID'] . ' GROUP BY TA.taskID ORDER BY count(L.postID) DESC, count(TA.taskID) DESC, taskName';
-
+		$sql = 'SELECT count(DISTINCT L.postID) as primarySort, count(DISTINCT L2.postID) as secondarySort, taskName, TA.taskID FROM tasks TA LEFT JOIN times T ON TA.taskID = T.taskID 
+		LEFT JOIN lookup L on T.id = L.postID AND L.date >= ' . $begin . ' AND L.date < ' . $end . ' 
+		LEFT JOIN lookup L2 on T.id = L2.postID
+		WHERE TA.userID = ' . $_SESSION['loggedIn']['userID'] . ' 
+		GROUP BY TA.taskID 
+		ORDER BY count(L.postID) DESC, count(L2.postID) DESC, taskName';
 		$core = Core::getInstance(); 
 		$s = $core->pdo->query($sql);
 		return $s->fetchAll();
@@ -55,7 +59,7 @@ abstract class Task
 	static function removeTask($id)
 	{		
 	
-		$sql = 'DELETE tasks, times FROM tasks LEFT JOIN times on times.taskID = tasks.taskID WHERE tasks.taskID = :taskID';
+		$sql = 'DELETE tasks, times, lookup FROM tasks LEFT JOIN times on times.taskID = tasks.taskID WHERE tasks.taskID = :taskID LEFT JOIN lookup on times.id = lookup.postID AND lookup.postType="time"';
 		$core = Core::getInstance();
 		$s = $core->pdo->prepare($sql);
 		$s->bindValue('taskID', $id);

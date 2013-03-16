@@ -1,15 +1,12 @@
 /* Bare Essentials --------------------------------------- */
 
 html, body {
-	overflow: hidden;
+
 	background: url(/images/mochaGrunge.png);
-	height: 100%;
+
 }
 
-#fakewrap {
-	height: 100%;
-	overflow: auto;
-}
+
 
 #wrap {
 	width: 980px;
