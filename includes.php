@@ -59,19 +59,6 @@ else if (isset($_POST['replaceTask']))
 }
 
 
-// If they're entering a new expense for a specific client
-else if(isset($_POST['addExpense']))
-{
-	$array = array('clientID', 'amount', 'comments');
-	$errors = Validate::genVal($array);
-	if (empty($errors))
-		Expense::addExpense();
-}
-
-// If they're modifying a previously entered expense
-else if(isset($_POST['updateExpense']))
-	Expense::updateExpense($_POST['id'], urldecode($_POST['redirect']));
-
 
 
 

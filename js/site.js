@@ -152,27 +152,23 @@ jQuery(document).ready(function($) {
 	// Validate the Create a Fee form
 	$('form.create-fee').submit(function()
 	{
-		$(this).find('textarea').removeClass('error');
-		var valid = true;
-		$(this).find('input').each(function()
-		{
-			$(this).removeClass('error');
-			if ( $(this).val() === "" )
-			{
-				$(this).addClass('error');
-				valid = false;
-			}
-			if ( $(this).is('input[name="amount"]') && ! isNumeric( $(this).val() ) )
-			{
-				$(this).addClass('error');
-				valid = false;
-			}
+		var textarea = $(this).find('textarea');
+		var amount = $(this).find('input[name="amount"]');
 
-		});
-		if ($(this).find('textarea').val() === "" )
+		$(textarea).removeClass('error');
+		$(amount).removeClass('error');
+
+		var valid = true;
+		
+		if ( $(amount).val() === "" || ! isNumeric( $(this).val() ) )
+		{
+				$(amount).addClass('error');
+				valid = false;
+		}
+		if ($(textarea).val() === "" )
 		{
 			valid = false;
-			$(this).find('textarea').addClass('error');
+			$(textarea).addClass('error');
 		}
 
 		return valid;
