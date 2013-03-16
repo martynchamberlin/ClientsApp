@@ -60,7 +60,7 @@ if (isset($_POST['email']) && User::update($_POST) === true)
 	</div>
 		
 	<div class="both">
-		<input type="submit" class="register_input" value="Complete" name="continue"></div>
+		<input type="submit" class="register_input" value="Update Profile" name="continue"></div>
 </form>
 
 

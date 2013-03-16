@@ -104,6 +104,7 @@ class User
 
 	static function create($data)
 	{
+		// don't forget, $data is passed by reference.
 		$errors = self::sanitize($data);
 
 		if (empty($errors) )
@@ -114,6 +115,7 @@ class User
 			SET first_name = :first_name,
 			last_name = :last_name,
 			email = :email,
+			creation = '. time() . ', 
 			password = :password';
 			$s = $pdo->prepare($sql);
 			$s->bindValue(':email', $data['email']);

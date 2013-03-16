@@ -30,15 +30,23 @@ AND L.postType = "time"';
 	{
 		$_SESSION['period'] = $period;
 	}
-
-	static function showMonths($num)
+	
+	// From now on we're officially ignoring this parameter.
+	static function showMonths($num = 12)
 	{
 		$months = array();
 		$currentMonth = date('F Y');
-		for ($i = 0; $i < $num; $i++)
+		$firstMonth = date('F Y', $_SESSION['loggedIn']['creation']);
+
+		while ( true )
 		{
 			array_push($months, $currentMonth);
-			$currentMonth = date('F Y', strtotime('first day of ' . -($i + 1) . ' months'));
+
+			if ( $currentMonth == $firstMonth )
+				break;
+
+			else
+			$currentMonth = date('F Y', strtotime('-1 month', strtotime( $currentMonth)));
 		}
 		return $months;
 	}
