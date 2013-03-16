@@ -20,7 +20,7 @@ abstract class Client
 
 		LEFT JOIN lookup L2 on C.clientID = L2.clientID 
 
-		WHERE C.userID = ' . $_SESSION['loggedIn']['id'] . ' 
+		WHERE C.userID = ' . $_SESSION['loggedIn']['userID'] . ' 
 		GROUP BY C.clientID
 		ORDER BY primarySort DESC, secondarySort DESC, last, first';
 			$core = Core::getInstance(); 
@@ -45,14 +45,14 @@ abstract class Client
 			$s = $core->pdo->prepare($sql);
 			$clientID = isset($_POST['clientID']) ? $_POST['clientID'] : substr(md5(microtime()), 0, 10);
 			$s->bindValue('clientID', $clientID);
-			$s->bindValue('userID', $_SESSION['loggedIn']['id']);
+			$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
 			$s->bindValue('first', $_POST['first']);
 			$s->bindValue('last', $_POST['last']);
 			$s->bindValue('email', $_POST['email']);
 			$s->bindValue('rate', $_POST['rate']);
 			$s->execute();
 		}
-		header('Location: /time/');
+		header('Location: /clients/');
 		exit;
 	}
 

@@ -69,7 +69,7 @@ table.breakdown td.hour {
 	float: right;
 }
 
-#nav li.logout {
+#nav li.logout, #nav li.login {
 float: right;
 padding: 0;
 }
@@ -382,7 +382,7 @@ ul em, ol em {
 /* Home --------------------------------------- */
 
 thead tr {
-	background: #fd9026;
+	background: #fd9026!important;
 	text-align: left;
 	color: #fff;
 }
@@ -478,6 +478,22 @@ table {
 }
 
 /* Login Page --------------------------------------- */
+
+body .fancybox-close {
+	background-image: none;
+}
+
+input.error, textarea.error {
+	border: 1px solid red!important;
+}
+
+body .fancybox-wrap {
+	top: 20%!important;
+}
+
+body .fancybox-wrap form {
+	padding: 20px 20px 0;
+}
 
 .login .both {	
 	overflow: hidden;
@@ -575,7 +591,7 @@ input[type="submit"][value="Start"]#startstop:hover {
 }
 
 
-#startstop[value="Stop"] {
+#startstop[value="Stop"], input[type="submit"].delete {
 text-shadow: 0 -1px 0 #860000;
 box-shadow: 0 1px 0 0 #c10000 inset;
 background-color: #d10000;
@@ -608,6 +624,15 @@ input[type="submit"][value="Stop"]#startstop:hover {
 .expense input[type="text"].normal {
 	width: 66px;
 }
+
+
+/* Account Page --------------------------------------- */
+
+.account .delete-section {
+	display: none;
+}
+
+
 
 /* Elements --------------------------------------- */
 
@@ -688,7 +713,7 @@ textarea.hidden {
 	overflow: hidden;
 }
 
-.add input[type="submit"], .edit input[type="submit"], .cancel, .edit .delete a {
+.add input[type="submit"], .edit input[type="submit"], .edit .delete a {
 	float: left;
 	margin: 10px 7px 0 0;
 	font: 12px Arial;
@@ -698,7 +723,7 @@ textarea.hidden {
 	border-radius: 5px
 }
 
-.add input[type="submit"]:hover, .edit input[type="submit"]:hover, .cancel:hover, .edit .delete a:hover {
+.add input[type="submit"]:hover, .edit input[type="submit"]:hover, .edit .delete a:hover {
 	text-decoration: none;
 	color: #fff;
 }

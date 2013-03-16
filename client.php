@@ -17,8 +17,8 @@ else
 ?>
 <h1><? echo (! $edit) ? 'New Client' : $client[0]['first'] . ' ' . $client[0]['last']; ?></h1>
 
-<form action="" method="post">
-<input type="hidden" name="replaceClient"/>
+<form action="" method="post" class="add-client">
+<input type="hidden" name="replaceClient" value="replaceClient"/>
 <? if ($edit) echo '<input type="hidden" name="clientID" value="' . $_GET['edit'] . '">' ; ?>
 <label for="first">First Name</label>
 <input type="text" name="first" value="<? echo ($edit) ? $client[0]['first'] : ''?>" id="first">

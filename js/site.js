@@ -1,9 +1,254 @@
 var unload = false;
 
+function validateEmail(email) { 
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+} 
+
+function isNumeric(number)
+{
+	if (isNaN(number / 1) == false) {
+    return true;
+	}
+	return false;
+}
+
+
 jQuery(document).ready(function($) {
 
+	// When they want to delete their account
+	$('.cancel').click(function()
+	{
+		$('.delete-section').show('slow');
+		return false;
+	});
+
+	if(window.location.href.indexOf("delete") > -1) 
+	{
+		$('.delete-section').show();
+	}
+
+	// When they click "log in" they shouldn't have to load a brand new page. instead, just show them this fancybox
+		$('.fancybox').fancybox({
+			helpers : {
+				overlay : {
+				css : {
+					'background' : 'url(/images/mochaGrunge.png)'
+				}
+			}
+		},
+			overlayColor: '#333',
+			afterLoad : function() {
+			this.content = '<form action="/login/" class="popup" method="post"><label for="email">Email</labeL><input type="text" class="normal" class="email" name="email"><input type="hidden" name="login" value="login"><label for="password">Password</label><input type="password" name="password"/><input type="submit" value="Login"></form>'
+			}
+		});
+
+	// Make the Fancybox happen automatically if ?logout=true in URL
+	if(window.location.href.indexOf("logout") > -1) 
+	{
+		$('.fancybox').trigger('click');
+	}
+
+	// Validate the stuff when they try logging in
+	$('.popup').live('submit', function()
+	{
+		var valid = true;
+		$(this).find('input').each(function()
+		{
+			$(this).removeClass('error');
+			if ( $(this).val() === "" )
+			{
+				$(this).addClass('error');
+				valid = false;
+			}
+			if ( $(this).is('input[name="email"]') && !validateEmail($(this).val() ) )
+			{
+				$(this).addClass('error');
+				valid = false;
+			}
+
+			if ( $(this).is('input[name="password"]') && $(this).val().length < 8 )
+			{
+				$(this).addClass('error');
+				valid = false;
+			}
+
+
+		});
+		return valid;
+
+	});
+
+	// Validate the Create free Account form on the home page
+	$('form.signup').submit(function()
+	{
+		var valid = true;
+		$(this).find('input').each(function()
+		{
+			$(this).removeClass('error');
+			if ( $(this).val() === "" )
+			{
+				$(this).addClass('error');
+				valid = false;
+			}
+			if ( $(this).is('input[name="email"]') && !validateEmail($(this).val() ) )
+			{
+				$(this).addClass('error');
+				valid = false;
+			}
+
+			if ( $(this).is('input[name="password"]') && $(this).val().length < 8 )
+			{
+				$(this).addClass('error');
+				valid = false;
+			}
+
+
+		});
+		return valid;
+
+	});
+
+
+	// Validate the Create a client form
+	$('form.add-client').submit(function()
+	{
+		var valid = true;
+		$(this).find('input').each(function()
+		{
+			$(this).removeClass('error');
+			if ( $(this).val() === "" )
+			{
+				$(this).addClass('error');
+				valid = false;
+			}
+			if ( $(this).is('input[name="email"]') && !validateEmail($(this).val() ) )
+			{
+				$(this).addClass('error');
+				valid = false;
+			}
+		});
+		return valid;
+
+	});
+
+
+	// Validat the Create a Task form
+	$('form.create-task').submit(function()
+	{
+		var valid = true;
+		$(this).find('input').each(function()
+		{
+			$(this).removeClass('error');
+			if ( $(this).val() === "" )
+			{
+				$(this).addClass('error');
+				valid = false;
+			}
+		});
+		return valid;
+	});
+
+	// Validate the Create a Fee form
+	$('form.create-fee').submit(function()
+	{
+		$(this).find('textarea').removeClass('error');
+		var valid = true;
+		$(this).find('input').each(function()
+		{
+			$(this).removeClass('error');
+			if ( $(this).val() === "" )
+			{
+				$(this).addClass('error');
+				valid = false;
+			}
+			if ( $(this).is('input[name="amount"]') && ! isNumeric( $(this).val() ) )
+			{
+				$(this).addClass('error');
+				valid = false;
+			}
+
+		});
+		if ($(this).find('textarea').val() === "" )
+		{
+			valid = false;
+			$(this).find('textarea').addClass('error');
+		}
+
+		return valid;
+	});
+
+	// Validate the Create a Time form
+	$('form.create-time').submit(function()
+	{
+		$(this).find('textarea').removeClass('error');
+		var valid = true;
+		var timeAmount = $(this).find('input[name="timeAmount"]');
+		$(timeAmount).removeClass('error');
+		if ($(timeAmount).val() === "" || ! isNumeric ( $(timeAmount).val() ) )
+		{
+				$(timeAmount).addClass('error');
+				valid = false;
+		}
+		if ($(this).find('textarea').val() === "" )
+		{	
+			valid = false;
+			$(this).find('textarea').addClass('error');
+		}
+		if (! valid )
+		{
+			unload = false;
+		}
+		return valid;
+	});
+
+	// Validate the Account Settings form
+	$('form.account-settings').submit(function()
+	{
+		var valid = true;
+		$(this).find('input').each(function()
+		{
+			$(this).removeClass('error');
+			if ( $(this).val() === "" && ! $(this).is('input[type="password"]'))
+			{
+				$(this).addClass('error');
+				valid = false;
+			}
+
+			if ( $(this).is('input[name="email"]') && !validateEmail($(this).val() ) )
+			{
+				$(this).addClass('error');
+				valid = false;
+			}
+
+			if ( $(this).is('input[name="password"]') && $(this).val().length < 8 &&$(this).val().length > 0 )
+			{
+				$(this).addClass('error');
+				valid = false;
+			}
+
+		});
+
+		return valid;
+	});
+
+	// Process the delete account form 
+	$('form.delete-account').submit(function()
+	{
+		var password = $(this).find('input[name="password"]');
+		if ( $(password).val().length < 8 )
+		{
+			$(password).addClass('error');
+			return false;		
+		}
+	});
+
+	//$(".confs").fancybox();
 	// Give some sanity to the tables
-	$('table tr:odd').addClass('grey');
+	$('table').each(function()
+	{
+		$(this).find('tr:even').addClass('grey');
+	});
 	// Handles people on the dropdown trying to go to either the "new time" or the "new fee" pages ... both of which require a client and in the case of time, also a task
 	$('#nav .no-time').click(function()
 	{

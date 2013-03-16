@@ -6,7 +6,7 @@ require 'header.php';
 if (isset($_POST['email']) && User::create($_POST) === true)
 {
 	echo '<h1>Account successfully created</h1>';
-	echo '<p>Click <a href="/login/">here</a> to log in</p>';
+	echo '<p>Click <a href="#" class="fancybox">here</a> to log in</p>';
 	exit;
 }
 
@@ -14,7 +14,7 @@ if (isset($_POST['email']) && User::create($_POST) === true)
 ?>
 
 <h1>Signup for a free account</h1>
-<form action = "<?= Config::home() ."/signup/"; ?>" method="POST">
+<form class="signup" action = "<?= Config::home() ."/signup/"; ?>" method="POST">
 	<div class="both">
 		<label>First Name:</label>
 		<div class="right">

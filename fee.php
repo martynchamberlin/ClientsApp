@@ -15,7 +15,7 @@ else
 
 <h1><? echo $edit ? 'Edit Fee' : 'New Fee'; ?></h1>
 
-<form action="" method="post">
+<form action="" method="post" class="create-fee">
 <? 
 if ($edit)
 {

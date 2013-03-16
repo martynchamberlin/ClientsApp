@@ -21,7 +21,7 @@ require 'header.php';
 </div>
 
 <div class="right">
-<form action="/signup/" method="post">
+<form action="/signup/" method="post" class="signup">
 <input type="text" autocomplete="off" name="first_name" placeholder="first name">
 <input type="text" autocomplete="off" name="last_name" placeholder="last name">
 <input type="text" autocomplete="off" name="email" placeholder="email address">

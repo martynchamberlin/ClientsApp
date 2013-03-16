@@ -34,16 +34,16 @@ else
 
 <h1><? echo $edit ? 'Edit Entry' : 'New Time'; ?></h1>
 
-<form action="" method="post">
+<form action="" method="post" class="create-time">
 <? 
 if ($edit)
 {
-	echo '<input type="hidden" name="updateTime"/>';
+	echo '<input type="hidden" name="updateTime" value="updateTime"/>';
 	echo '<input type="hidden" name="id" value="' . $_GET['time'] . ' "/>';
 	echo '<input type="hidden" name="redirect" value="' . urlencode($_GET['redirect']) . '"/>';
 }
 else
-	echo '<input type="hidden" name="addTime"/>';
+	echo '<input type="hidden" value="addTime" name="addTime"/>';
 ?>
 <div  class="overflow_hidden">
 <div class="left">

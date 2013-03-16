@@ -6,8 +6,26 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link rel="stylesheet" href="/css/reset.css" type="text/css" media="screen" />
 		<link rel="stylesheet" href="/css/style.css" type="text/css" media="screen" />
-		<link rel="stylesheet" href="/css/select2.css" type="text/css" media="screen" />
-		<script type='text/javascript' src='/js/jquery.js'></script>	
+		<link rel="stylesheet" href="/css/select2.css" type="text/css" media="screen" />		
+
+<script type='text/javascript' src='http://regulatoryspecialists.dev.perfectioncoding.com/wp-includes/js/jquery/jquery.js?ver=1.8.3'></script>
+<!-- Add jQuery library -->
+
+<!-- Add mousewheel plugin (this is optional) -->
+<script type="text/javascript" src="/fancybox/lib/jquery.mousewheel-3.0.6.pack.js"></script>
+
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="/fancybox/source/jquery.fancybox.css?v=2.1.4" type="text/css" media="screen" />
+<script type="text/javascript" src="/fancybox/source/jquery.fancybox.pack.js?v=2.1.4"></script>
+
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet" href="/fancybox/source/helpers/jquery.fancybox-buttons.css?v=1.0.5" type="text/css" media="screen" />
+<script type="text/javascript" src="/fancybox/source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="/fancybox/source/helpers/jquery.fancybox-media.js?v=1.0.5"></script>
+
+<link rel="stylesheet" href="/fancybox/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" type="text/css" media="screen" />
+<script type="text/javascript" src="/fancybox/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+
 		<script src="/js/jquery.text-expander.js"></script>
 		<script src="/js/textarea.js"></script>
 		<script type='text/javascript' src='/js/superfish.js'></script>
@@ -81,8 +99,8 @@
 	<ul>
 					<li>
 						<a id="home" <? if (Core::isPage('')) echo 'class="current" '; ?>href="/">Clients <strong>App</strong></a>
-					<li class="logout">
-						<a href="/login/">Login</a>
+					<li class="login">
+						<a href="#" class="fancybox">Login</a>
 					</li>
 				</ul>
 		<? endif; ?>

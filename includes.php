@@ -72,9 +72,7 @@ else if(isset($_POST['addExpense']))
 else if(isset($_POST['updateExpense']))
 	Expense::updateExpense($_POST['id'], urldecode($_POST['redirect']));
 
-// If they're trying to log in
-else if(isset($_POST['login']))
-	User::logged_in();
+
 
 
 

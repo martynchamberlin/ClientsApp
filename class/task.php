@@ -11,7 +11,7 @@ abstract class Task
 		$begin = strtotime($period);
 		$end = strtotime('+1 month', $begin);
 
-		$sql = 'SELECT count(L.postID) as primarySort, count(TA.taskID) as secondarySort, taskName, TA.taskID FROM tasks TA LEFT JOIN times T ON TA.taskID = T.taskID LEFT JOIN lookup L on T.id = L.postID AND L.date >= ' . $begin . ' AND L.date < ' . $end . ' WHERE TA.userID = ' . $_SESSION['loggedIn']['id'] . ' GROUP BY TA.taskID ORDER BY count(L.postID) DESC, count(TA.taskID) DESC, taskName';
+		$sql = 'SELECT count(L.postID) as primarySort, count(TA.taskID) as secondarySort, taskName, TA.taskID FROM tasks TA LEFT JOIN times T ON TA.taskID = T.taskID LEFT JOIN lookup L on T.id = L.postID AND L.date >= ' . $begin . ' AND L.date < ' . $end . ' WHERE TA.userID = ' . $_SESSION['loggedIn']['userID'] . ' GROUP BY TA.taskID ORDER BY count(L.postID) DESC, count(TA.taskID) DESC, taskName';
 
 		$core = Core::getInstance(); 
 		$s = $core->pdo->query($sql);
@@ -42,13 +42,13 @@ abstract class Task
 			{
 				$sql = 'INSERT INTO tasks SET taskName = :taskName, userID = :userID';
 				$s = $core->pdo->prepare($sql);
-				$s->bindValue('userID', $_SESSION['loggedIn']['id']);
+				$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
 				$s->bindValue('taskName', $_POST['taskName']);
 			}
 			
 			$s->execute();
 		}
-		header('Location: /');
+		header('Location: /tasks');
 		exit;
 	}
 

@@ -68,7 +68,7 @@ AND L.postType = "time"';
 		$s = $core->pdo->prepare($sql);
 		$s->bindValue('taskID', $_POST['taskID']);
 		$s->bindValue('clientID', $_POST['clientID']);
-		$s->bindValue('userID', $_SESSION['loggedIn']['id']);
+		$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
 		$s->bindValue('date', strtotime($_POST['daySelect'] . ' ' . $_POST['monthSelect']));
 		$s->execute();
 		$row = $s->fetch();
@@ -100,7 +100,7 @@ AND L.postType = "time"';
 			$core = Core::getInstance();
 			$s = $core->pdo->prepare($sql);
 			$s->bindValue('clientID', $_POST['clientID']);
-			$s->bindValue('userID', $_SESSION['loggedIn']['id']);
+			$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
 			$s->bindValue('timeAmount', $_POST['timeAmount']);
 			$s->bindValue('taskID', $_POST['taskID']);
 			$s->bindValue('comments', $_POST['comments']);
@@ -117,7 +117,7 @@ AND L.postType = "time"';
 			$s = $core->pdo->prepare($sql);
 			$s->bindValue('date', strtotime($_POST['daySelect'] . ' ' . $_POST['monthSelect']));
 			$s->bindValue('clientID', $_POST['clientID']);
-			$s->bindValue('userID', $_SESSION['loggedIn']['id']);
+			$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
 			$s->bindValue('postID', $postID);
 			$s->execute();
 		}
@@ -131,7 +131,7 @@ AND L.postType = "time"';
 		$core = Core::getInstance();
 		$s = $core->pdo->prepare($sql);
 		$s->bindValue('clientID', $_POST['clientID']);
-		$s->bindValue('userID', $_SESSION['loggedIn']['id']);
+		$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
 		$s->bindValue('timeAmount', $_POST['timeAmount']);
 		$s->bindValue('taskID', $_POST['taskID']);
 		$s->bindValue('comments', $_POST['comments']);
@@ -149,7 +149,7 @@ AND L.postType = "time"';
 		$s->bindValue('postID', $id);
 		$s->execute();
 
-		header('Location: ' . $redirect);
+		header('Location: /view/?clientID=' . $_POST['clientID']);
 		exit;
 	}
 
@@ -159,7 +159,7 @@ AND L.postType = "time"';
 		$core = Core::getInstance();
 		$s = $core->pdo->prepare($sql);
 		$s->bindValue('id', $id);
-		$s->bindValue('userID', $_SESSION['loggedIn']['id']);
+		$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
 		$s->execute();
 
 		if ($s->rowCount() > 0 )
@@ -167,7 +167,7 @@ AND L.postType = "time"';
 			$sql = 'DELETE FROM lookup WHERE postID = :postID AND postType = "time" AND userID = :userID';
 			$s = $core->pdo->prepare($sql);
 			$s->bindValue('postID', $id);
-			$s->bindValue('userID', $_SESSION['loggedIn']['id']);
+			$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
 			$s->execute();
 		}
 		header('Location: ' . $redirect);
@@ -187,7 +187,7 @@ INNER JOIN times T on L.postID = T.id AND L.postType = "time"
 LEFT JOIN tasks TA ON T.taskID = TA.taskID
 WHERE L.date >= ' . $begin . ' 
 		AND L.date < ' . $end . ' 
-    AND L.userID = ' . $_SESSION['loggedIn']['id'] . '
+    AND L.userID = ' . $_SESSION['loggedIn']['userID'] . '
 AND C.clientID = "' . $id . '"
 ORDER BY L.date DESC, postID DESC';
 //ORDER BY TA.taskName, L.date';
@@ -214,7 +214,7 @@ LEFT JOIN times T on L.postID = T.id AND L.postType = "time"
 LEFT JOIN expenses E on L.postID = E.id AND L.postType = "expense"
 WHERE L.date >= ' . $begin . ' 
 		AND L.date < ' . $end . ' 
-    AND L.userID = ' . $_SESSION['loggedIn']['id'] . '
+    AND L.userID = ' . $_SESSION['loggedIn']['userID'] . '
 GROUP BY C.clientID
 ORDER BY IF(sum(T.timeAmount), sum(T.timeAmount) * C.rate / 60, 0)  + IF(sum(E.amount), sum(E.amount), 0) DESC, T.timeAmount DESC, C.last DESC';
 		//echo $sql;

@@ -24,7 +24,7 @@ AND L.postType = "expense"';
 		$core = Core::getInstance();
 		$s = $core->pdo->prepare($sql);
 		$s->bindValue('clientID', $_POST['clientID']);
-		$s->bindValue('userID', $_SESSION['loggedIn']['id']);
+		$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
 		$s->bindValue('amount', $_POST['amount']);
 		$s->bindValue('comments', $_POST['comments']);
 		$s->execute();
@@ -40,7 +40,7 @@ AND L.postType = "expense"';
 		$s = $core->pdo->prepare($sql);
 		$s->bindValue('date', strtotime($_POST['daySelect'] . ' ' . $_POST['monthSelect']));
 		$s->bindValue('clientID', $_POST['clientID']);
-		$s->bindValue('userID', $_SESSION['loggedIn']['id']);
+		$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
 		$s->bindValue('postID', $postID);
 		$s->execute();
 
@@ -56,7 +56,7 @@ AND L.postType = "expense"';
 		$s->bindValue('clientID', $_POST['clientID']);
 		$s->bindValue('amount', $_POST['amount']);
 		$s->bindValue('comments', $_POST['comments']);
-		$s->bindValue('userID', $_SESSION['loggedIn']['id']);
+		$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
 		$s->bindValue('id', $id);
 		$s->execute();
 
@@ -82,7 +82,7 @@ AND L.postType = "expense"';
 		$core = Core::getInstance();
 		$s = $core->pdo->prepare($sql);
 		$s->bindValue('id', $id);
-		$s->bindValue('userID', $_SESSION['loggedIn']['id']);
+		$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
 		$s->execute();
 
 		if ($s->rowCount() > 0)
@@ -107,7 +107,7 @@ INNER JOIN lookup L ON C.clientID = L.clientID
 INNER JOIN expenses E on L.postID = E.id AND L.postType = "expense"
 WHERE L.date >= ' . $begin . ' 
 		AND L.date < ' . $end . ' 
-    AND L.userID = ' . $_SESSION['loggedIn']['id'] . '
+    AND L.userID = ' . $_SESSION['loggedIn']['userID'] . '
 AND C.clientID = "' . $id . '"
 ORDER BY L.date';
 

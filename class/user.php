@@ -6,9 +6,10 @@ class User
 	// So I'm making them separate. 
 	static $user_info;
 	static $bool_login;
-	static $login_error_message;
+	static $login_error_message = array();
 	static $create_error_message = array();
 
+	// for when they're first creating their account
 	static function sanitize(& $data)
 	{
 		$errors = array();
@@ -48,7 +49,7 @@ class User
 		return $errors;
 
 	}
-
+	// for when they're updating their account
 	static function sanitize_updates(& $data)
 	{
 		$errors = array();
@@ -125,6 +126,45 @@ class User
 		}
 	}
 
+	static function delete($data)
+	{
+		$password = md5($data['password']);
+		$email = $_SESSION['loggedIn']['email'];
+		$userID = $_SESSION['loggedIn']['userID'];
+
+		$core = Core::getInstance();
+		$pdo = $core->pdo;
+		$sql = 'SELECT * FROM users
+			WHERE email = :email AND password = :password AND userID = :userID';
+		$s = $pdo->prepare($sql);
+		$s->bindValue(':email', $email);
+		$s->bindValue(':userID', $userID);
+		$s->bindValue(':password', $password);
+		$s->execute();
+		// Russell would utterly kill me
+		if ( $s->rowCount() > 0 ) 
+		{
+			$sql = 'DELETE U, E, L, Ta, Ti, C FROM users U
+				LEFT JOIN expenses E ON E.userID = U.userID
+				LEFT JOIN lookup L on L.userID = U.userID
+				LEFT JOIN tasks Ta on Ta.userID = U.userID
+				LEFT JOIN times Ti on Ti.userID = U.userID
+				LEFT JOIN clients C on C.userID = U.userID
+			WHERE U.userID = :userID';
+			$s = $pdo->prepare($sql);
+			$s->bindValue(':userID', $userID);
+			$s->execute();
+			session_destroy();
+			header('Location: /');
+			exit;
+		}
+		else
+		{
+			self::$login_error_message['password'] = "That's not your password!";
+		}
+	}
+
+
 	static function update($data)
 	{
 		$errors = self::sanitize_updates($data);
@@ -169,12 +209,12 @@ class User
 				// Mustn't validate this to be valid email address, because they might be entering their username instead, which is perfectly valid
 				if (empty($email) || ! filter_var($email, FILTER_VALIDATE_EMAIL) )
 				{
-					self::$login_error_message = 'Please enter a valid email address';
+					self::$login_error_message['email'] = 'Please enter a valid email address';
 				}
 
-				else if (empty($password)) 
+				if (empty($password) || strlen($password) < 8) 
 				{
-					self::$login_error_message = 'Please enter a password.';
+					self::$login_error_message['password'] = 'Password must be at least 8 characters.';
 				}
 
 				else
@@ -196,18 +236,18 @@ class User
 			
 					else if (! self::db_contains_email( $email ) )
 					{
-						self::$login_error_message = 'Oops, this email address or username isn\'t in database.';
+						self::$login_error_message['email'] = 'Oops, this email address or username isn\'t in database.';
 					}
 			
 					else if ( self::db_contains_email($email) )
 					{
-						self::$login_error_message = 'Incorrect password.';
+						self::$login_error_message['password'] = 'Incorrect password.';
 						//<br/><a href="'. Config::home() .'/reset-password/">Forget your password?</a>';
 					}
 			
 					else if ( ! self::is_active($email, $password))
 					{
-						self::$login_error_message = 'Please active your account.';
+						self::$login_error_message['email'] = 'Please active your account.';
 					}
 
 				}

@@ -14,8 +14,8 @@ else
 ?>
 <h1><? echo (! $edit) ? 'New Task' : 'Edit Task' ?></h1>
 
-<form action="" method="post">
-<input type="hidden" name="replaceTask"/>
+<form action="" method="post" class="create-task">
+<input type="hidden" name="replaceTask" value="replacetask"/>
 <? if ($edit) echo '<input type="hidden" name="taskID" value="' . $_GET['edit'] . '">' ; ?>
 <label for="first">Name</label>
 <input type="text" name="taskName" value="<? echo ($edit) ? $task['taskName'] : ''?>" id="first">

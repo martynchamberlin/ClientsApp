@@ -1,6 +1,14 @@
 <? 
 
 require 'includes.php'; 
+
+// They're deleting their account
+if (isset($_POST['delete']) && User::delete($_POST) === true )
+{
+	header('Location: /');
+	exit;
+}
+
 require 'header.php'; 
 
 ?>
@@ -8,14 +16,16 @@ require 'header.php';
 <h1>Accunt Settings</h1>
 
 <?
+// They're updating their account
 if (isset($_POST['email']) && User::update($_POST) === true)
 {
 	echo '<p>Account successfully updated</p>';
 }
-?>
-<form action="" method="post">
 
-<form action = "<?= Config::home() ."/account/"; ?>" method="POST">
+?>
+
+
+<form action = "" method="POST" class="account-settings">
 	<div class="both">
 		<label>First Name:</label>
 		<div class="right">
@@ -56,6 +66,29 @@ if (isset($_POST['email']) && User::update($_POST) === true)
 
 </form>
 
+<p><a href="?delete" class="cancel">Cancel my account</a></p>
+
+<div class="delete-section">
+<p>We're sorry to see you go! All your data you've ever created on this platform will be immediately deleted by deactivating it below.</p>
+
+<? if (isset($_GET['delete']) && isset(User::$login_error_message['password']) ) : ?>
+<p class="error"><?= User::$login_error_message['password']; ?></p>
+<? endif; ?>
+<form action="?delete" method="POST" class="delete-account">
+	<div class="both">
+		<label>Password:</label>
+		<div class="right">
+			<input type="hidden" name="delete">
+			<input type="password" name="password" class="required">
+			<?php if (!empty(User::$create_error_message['first_name'])){ echo ' <span class="error">'.User::$create_error_message['first_name'].'</span>'; } ?>
+		</div>
+	</div>
+
+		<div class="both">
+		<input type="submit" class="delete" value="Permanently Delete Account" name="continue"></div>
+
+</form>
+</div>
 
 <?
 require 'footer.php'; ?>
