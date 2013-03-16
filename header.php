@@ -8,7 +8,7 @@
 		<link rel="stylesheet" href="/css/style.css" type="text/css" media="screen" />
 		<link rel="stylesheet" href="/css/select2.css" type="text/css" media="screen" />		
 
-<script type='text/javascript' src='http://regulatoryspecialists.dev.perfectioncoding.com/wp-includes/js/jquery/jquery.js?ver=1.8.3'></script>
+<script type='text/javascript' src='/js/jquery.js'></script>
 <!-- Add jQuery library -->
 
 <!-- Add mousewheel plugin (this is optional) -->
