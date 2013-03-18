@@ -35,6 +35,7 @@ abstract class Client
 	static function replaceClient()
 	{
 		// Was originally using an `ON DUPLICATE KEY` clause to combine the `update`	 and `insert` queries, but it was too vunerable from a security standpoint
+			$clientID = isset($_POST['clientID']) ? $_POST['clientID'] : substr(md5(microtime()), 0, 10);
 
 		// They're deleting a client record
 		if (isset($_POST['delete']))
@@ -44,7 +45,7 @@ abstract class Client
 		// They're updating a client record
 		else if (isset($_POST['clientID'] ) )
 		{
-			$sql = 'UPDATE clients SET clientID = :clientID, first = :first, last = :last, email = :email, rate=:rate WHERE userID = :userID';
+			$sql = 'UPDATE clients SET first = :first, last = :last, email = :email, rate=:rate WHERE userID = :userID AND clientID = :clientID';
 			$core = Core::getInstance();
 			$s = $core->pdo->prepare($sql);
 			$s->bindValue('clientID', $clientID);
@@ -53,6 +54,7 @@ abstract class Client
 			$s->bindValue('last', $_POST['last']);
 			$s->bindValue('email', $_POST['email']);
 			$s->bindValue('rate', $_POST['rate']);
+			$s->execute();
 		}
 		// They're creating a new client record
 		else
@@ -60,7 +62,6 @@ abstract class Client
 			$sql = 'INSERT INTO clients SET clientID = :clientID, userID = :userID, first = :first, last = :last, email = :email, rate=:rate';
 			$core = Core::getInstance();
 			$s = $core->pdo->prepare($sql);
-			$clientID = isset($_POST['clientID']) ? $_POST['clientID'] : substr(md5(microtime()), 0, 10);
 			$s->bindValue('clientID', $clientID);
 			$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
 			$s->bindValue('first', $_POST['first']);
