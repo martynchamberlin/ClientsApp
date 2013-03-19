@@ -1,12 +1,8 @@
 /* Bare Essentials --------------------------------------- */
 
 html, body {
-
 	background: url(/images/mochaGrunge.png);
-
 }
-
-
 
 #wrap {
 	width: 980px;
@@ -168,7 +164,9 @@ color: white;
 	border: none;
 	margin: 0 0 2px 0;
 }
-
+.view .action-buttons {
+	margin: -25px 0 0;
+}
 
 .view .left-column {
 	float: left;
@@ -353,7 +351,7 @@ a.current {
 }
 
 #content ul, #content ol {
-	margin: 0 0 25px 29px;
+	margin: 0 0 25px 20px;
 }
 
 ul br, ol br {

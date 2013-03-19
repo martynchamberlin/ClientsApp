@@ -54,12 +54,12 @@ foreach ($clientArray as $row)
 	'</span><span class="day">' . date('j', $row['date']) . '</span></div>';
 	endif;
 	echo '
-	<div class="right"><strong> ' . $row['taskName'] . '</strong> — ' . markdown($row['comments']);
+	<div class="right">' . markdown('<strong> ' . $row['taskName'] . '</strong> — ' . $row['comments']);
 	if (!isset($_SESSION['print']))
 	{
-		echo ' <a href="/time/?time=' . $row['timeID'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '">(edit)</a> <a href="/delete/?time=' . $row['timeID'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '" class="delete">(delete)</a>';
+		echo '<div class="action-buttons"> <a href="/time/?time=' . $row['timeID'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '">(edit)</a> <a href="/delete/?time=' . $row['timeID'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '" class="delete">(delete)</a></div>';
 	}
-	echo '<br/><span class="minutes"> ' . $time . ' minutes</span>';
+	echo '<span class="minutes"> ' . $time . ' minutes</span>';
 
 	echo '</div><!-- end .right --></div><!-- end .overflow_hidden -->';
 	$lastdate = $date;

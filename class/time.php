@@ -83,7 +83,7 @@ AND L.postType = "time"';
 		if ( $s->rowCount() > 0 )
 		{
 			$comments = trim($row['comments']);
-			$comments .= "\n\n&#182; " . $_POST['comments'];
+			$comments .= "\n\n" . $_POST['comments'];
 			$time = $row['timeAmount'];
 			$time += $_POST['timeAmount'];
 			$sql = 'UPDATE times SET 

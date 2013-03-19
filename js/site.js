@@ -268,12 +268,12 @@ jQuery(document).ready(function($) {
 
 
 	// Thanks to Markdown, it's time for some new jQuery magic
-	$('.view .right').each(function()
+	/*$('.view .right').each(function()
 	{
 			$(this).find('p').first().css('display', 'inline');
 			$(this).find('p:eq(1)').css('padding-top', '20px');
 			$(this).find('p').last().css('display', 'inline');
-	});
+	});*/
 
 	// Get some defauls in there before you call the select2 function!
 	$('input[type=text]').each(function()
