@@ -37,20 +37,20 @@ abstract class Task
 			// Are they trying to update?
 			if (isset($_POST['taskID']))
 			{
-				$sql = 'UPDATE tasks SET taskName = :taskName, taskRate = :taskRate WHERE taskID = :taskID AND userID = :userID';
+				$sql = 'UPDATE tasks SET taskName = :taskName WHERE taskID = :taskID AND userID = :userID';
 				$s = $core->pdo->prepare($sql);
 				$s->bindValue('taskName', $_POST['taskName']);
 				$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
 				$s->bindValue('taskID', $_POST['taskID']);
-				$s->bindValue('taskRate', $_POST['taskRate']);
+				//$s->bindValue('taskRate', $_POST['taskRate']);
 			}
 			else
 			{
-				$sql = 'INSERT INTO tasks SET taskName = :taskName, taskRate = :taskRate, userID = :userID';
+				$sql = 'INSERT INTO tasks SET taskName = :taskName, userID = :userID';
 				$s = $core->pdo->prepare($sql);
 				$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
 				$s->bindValue('taskName', $_POST['taskName']);
-				$s->bindValue('taskRate', $_POST['taskRate']);
+				//$s->bindValue('taskRate', $_POST['taskRate']);
 			}
 			
 			$s->execute();
