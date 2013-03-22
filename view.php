@@ -57,7 +57,7 @@ foreach ($clientArray as $row)
 	<div class="right">' . markdown('<strong> ' . $row['taskName'] . '</strong> — ' . $row['comments']);
 	if (!isset($_SESSION['print']))
 	{
-		echo '<div class="action-buttons"> <a href="/time/?time=' . $row['timeID'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '">(edit)</a> <a href="/delete/?time=' . $row['timeID'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '" class="delete">(delete)</a></div>';
+		echo '<div class="action-buttons"> <a href="/time/?time=' . $row['post_id'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '">(edit)</a> <a href="/delete/?time=' . $row['post_id'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '" class="delete">(delete)</a></div>';
 	}
 	echo '<span class="minutes"> ' . $time . ' minutes</span>';
 

@@ -15,7 +15,7 @@ abstract class Client
 			$begin = strtotime($period);
 			$end = strtotime('+1 month', $begin);
 
-			$sql = 'SELECT count(DISTINCT L.postID) as primarySort, count(DISTINCT L2.postID) as secondarySort, C.first, C.last, C.rate, C.email, C.clientID FROM clients C
+			$sql = 'SELECT count(DISTINCT L.post_id) as primarySort, count(DISTINCT L2.post_id) as secondarySort, C.first, C.last, C.rate, C.email, C.clientID FROM clients C
 		LEFT JOIN lookup L on C.clientID = L.clientID AND L.date >= ' . $begin . ' AND L.date < ' . $end . '
 
 		LEFT JOIN lookup L2 on C.clientID = L2.clientID 
@@ -77,7 +77,7 @@ abstract class Client
 	static function removeClient($id)
 	{		
 	
-		$sql = 'DELETE C, T, L, E FROM clients C LEFT JOIN lookup L on L.clientID = C.clientID LEFT JOIN times T on T.id = L.postID LEFT JOIN expenses E on E.id = L.postID WHERE C.clientID = :clientID AND C.userID = :userID';
+		$sql = 'DELETE C, T, L, E FROM clients C LEFT JOIN lookup L on L.clientID = C.clientID LEFT JOIN times T on T.lid = L.post_id LEFT JOIN expenses E on E.lid = L.post_id WHERE C.clientID = :clientID AND C.userID = :userID';
 		$core = Core::getInstance();
 		$s = $core->pdo->prepare($sql);
 		$s->bindValue('clientID', $id);

@@ -17,7 +17,7 @@ abstract class Time
 FROM lookup L
 INNER JOIN times T ON L.clientID = T.clientID
 WHERE T.id = :id
-AND T.id = L.postID
+AND T.id = L.post_id
 AND L.postType = "time"';
 		$core = Core::getInstance();
 		$s = $core->pdo->prepare($sql);
@@ -67,7 +67,7 @@ AND L.postType = "time"';
 
 		$sql = 'SELECT * FROM times T
 			INNER JOIN lookup L
-				ON T.id = L.postID
+				ON T.lid = L.post_id
 			WHERE
 			T.clientID = :clientID AND
 			T.userID = :userID AND
@@ -90,44 +90,46 @@ AND L.postType = "time"';
 				comments = :comments,
 				timeAmount = :timeAmount
 					WHERE 
-				id = :id';
+				lid = :lid';
 			$s = $core->pdo->prepare($sql);
 			$s->bindValue('comments', $comments);
 			$s->bindValue('timeAmount', $time);
-			$s->bindValue('id', $row['postID']);
+			$s->bindValue('lid', $row['lid']);
 			$s->execute();
 		}
 		else
 		{
-			$sql = 'INSERT INTO times SET 
-				clientID = :clientID, 
-				userID = :userID, 
-				timeAmount = :timeAmount,
-				taskID = :taskID,
-				comments = :comments';
-			$core = Core::getInstance();
-			$s = $core->pdo->prepare($sql);
-			$s->bindValue('clientID', $_POST['clientID']);
-			$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
-			$s->bindValue('timeAmount', $_POST['timeAmount']);
-			$s->bindValue('taskID', $_POST['taskID']);
-			$s->bindValue('comments', $_POST['comments']);
-			$s->execute();
-			$postID = $core->pdo->lastInsertId();
 
-			// We've got the actual content in there, and now we have to populate the lookup table. 
 			$sql = 'INSERT INTO lookup SET 
 				userID = :userID, 
 				clientID = :clientID, 
-				postID = :postID, 
 				date = :date, 
 				postType = "time"';
 			$s = $core->pdo->prepare($sql);
 			$s->bindValue('date', strtotime($_POST['daySelect'] . ' ' . $_POST['monthSelect']));
 			$s->bindValue('clientID', $_POST['clientID']);
 			$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
-			$s->bindValue('postID', $postID);
 			$s->execute();
+			$post_id = $core->pdo->lastInsertId();
+
+			$sql = 'INSERT INTO times SET 
+				clientID = :clientID, 
+				userID = :userID, 
+				timeAmount = :timeAmount,
+				taskID = :taskID,
+				lid = :lid,
+				comments = :comments';
+			$core = Core::getInstance();
+			$s = $core->pdo->prepare($sql);
+			$s->bindValue('clientID', $_POST['clientID']);
+			$s->bindValue('lid', $post_id);
+			$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
+			$s->bindValue('timeAmount', $_POST['timeAmount']);
+			$s->bindValue('taskID', $_POST['taskID']);
+			$s->bindValue('comments', $_POST['comments']);
+			$s->execute();
+
+			// We've got the actual content in there, and now we have to populate the lookup table. 
 		}
 		header('Location: /view/?clientID=' . $_POST['clientID']);
 		exit;
@@ -135,7 +137,7 @@ AND L.postType = "time"';
 
 	static function updateTime($id, $redirect = '/')
 	{
-		$sql = 'UPDATE times SET clientID = :clientID, timeAmount = :timeAmount, taskID = :taskID, comments = :comments WHERE id = :id AND userID = :userID';
+		$sql = 'UPDATE times SET clientID = :clientID, timeAmount = :timeAmount, taskID = :taskID, comments = :comments WHERE lid = :lid AND userID = :userID';
 		$core = Core::getInstance();
 		$s = $core->pdo->prepare($sql);
 		$s->bindValue('clientID', $_POST['clientID']);
@@ -149,12 +151,12 @@ AND L.postType = "time"';
 		$sql = 'UPDATE lookup SET 
 			clientID = :clientID, 
 			date = :date 
-			WHERE postType = "time" AND postID = :postID AND userID = :userID';
+			WHERE postType = "time" AND id = :id AND userID = :userID';
 		
 		$s = $core->pdo->prepare($sql);
 		$s->bindValue('date', strtotime($_POST['daySelect'] . ' ' . $_POST['monthSelect']));
 		$s->bindValue('clientID', $_POST['clientID']);
-		$s->bindValue('postID', $id);
+		$s->bindValue('id', $id);
 		$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
 		$s->execute();
 
@@ -164,18 +166,18 @@ AND L.postType = "time"';
 
 	static function deleteTime($id, $redirect = '/')
 	{
-		$sql = 'DELETE FROM times WHERE id = :id AND userID = :userID';
+		$sql = 'DELETE FROM times WHERE lid = :lid AND userID = :userID';
 		$core = Core::getInstance();
 		$s = $core->pdo->prepare($sql);
-		$s->bindValue('id', $id);
+		$s->bindValue('lid', $id);
 		$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
 		$s->execute();
 
 		if ($s->rowCount() > 0 )
 		{
-			$sql = 'DELETE FROM lookup WHERE postID = :postID AND postType = "time" AND userID = :userID';
+			$sql = 'DELETE FROM lookup WHERE post_id = :id AND postType = "time" AND userID = :userID';
 			$s = $core->pdo->prepare($sql);
-			$s->bindValue('postID', $id);
+			$s->bindValue('id', $id);
 			$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
 			$s->execute();
 		}
@@ -192,13 +194,13 @@ AND L.postType = "time"';
 
 		$sql = 'SELECT *, T.id as timeID FROM clients C
 INNER JOIN lookup L ON C.clientID = L.clientID
-INNER JOIN times T on L.postID = T.id AND L.postType = "time"
+INNER JOIN times T on L.post_id = T.lid AND L.postType = "time"
 LEFT JOIN tasks TA ON T.taskID = TA.taskID
 WHERE L.date >= ' . $begin . ' 
 		AND L.date < ' . $end . ' 
     AND L.userID = ' . $_SESSION['loggedIn']['userID'] . '
 AND C.clientID = "' . $id . '"
-ORDER BY L.date DESC, postID DESC';
+ORDER BY L.date DESC, L.post_id DESC';
 //ORDER BY TA.taskName, L.date';
 //echo $sql;
 		$core = Core::getInstance();
@@ -219,8 +221,8 @@ ORDER BY L.date DESC, postID DESC';
     if(sum(E.amount), sum(E.amount), 0) as expenseAmount, 
     if(sum(T.timeAmount), sum(T.timeAmount) * C.rate / 60, 0) + IF(sum(E.amount), sum(E.amount), 0) as orderBY FROM clients C
 INNER JOIN lookup L ON C.clientID = L.clientID
-LEFT JOIN times T on L.postID = T.id AND L.postType = "time"
-LEFT JOIN expenses E on L.postID = E.id AND L.postType = "expense"
+LEFT JOIN times T on L.post_id = T.lid AND L.postType = "time"
+LEFT JOIN expenses E on L.post_id = E.lid AND L.postType = "expense"
 WHERE L.date >= ' . $begin . ' 
 		AND L.date < ' . $end . ' 
     AND L.userID = ' . $_SESSION['loggedIn']['userID'] . '

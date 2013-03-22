@@ -9,7 +9,7 @@ abstract class Expense
 FROM lookup L
 INNER JOIN expenses E ON L.clientID = E.clientID
 WHERE E.id = :id
-AND E.id = L.postID
+AND E.lid = L.post_id
 AND L.postType = "expense"';
 		$core = Core::getInstance();
 		$s = $core->pdo->prepare($sql);
@@ -20,20 +20,11 @@ AND L.postType = "expense"';
 
 	static function addExpense()
 	{
-		$sql = 'INSERT INTO expenses SET clientID = :clientID, userID = :userID, amount = :amount, comments = :comments';
 		$core = Core::getInstance();
-		$s = $core->pdo->prepare($sql);
-		$s->bindValue('clientID', $_POST['clientID']);
-		$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
-		$s->bindValue('amount', $_POST['amount']);
-		$s->bindValue('comments', $_POST['comments']);
-		$s->execute();
-		$postID = $core->pdo->lastInsertId();
 
 		$sql = 'INSERT INTO lookup SET 
 			userID = :userID, 
 			clientID = :clientID, 
-			postID = :postID, 
 			date = :date, 
 			postType = "expense"';
 
@@ -41,7 +32,22 @@ AND L.postType = "expense"';
 		$s->bindValue('date', strtotime($_POST['daySelect'] . ' ' . $_POST['monthSelect']));
 		$s->bindValue('clientID', $_POST['clientID']);
 		$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
-		$s->bindValue('postID', $postID);
+		$s->execute();
+		$post_id = $core->pdo->lastInsertId();
+
+
+		$sql = 'INSERT INTO expenses SET 
+			clientID = :clientID, 
+			userID = :userID, 
+			amount = :amount, 
+			lid = :lid, 
+			comments = :comments';
+		$s = $core->pdo->prepare($sql);
+		$s->bindValue('clientID', $_POST['clientID']);
+		$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
+		$s->bindValue('amount', $_POST['amount']);
+		$s->bindValue('comments', $_POST['comments']);
+		$s->bindValue('lid', $post_id);
 		$s->execute();
 
 		header('Location: /view/?clientID=' . $_POST['clientID']);
@@ -64,12 +70,12 @@ AND L.postType = "expense"';
 		$sql = 'UPDATE lookup SET 
 			clientID = :clientID, 
 			date = :date 
-			WHERE postType = "expense" AND postID = :postID';
+			WHERE postType = "expense" AND post_id = :post_id';
 		
 		$s = $core->pdo->prepare($sql);
 		$s->bindValue('date', strtotime($_POST['daySelect'] . ' ' . $_POST['monthSelect']));
 		$s->bindValue('clientID', $_POST['clientID']);
-		$s->bindValue('postID', $id);
+		$s->bindValue('post_id', $id);
 		$s->execute();
 
 		header('Location: ' . $redirect);
@@ -87,9 +93,9 @@ AND L.postType = "expense"';
 
 		if ($s->rowCount() > 0)
 		{
-			$sql = 'DELETE FROM lookup WHERE postID = :postID AND postType = "expense"';
+			$sql = 'DELETE FROM lookup WHERE post_id = :post_id AND postType = "expense"';
 			$s = $core->pdo->prepare($sql);
-			$s->bindValue('postID', $id);
+			$s->bindValue('post_id', $id);
 			$s->execute();
 		}
 
@@ -104,7 +110,7 @@ AND L.postType = "expense"';
 		$end = strtotime('+1 month', $begin);
 		$sql = 'SELECT *, E.id as expenseID FROM clients C
 INNER JOIN lookup L ON C.clientID = L.clientID
-INNER JOIN expenses E on L.postID = E.id AND L.postType = "expense"
+INNER JOIN expenses E on L.post_id = E.lid AND L.postType = "expense"
 WHERE L.date >= ' . $begin . ' 
 		AND L.date < ' . $end . ' 
     AND L.userID = ' . $_SESSION['loggedIn']['userID'] . '
