@@ -39,7 +39,7 @@ foreach ($stuff as $row)
 
 	echo '<td><a href="/view/?clientID=' . $row['clientID'] . '">';
 	echo Time::roundToHours($row['timeAmount']) . ' hours</td>';
-	echo '<td>$' . number_format($money, 2) . '</td>';
+	echo '<td>$' . number_format($row['orderBY'], 2) . '</td>';
 
 	echo '<td>';
 

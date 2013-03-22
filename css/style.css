@@ -440,6 +440,26 @@ table {
 }
 
 
+/* Client Page --------------------------------------- */
+
+.client .good-alert {
+	width: 620px;
+	float: right;
+	margin: 100px 0 0 0;
+}
+
+.client .good-alert.two {
+	margin: 25px 0 0 0;
+}
+
+/* Task Page --------------------------------------- */
+
+
+.task .good-alert {
+	width: 620px;
+	float: right;
+	margin: 70px 0 0;
+}
 
 /* Landing Page --------------------------------------- */
 

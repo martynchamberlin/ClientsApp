@@ -18,7 +18,7 @@ jQuery(document).ready(function($) {
 
 	setTimeout(function()
 	{
-		$('p.good-alert').fadeOut(1000);
+		$('.account p.good-alert').fadeOut(1000);
 	}, 1000);
 
 	// When they want to delete their account
@@ -137,6 +137,12 @@ jQuery(document).ready(function($) {
 				$(this).addClass('error');
 				valid = false;
 			}
+			var rate = $('input[name="rate"]');
+			if (! isNumeric( $(rate).val() ) )
+			{
+				$(rate).addClass('error');
+				valid = false;
+			}
 		});
 		return valid;
 
@@ -147,18 +153,25 @@ jQuery(document).ready(function($) {
 	$('form.create-task').submit(function()
 	{
 		var valid = true;
-		$(this).find('input').each(function()
+		var taskName = $(this).find('input[name="taskName"]');
+		var taskRate = $(this).find('input[name="taskRate"]');
+		$(taskName).removeClass('error');
+		$(taskRate).removeClass('error');
+		if ( $(taskName).val() === "" )
 		{
-			$(this).removeClass('error');
-			if ( $(this).val() === "" )
-			{
-				$(this).addClass('error');
-				valid = false;
-			}
-		});
+			$(taskName).addClass('error');
+			valid = false;
+		}/*
+		if ( $(taskRate).val() !== "" && ! isNumeric( $(taskRate).val() ) )
+		{
+			$(taskRate).addClass('error');
+			valid = false;
+		}*/
+		$(this).find('.error').first().focus();
 		return valid;
 	});
 
+	
 	// Validate the Create a Fee form
 	$('form.create-fee').submit(function()
 	{

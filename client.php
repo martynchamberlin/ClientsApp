@@ -23,6 +23,12 @@ else
 ?>
 <h1><? echo (! $edit) ? 'New Client' : $client['first'] . ' ' . $client['last']; ?></h1>
 
+<div class="good-alert one">It's good to have a valid email address on hand — never know when you'll need to invoice them!</div>
+
+
+
+<div class="good-alert two">If you are doing contract work instead of hourly billing with this client, make your hourly rate $0.00 and create one-time fees instead. You can always override this setting with individual task rates.</div>
+
 <form action="" method="post" class="add-client">
 <input type="hidden" name="replaceClient" value="replaceClient"/>
 <? if ($edit) echo '<input type="hidden" name="clientID" value="' . $_GET['edit'] . '">' ; ?>
@@ -36,7 +42,8 @@ else
 <input type="text" name="email" value="<? echo ($edit) ? $client['email'] : ''?>" id="email">
 
 <label for="rate">Rate per hour</label>
-<input type="text" name="rate" value="<? echo ($edit) ? $client['rate'] : '50.00'?>"/>
+
+<input type="text" name="rate" value="<? echo ($edit) ? $client['rate'] : ''?>"/>
 
 <?php if ($edit) { ?>
 <div class="overflow_hidden">
@@ -45,7 +52,7 @@ else
 </div>
 <?php } ?>
 
-<input type="submit" value="<? echo ($edit) ? 'Save' : 'Add'?>">
+<input type="submit" value="<? echo ($edit) ? 'Save Client' : 'Create Client'?>">
 </form>
 
 
