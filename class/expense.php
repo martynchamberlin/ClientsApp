@@ -8,7 +8,7 @@ abstract class Expense
 		$sql = 'SELECT * 
 FROM lookup L
 INNER JOIN expenses E ON L.clientID = E.clientID
-WHERE E.id = :id
+WHERE E.lid = :id
 AND E.lid = L.post_id
 AND L.postType = "expense"';
 		$core = Core::getInstance();
@@ -56,14 +56,14 @@ AND L.postType = "expense"';
 
 	static function updateExpense($id, $redirect = '/')
 	{
-		$sql = 'UPDATE expenses SET clientID = :clientID, amount = :amount, comments = :comments WHERE id = :id AND userID = :userID';
+		$sql = 'UPDATE expenses SET clientID = :clientID, amount = :amount, comments = :comments WHERE lid = :lid AND userID = :userID';
 		$core = Core::getInstance();
 		$s = $core->pdo->prepare($sql);
 		$s->bindValue('clientID', $_POST['clientID']);
 		$s->bindValue('amount', $_POST['amount']);
 		$s->bindValue('comments', $_POST['comments']);
 		$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
-		$s->bindValue('id', $id);
+		$s->bindValue('lid', $id);
 		$s->execute();
 
 		// Do not make this conditional based on previous row count. Because if they just change the date, then the expenses table will not be updated, and so the affected rowcount will = 0. Took me 20 minutes to figure this out.
@@ -84,18 +84,19 @@ AND L.postType = "expense"';
 
 	static function deleteExpense($id, $redirect = '/')
 	{
-		$sql = 'DELETE FROM expenses WHERE id = :id AND userID = :userID';
+		$sql = 'DELETE FROM expenses WHERE lid = :lid AND userID = :userID';
 		$core = Core::getInstance();
 		$s = $core->pdo->prepare($sql);
-		$s->bindValue('id', $id);
+		$s->bindValue('lid', $id);
 		$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
 		$s->execute();
 
 		if ($s->rowCount() > 0)
 		{
-			$sql = 'DELETE FROM lookup WHERE post_id = :post_id AND postType = "expense"';
+			$sql = 'DELETE FROM lookup WHERE post_id = :post_id AND postType = "expense" AND userID = :userID';
 			$s = $core->pdo->prepare($sql);
 			$s->bindValue('post_id', $id);
+			$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
 			$s->execute();
 		}
 

@@ -627,7 +627,10 @@ input[type="submit"][value="Stop"]#startstop:hover {
 	display: none;
 }
 
-
+.good-alert {
+	background: #fdf4e9;
+	padding: 10px;
+}
 
 /* Elements --------------------------------------- */
 

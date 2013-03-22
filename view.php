@@ -93,7 +93,7 @@ if (!empty($expenses))
 		echo '<div class="comments"> &bull; ' . $e['comments'] . '';
 		if (!isset($_SESSION['print']))
 		{
-			echo ' <a href="/fee/?expense=' . $e['expenseID'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '">(edit)</a> <a href="/delete/?expense=' . $e['expenseID'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '" class="delete">(delete)</a>';
+			echo ' <a href="/fee/?expense=' . $e['post_id'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '">(edit)</a> <a href="/delete/?expense=' . $e['post_id'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '" class="delete">(delete)</a>';
 		}
 	echo '</div></div><!-- end .overflow_hidden -->';
 	$expenseTotal += $e['amount'];

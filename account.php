@@ -19,7 +19,7 @@ require 'header.php';
 // They're updating their account
 if (isset($_POST['email']) && User::update($_POST) === true)
 {
-	echo '<p>Account successfully updated</p>';
+	echo '<p class="good-alert">Account successfully updated</p>';
 }
 
 ?>

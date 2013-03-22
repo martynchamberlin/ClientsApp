@@ -16,10 +16,20 @@ function isNumeric(number)
 
 jQuery(document).ready(function($) {
 
+	setTimeout(function()
+	{
+		$('p.good-alert').fadeOut(1000);
+	}, 1000);
+
 	// When they want to delete their account
 	$('.cancel').click(function()
 	{
-		$('.delete-section').show('slow');
+		$('.delete-section').show(50);
+		setTimeout(function()
+		{
+			$('html,body').animate({ scrollTop: $('body').innerHeight() - window.innerHeight }, 500);
+			$('.delete-account input[type="password"]').focus();
+		}, 51 );
 		return false;
 	});
 

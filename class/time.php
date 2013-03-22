@@ -16,8 +16,8 @@ abstract class Time
 		$sql = 'SELECT * 
 FROM lookup L
 INNER JOIN times T ON L.clientID = T.clientID
-WHERE T.id = :id
-AND T.id = L.post_id
+WHERE T.lid = :id
+AND T.lid = L.post_id
 AND L.postType = "time"';
 		$core = Core::getInstance();
 		$s = $core->pdo->prepare($sql);
@@ -137,7 +137,12 @@ AND L.postType = "time"';
 
 	static function updateTime($id, $redirect = '/')
 	{
-		$sql = 'UPDATE times SET clientID = :clientID, timeAmount = :timeAmount, taskID = :taskID, comments = :comments WHERE lid = :lid AND userID = :userID';
+		$sql = 'UPDATE times SET 
+			clientID = :clientID, 
+			timeAmount = :timeAmount, 
+			taskID = :taskID, 
+			comments = :comments 
+		WHERE lid = :lid AND userID = :userID';
 		$core = Core::getInstance();
 		$s = $core->pdo->prepare($sql);
 		$s->bindValue('clientID', $_POST['clientID']);
@@ -145,7 +150,7 @@ AND L.postType = "time"';
 		$s->bindValue('timeAmount', $_POST['timeAmount']);
 		$s->bindValue('taskID', $_POST['taskID']);
 		$s->bindValue('comments', $_POST['comments']);
-		$s->bindValue('id', $id);
+		$s->bindValue('lid', $id);
 		$s->execute();
 
 		$sql = 'UPDATE lookup SET 
