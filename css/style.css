@@ -164,7 +164,7 @@ color: white;
 	border: none;
 	margin: 0 0 2px 0;
 }
-.view .action-buttons {
+.negative-margins {
 	margin: -25px 0 0;
 }
 
@@ -445,7 +445,7 @@ table {
 .client .good-alert {
 	width: 620px;
 	float: right;
-	margin: 100px 0 0 0;
+	margin: 124px 0 0 0;
 }
 
 .client .good-alert.two {

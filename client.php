@@ -27,7 +27,7 @@ else
 
 
 
-<div class="good-alert two">If you are doing contract work instead of hourly billing with this client, make your hourly rate $0.00 and create one-time fees instead. You can always override this setting with individual task rates.</div>
+<div class="good-alert two">If you are doing contract work instead of hourly billing with this client, make your hourly rate $0.00 and create one-time fees instead.</div>
 
 <form action="" method="post" class="add-client">
 <input type="hidden" name="replaceClient" value="replaceClient"/>

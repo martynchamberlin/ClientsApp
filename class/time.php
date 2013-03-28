@@ -128,8 +128,6 @@ AND L.postType = "time"';
 			$s->bindValue('taskID', $_POST['taskID']);
 			$s->bindValue('comments', $_POST['comments']);
 			$s->execute();
-
-			// We've got the actual content in there, and now we have to populate the lookup table. 
 		}
 		header('Location: /view/?clientID=' . $_POST['clientID']);
 		exit;

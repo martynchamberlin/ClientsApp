@@ -54,14 +54,15 @@ foreach ($clientArray as $row)
 	'</span><span class="day">' . date('j', $row['date']) . '</span></div>';
 	endif;
 	echo '
-	<div class="right">' . markdown('<strong> ' . $row['taskName'] . '</strong> — ' . $row['comments']);
+	<div class="right">' . markdown('<strong> ' . $row['taskName'] . '</strong> — ' . $row['comments']) . '
+	<div class="negative-margins">';
 	if (!isset($_SESSION['print']))
 	{
 		echo '<div class="action-buttons"> <a href="/time/?time=' . $row['post_id'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '">(edit)</a> <a href="/delete/?time=' . $row['post_id'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '" class="delete">(delete)</a></div>';
 	}
 	echo '<span class="minutes"> ' . $time . ' minutes</span>';
 
-	echo '</div><!-- end .right --></div><!-- end .overflow_hidden -->';
+	echo '</div><!-- end .negative-margins--></div><!-- end .right --></div><!-- end .overflow_hidden -->';
 	$lastdate = $date;
 }
 
