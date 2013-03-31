@@ -36,7 +36,7 @@
 		<script type="text/javascript" src="//use.typekit.net/nbv3jkv.js"></script>
 		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 	</head>
-	<body class="<? core::echoPageURL(); ?>">
+	<body class="<?= core::get_page_url() . " " . User::get_color_scheme(); ?>">
 		<div id="fakewrap">
 		<div id="wrap">
 	<div id="nav">

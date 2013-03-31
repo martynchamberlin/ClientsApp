@@ -43,7 +43,7 @@ class Core
 		return false;
 	}
 
-	static function echoPageURL()
+	static function get_page_url()
 	{
 		$pageURL = $_SERVER["REQUEST_URI"]; 
 		$pageURL = explode('?', $pageURL);
@@ -51,7 +51,7 @@ class Core
 		$pageURL = explode('.', $pageURL);
 		$pageURL = array_shift($pageURL);
 		$pageURL = basename($pageURL);
-		echo (empty($pageURL)) ? 'home' : $pageURL;
+		 return (empty($pageURL)) ? 'home' : $pageURL;
 	}
 
 }

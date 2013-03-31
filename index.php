@@ -60,7 +60,7 @@ foreach ($stuff as $row)
 
 </table>
 
-<hr/>
+<br />
 <table class="total">
 <tr>
 	<td><strong>Total time</strong>:</td>
