@@ -333,8 +333,7 @@ h1 {
 	margin: 0 0 30px;
 	font-weight: bold;
 	line-height: 36px;
-	font-weight:300;
-	font-family: Helvetica;
+	text-align: center;
 }
 
 h2 {
@@ -489,13 +488,16 @@ table {
 }
 
 .landing .right form {
-	background: #eee;
 	padding: 35px 66px 3px;
 }
 
 #home {
 	color: black;
 	font-weight: 300;
+}
+
+body.logged_out.landing {
+	background: none;
 }
 
 /* Login Page --------------------------------------- */
@@ -774,19 +776,10 @@ input[type="file"] {
 }
 
 
-/* Retina Display --------------------------------------- */
-
-@media screen and (-webkit-min-device-pixel-ratio: 2) {
-	body {
-		background: url(/images/mochaGrunge_@2X.png);
-		background-size: 400px;
-	}
-}
-
 /* Green Color Scheme --------------------------------------- */
 
 body.green a {
-	color: rgb(55, 136, 52);
+	color: #8ca852;
 }
 
 body.green thead th {
@@ -794,8 +787,42 @@ body.green thead th {
 }
 
 body.green .grey, body.green .good-alert {
-	background: rgb(240, 247, 242);
+	background: rgb(245, 247, 240);
 }
+
+body.green .calendar {
+	background: url(/images/calendar_green.png) no-repeat;
+	height: 90px;
+}
+
+body.green .month {
+	padding-top: 13px;
+}
+
+body.green .day {
+	color: #8ca852;
+	font-weight: bold;
+	padding: 2px 0 0 0;
+	display: block;
+}
+
+body.green input[type="submit"] {
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(164, 196, 139)), to(rgb(80, 116, 2))); 
+	background: -webkit-linear-gradient(center top, #a4c48b, #648420); 
+	background: -moz-linear-gradient(center top, #a4c48b, #648420);
+	background: -ms-linear-gradient(center top, #a4c48b, #648420); 
+	background: -o-linear-gradient(center top, #a4c48b, #648420);
+
+	text-shadow: 0 -1px 0 #648420;
+	box-shadow: 0 1px 0 0 #a4c48b inset;
+}
+
+body.green input[type="submit"]:hover {
+	-webkit-box-shadow:0 0 5px #91ac63; 
+	-moz-box-shadow: 0 0 5px #91ac63; 
+	box-shadow:0 0 5px #91ac63; 
+}
+
 
 /* Teal Color Scheme --------------------------------------- */
 
@@ -813,15 +840,31 @@ body.teal .grey, body.teal .good-alert {
 /* Blue Color Scheme --------------------------------------- */
 
 body.blue a {
-	color: #369;
+	color: #4475ad;
 }
 
 body.blue thead th {
-	background: #369;
+	background: #4475ad;
 }
 
 body.blue .grey,  body.blue .good-alert {
 	background: rgb(240, 243, 247);
+}
+
+body.blue .calendar {
+	background: url(/images/calendar_blue.png) no-repeat;
+	height: 90px;
+}
+
+body.blue .month {
+	padding-top: 13px;
+}
+
+body.blue .day {
+	color: #4475ad;
+	font-weight: bold;
+	padding: 2px 0 0 0;
+	display: block;
 }
 
 /* Red Color Scheme --------------------------------------- */
@@ -852,4 +895,25 @@ body.bw thead th {
 body.bw .grey, body.bw .good-alert {
 	background: #f5f5f5;
 }
+
+/* Retina Display --------------------------------------- */
+
+@media screen and (-webkit-min-device-pixel-ratio: 2) {
+	body {
+		background: url(/images/mochaGrunge_@2X.png);
+		background-size: 400px;
+	}
+
+	body.green .calendar {
+		background: url(/images/calendar_green_retina.png) no-repeat;
+	}
+
+	body.green .calendar {
+		background: url(/images/calendar_blue_retina.png) no-repeat;
+	}
+
+}
+
+
+
 

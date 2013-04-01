@@ -1,5 +1,7 @@
 var unload = false;
 
+
+
 function validateEmail(email) { 
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
@@ -15,6 +17,10 @@ function isNumeric(number)
 
 
 jQuery(document).ready(function($) {
+	if ($('body').is('.logged_out.landing') )
+	{
+		$.backstretch("../images/iStock_000006378858Medium.jpg");
+	}
 
 	setTimeout(function()
 	{
@@ -38,20 +44,65 @@ jQuery(document).ready(function($) {
 		$('.delete-section').show();
 	}
 
-	// When they click "log in" they shouldn't have to load a brand new page. instead, just show them this fancybox
-		$('.fancybox').fancybox({
+	fancy = new Object();
+	fancy.open = false;
+	function get_fancy()
+	{
+		return fancy.open;
+	}
+
+	function set_fancy( bool )
+	{
+		fancy.open = bool;
+	}
+
+	$('#realfancy').fancybox({
 			helpers : {
 				overlay : {
 				css : {
-					'background' : 'url(/images/mochaGrunge.png)'
+				//	'background' : 'url(/images/mochaGrunge.png)'
 				}
 			}
 		},
 			overlayColor: '#333',
 			afterLoad : function() {
+			set_fancy( true );
+
 			this.content = '<form action="/login/" class="popup" method="post"><label for="email">Email</labeL><input type="text" class="normal" class="email" name="email"><input type="hidden" name="login" value="login"><label for="password">Password</label><input type="password" name="password"/><input type="submit" value="Login"></form>'
-			}
+			},
+			afterShow : function() {
+				$('.popup').find('input').first().focus();
+			},
+			afterClose : function() {
+				set_fancy( false );
+				go_down();
+			},
 		});
+
+	function go_up()
+	{
+			$('#wrap').animate({
+			'marginTop': '-' + $('#wrap').outerHeight() + 'px',
+			}, 300);
+	}
+
+	function go_down()
+	{
+			$('#wrap').animate({
+			'marginTop': 0,
+			}, 300);
+	}
+
+	// When they click "log in" they shouldn't have to load a brand new page. instead, just show them this fancybox
+	$('.fancybox').click(function()
+		{
+		go_up();
+		setTimeout(function()
+		{
+				$('#realfancy').trigger('click');
+		}, 500);
+		return false;
+	});
 
 	// Make the Fancybox happen automatically if ?logout=true in URL
 	if(window.location.href.indexOf("logout") > -1) 

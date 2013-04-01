@@ -29,14 +29,14 @@
 		<script src="/js/jquery.text-expander.js"></script>
 		<script src="/js/textarea.js"></script>
 		<script type='text/javascript' src='/js/superfish.js'></script>
-
+		<script src="/js/backstretch.js"></script>
 		<script src="/js/site.js"></script>
 		<script src="/js/jquery.hotkeys-0.7.9.js"></script>
 		<script src="/js/select2.js"></script>
 		<script type="text/javascript" src="//use.typekit.net/nbv3jkv.js"></script>
 		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 	</head>
-	<body class="<?= core::get_page_url() . " " . User::get_color_scheme(); ?>">
+	<body class="<?= core::get_page_url() . " " . User::get_color_scheme() . " "; echo User::logged_in() ? "logged_in" : "logged_out"; ?>">
 		<div id="fakewrap">
 		<div id="wrap">
 	<div id="nav">
@@ -100,7 +100,7 @@
 					<li>
 						<a id="home" <? if (Core::isPage('')) echo 'class="current" '; ?>href="/">Clients <strong>App</strong></a>
 					<li class="login">
-						<a href="#" class="fancybox">Login</a>
+						<a href="/login/" class="fancybox">Login</a>
 					</li>
 				</ul>
 		<? endif; ?>

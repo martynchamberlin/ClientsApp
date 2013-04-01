@@ -54,18 +54,21 @@ if ( $alert )
 	<div class="both color_scheme">
 		<span class="label">Color Scheme:</span>
 		<div class="right">
-			<input type="radio" id="orange" name="color_scheme" value="orange" <?  if (User::color_scheme("orange") ) { echo "checked=\"checked\""; } ?>><label for="orange">Classic Orange</label>
+			<input type="radio" id="orange" name="color_scheme" value="orange" <?  if (User::color_scheme("orange") ) { echo "checked=\"checked\""; } ?>><label for="orange">Orange</label>
 			<br/>
-<input type="radio" id="green" name="color_scheme" value="green" <?  if (User::color_scheme("green") ) { echo "checked=\"checked\""; } ?>><label for="green">Cold Green</label>
+<input type="radio" id="green" name="color_scheme" value="green" <?  if (User::color_scheme("green") ) { echo "checked=\"checked\""; } ?>><label for="green">Green</label>
 			<br/>
+
+			<input type="radio" id="blue" name="color_scheme" value="blue" <?  if (User::color_scheme("blue") ) { echo "checked=\"checked\""; } ?>><label for="blue">Blue</label>
+			<br/>
+
+			<!--
 			<input type="radio" id="teal" name="color_scheme" value="teal" <?  if (User::color_scheme("teal") ) { echo "checked=\"checked\""; } ?>><label for="teal">Neo Teal</label>
-			<br/>
-			<input type="radio" id="blue" name="color_scheme" value="blue" <?  if (User::color_scheme("blue") ) { echo "checked=\"checked\""; } ?>><label for="blue">Corporate Blue</label>
 			<br/>
 			<input type="radio" id="red" name="color_scheme" value="red" <?  if (User::color_scheme("red") ) { echo "checked=\"checked\""; } ?>><label for="red">Crazy Red</label>
 			<br/>
 			<input type="radio" id="bw" name="color_scheme" value="bw" <?  if (User::color_scheme("bw") ) { echo "checked=\"checked\""; } ?>><label for="bw">Black & White</label>
-			<br/>
+			<br/>-->
 
 			<br/>
 				</div>
