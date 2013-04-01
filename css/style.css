@@ -1,6 +1,11 @@
 /* Bare Essentials --------------------------------------- */
 
-html, body {
+
+body.logged_out.landing {
+	background: none;
+}
+
+body {
 	background: url(/images/mochaGrunge.png);
 }
 
@@ -496,9 +501,6 @@ table {
 	font-weight: 300;
 }
 
-body.logged_out.landing {
-	background: none;
-}
 
 /* Login Page --------------------------------------- */
 
