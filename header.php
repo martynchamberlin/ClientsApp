@@ -2,7 +2,7 @@
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en">
 	<head>
-		<title>Title of the Document</title>
+		<title>Time Tracking Software for Solo Entrepreneurs</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link rel="stylesheet" href="/css/reset.css" type="text/css" media="screen" />
 		<link rel="stylesheet" href="/css/style.css" type="text/css" media="screen" />
@@ -42,14 +42,14 @@
 	<div id="nav">
 		<? if ( User::logged_in() === true ) : ?>
 				<ul>
-					<li>
+					<li class="first">
 						<a id="home" <? if (Core::isPage('')) echo 'class="current" '; ?>href="/">Clients <strong>App</strong></a>
 					</li>
 					<li>
 						<a href="#">New...</a>
 						<ul>
 							<? $clients = Client::showClientList(); $tasks = Task::showTaskList(); ?>
-							<li><a href="/<?= ! empty($clients) && !empty($tasks) ? 'time/">' : '#time" class="no-time dead">' ?>Time Log</a></li>
+							<li ><a href="/<?= ! empty($clients) && !empty($tasks) ? 'time/">' : '#time" class="no-time dead">' ?>Time Log</a></li>
 							<li><a href="/client/">Client</a></li>
 
 							<li><a href="/task/">Frequent Task</a></li>
@@ -64,23 +64,19 @@
 					<li>
 						<a <? if (Core::isPage('tasks')) echo 'class="current" '; ?>href="/tasks/">Tasks</a>
 					</li>		
-
-				
-
-
-										<li class="account-settings">
+					<li class="account-settings">
 						<a href="/account/">Account</a>
 						<ul>
 					<li class="logout">
 						<a href="/logout/">Logout</a>
 					</li>
 
-						</ul>
-					</li>
+				</ul>
+			</li>
 
 	<li class="period">
 									<form action="" method="POST" id="getPeriod">
-							<select name="monthSelect">
+							<select name="monthSelect" style="width: 150px">
 							<? $months = Time::showMonths(12);
 							for ($i = 0; $i < count($months); $i++)
 							{
@@ -92,6 +88,31 @@
 						</select>
 						</form>
 					</li>
+
+
+	<li class="client">
+	<form>
+	<select name="clientID" tabindex="501">
+<? $clientList = Client::showClientList(); 
+
+echo '<option value="">Select Client</option>';
+
+foreach ($clientList as $instance)
+{
+
+	echo '<option value="' . $instance['clientID'] . '"';
+	echo Core::is_page('view') && isset($_GET['clientID']) && $_GET['clientID'] == $instance['clientID'] ? ' selected="selected"' : '';
+	echo '>';
+	echo $instance['first'] . ' ' . $instance['last'];
+	echo '</option>';
+
+}
+?>
+</select>
+
+</form>
+
+
 
 				</ul>
 		<? else: ?>

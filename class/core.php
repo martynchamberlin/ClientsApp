@@ -29,8 +29,12 @@ class Core
 		return self::$instance;
 	}
 
-	
 	static function isPage($string)
+	{
+		return self::is_page($string);
+	}
+
+	static function is_page($string)
 	{
 		$pageURL = $_SERVER["REQUEST_URI"];
 		$pageURL = explode('?', $pageURL );

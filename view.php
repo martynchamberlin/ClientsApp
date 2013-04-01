@@ -73,6 +73,7 @@ echo '<hr/>';
 echo '<h2 class="breakdown">Task breakdown</h2>';
 
 echo '<table class="breakdown">';
+rsort($tasks);
 foreach ($tasks as $task)
 {
 	echo '<tr><td class="name"><a href="/task/?edit=' . $task['taskID'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']). '">' . $task['name'] . '</a></td><td class="hour">' . Time::roundToHours($task['total'])  . ' </td><td>hours</td><td> &nbsp;&nbsp;&nbsp;$' . number_format(Time::calculateTotal($task['total'], $client['rate']), 2) . '</td></tr>';
@@ -89,9 +90,12 @@ if (!empty($expenses))
 
 	foreach ($expenses as $e)
 	{
-		echo '<div class="overflow_hidden"><div class="left-column"> ' . date('M j', $e['date'])  . ' &bull; ';
-		echo '$' . number_format($e['amount'], 2) . '</div> ';
-		echo '<div class="comments"> &bull; ' . $e['comments'] . '';
+		echo '<div class="overflow_hidden">
+			<div class="calendar"><span class="month">'
+	. date('M', $e['date']) . 
+	'</span><span class="day">' . date('j', $e['date']) . '</span></div>
+	
+		<div class="right"><strong>$' . number_format($e['amount'], 2) . '</strong> — ' . $e['comments'] . '';
 		if (!isset($_SESSION['print']))
 		{
 			echo ' <a href="/fee/?expense=' . $e['post_id'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '">(edit)</a> <a href="/delete/?expense=' . $e['post_id'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '" class="delete">(delete)</a>';

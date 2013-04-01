@@ -40,8 +40,8 @@ overflow: hidden;
 border-bottom: 1px solid rgb(228, 228, 228);
 }
 
-#nav ul {
-margin: 0 -17px;
+#nav li.first a {
+	padding-left:0;
 }
 
 #nav li {
@@ -55,22 +55,35 @@ margin: 0 -17px;
 	text-decoration: none;
 }
 
-#nav li.period {
+#nav li.client {
 	float: right;
 	margin: 8px 0 0;
 }
 
 #nav li.period .select2-container {
+	margin-right: 0;
+}
+
+#nav li.period {
+	float: right;
+	margin: 8px 0 0;
+}
+
+#nav .select2-container {
 	margin: 0 10px;
 }
 
-#nav li.period a {
+#nav li.period select {
+}
+
+#nav li.period a, #nav li.client a {
 	padding: 0 10px;
 }
 
-#nav li.account-settings {
-	float: right;
+#nav li.period a {
+	padding-right: 0;
 }
+
 
 #nav li.logout, #nav li.login {
 float: right;
@@ -183,12 +196,6 @@ color: white;
 	min-width: 150px;
 }
 
-.view .comments {
-}
-
-.view .comments a {
-	color: #aaa;
-}
 
 /* Calendar Idea -----------------------------------*/
 
@@ -781,7 +788,7 @@ input[type="file"] {
 /* Green Color Scheme --------------------------------------- */
 
 body.green a {
-	color: #8ca852;
+	color: #87b448;
 }
 
 body.green thead th {

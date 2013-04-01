@@ -358,6 +358,10 @@ jQuery(document).ready(function($) {
 	$('select').each(function()
 	{
 		$(this).css('width', '200px');
+		if ($(this).is('#nav select'))
+		{
+			$(this).css('width', '140px');
+		}
 	});
 
 	$('select').select2();
@@ -511,6 +515,31 @@ jQuery(document).ready(function($) {
 
 	
 	$('textarea').autosize(); 
+
+	$('#nav li.client select').change(function()
+	{
+		if ($(this).val() !== "")
+		{
+			window.location = "/view/?clientID=" + $(this).val();
+		}
+	});
+
+	function is_page( page )
+	{
+		page = "." + page;
+		if ( $('body').is( page ) )
+		{
+			return true;
+		}
+		return false;
+	}
+
+	var h1 = $(this).find('h1').html();
+	var h1 = h1.replace(/(<([^>]+)>)/ig,"");
+	if ( ! is_page('landing') )
+	{
+		document.title = h1;
+	}
 
 });
 

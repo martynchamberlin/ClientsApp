@@ -154,7 +154,7 @@ AND L.postType = "time"';
 		$sql = 'UPDATE lookup SET 
 			clientID = :clientID, 
 			date = :date 
-			WHERE postType = "time" AND id = :id AND userID = :userID';
+			WHERE postType = "time" AND post_id = :id AND userID = :userID';
 		
 		$s = $core->pdo->prepare($sql);
 		$s->bindValue('date', strtotime($_POST['daySelect'] . ' ' . $_POST['monthSelect']));

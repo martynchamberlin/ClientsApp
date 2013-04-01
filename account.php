@@ -14,7 +14,7 @@ require 'header.php';
 
 ?>
 
-<h1>Accunt Settings</h1>
+<h1>Account Settings</h1>
 
 <?
 // They're updating their account
