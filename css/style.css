@@ -908,10 +908,12 @@ body.bw .grey, body.bw .good-alert {
 
 	body.green .calendar {
 		background: url(/images/calendar_green_retina.png) no-repeat;
+		background-size: 100%;
 	}
 
-	body.green .calendar {
+	body.blue .calendar {
 		background: url(/images/calendar_blue_retina.png) no-repeat;
+		background-size: 100%;
 	}
 
 }
