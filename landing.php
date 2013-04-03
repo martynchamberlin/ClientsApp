@@ -9,7 +9,7 @@ require 'header.php';
 <h1>78.3% of US businesses are run by solo entrepreneurs.</h1>
 <h2>It’s time to get smart about tracking your time.</h2>
 <div class="left">
-<p>Clients <strong>App</strong> is a web-based time tracking tool that allows you to keep track of the <em>what</em> and the <em>when</em> of your freelance projects. It’s built by a solo entrepreneur who grew frustrated with the bloated, antequated alternatives out there. Here’s some featurs that’ll make you use this app on a daily basis:</p>
+<p>Clients <strong>App</strong> is a web-based time tracking tool that allows you to keep track of the <em>what</em> and the <em>when</em> of your freelance projects. It’s built by a solo entrepreneur who grew frustrated with the bloated, antequated alternatives out there. Here’s some features that’ll make you use this app on a daily basis:</p>
 <ul>
 	<li>Create new clients, new times, new tasks, and new fees</li>
 	<li>Keep track of your total money and hours each month</li>

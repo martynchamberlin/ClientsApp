@@ -234,7 +234,7 @@ jQuery(document).ready(function($) {
 
 		var valid = true;
 		
-		if ( $(amount).val() === "" || ! isNumeric( $(this).val() ) )
+		if ( $(amount).val() === "" || ! isNumeric( $(amount).val() ) )
 		{
 				$(amount).addClass('error');
 				valid = false;
