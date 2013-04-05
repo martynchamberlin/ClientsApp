@@ -965,6 +965,15 @@ body.blue input[type="submit"]:hover {
 	box-shadow:0 0 5px #2b68a1; 
 }
 
+body.blue input[type="text"].normal:focus, body.blue textarea:focus, body.blue input[type="password"]:focus {
+    outline: 0;
+    border-color: rgba(142, 167, 197, 0.8);
+    -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(142, 167, 197, 0.6);
+    -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(142, 167, 197, 0.6);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(142, 167, 197, 0.6);
+}
+
+
 
 /* Red Color Scheme --------------------------------------- */
 
