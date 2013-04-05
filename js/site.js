@@ -22,7 +22,10 @@ jQuery(document).ready(function($) {
     var content = $(elem).next(".info");
 		var clientID = $(content).find('.clientID').html();
 		var month = $(content).find('.month').html();
-		alert( month );
+		// fix for iPads, in which it tries to turn unix timestamp into a telephone number
+		month = month.replace(/(<([^>]+)>)/ig,"");
+
+		//alert( month );
     $.ajax({
       type: "POST",
       url: "/ajax/",
