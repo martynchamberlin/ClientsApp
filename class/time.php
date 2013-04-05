@@ -219,13 +219,15 @@ ORDER BY L.date DESC, L.post_id DESC';
 		$begin = strtotime($period);
 		$end = strtotime('+1 month', $begin);
 		// We are ordering this return set by the amount of money the person owes us. I am confident this query will get much more complicated in the future, but right now it's downright beatiful and highly functional
-		$sql = 'SELECT C.clientID, C.first, C.last, C.rate, 
+		$sql = 'SELECT C.clientID, C.first, C.last, C.rate, if(P.id, P.id, "") as paid,
     if(sum(T.timeAmount), sum(T.timeAmount), 0) as timeAmount, 
     if(sum(E.amount), sum(E.amount), 0) as expenseAmount, 
     if(sum(T.timeAmount), sum(T.timeAmount) * C.rate / 60, 0) + IF(sum(E.amount), sum(E.amount), 0) as orderBY FROM clients C
 INNER JOIN lookup L ON C.clientID = L.clientID
 LEFT JOIN times T on L.post_id = T.lid AND L.postType = "time"
 LEFT JOIN expenses E on L.post_id = E.lid AND L.postType = "expense"
+LEFT JOIN paid P on P.clientID=C.clientID AND P.month >= ' . $begin . ' AND P.month < ' . $end . ' 
+
 WHERE L.date >= ' . $begin . ' 
 		AND L.date < ' . $end . ' 
     AND L.userID = ' . $_SESSION['loggedIn']['userID'] . '

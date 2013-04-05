@@ -75,7 +75,8 @@
 			</li>
 
 	<li class="period">
-									<form action="" method="POST" id="getPeriod">
+									<form action="/landing/" method="POST" id="getPeriod">
+									<input type="hidden" name="in_header" />
 							<select name="monthSelect" style="width: 150px">
 							<? $months = Time::showMonths(12);
 							for ($i = 0; $i < count($months); $i++)

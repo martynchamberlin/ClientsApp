@@ -183,6 +183,18 @@ color: white;
 	padding: 0 0 20px 0;
 }
 
+.view h1 a {
+	color: #000!important;
+}
+
+.view h1 a:hover {
+	border-bottom: 1px solid #e4e4e4;
+}
+
+.view .total {
+	float: none;
+}
+
 .view .expenses h2, .view .breakdown {
 	border: none;
 	margin: 0 0 2px 0;
@@ -245,6 +257,7 @@ label, .label {
 
 hr {
 	border-top: 1px solid #e4e4e4;
+	clear: both;
 }
 
 hr.orange {
@@ -286,10 +299,6 @@ select, .select2-container {
 .overflow_hidden {
 	overflow: hidden;
 	padding: 4px 0;
-}
-
-.home select {
-	margin: 25px 0;
 }
 
 input[type="text"].normal:focus, textarea:focus, input[type="password"]:focus {
@@ -390,11 +399,42 @@ ul em, ol em {
 	padding: 0 50px 0 0
 }
 
-/* Home --------------------------------------- */
+/* Home Page when logged in --------------------------------------- */
 
+.home td.number {
+	width: 20px;
+}
+
+.home td.checkboxes {
+	width: 25px;
+}
+
+.home td input[type="checkbox"] {
+	display: none;
+}
+
+.home .checkboxes {
+	text-align: center;
+}
+
+.checkbox {
+	border: 1px solid #ccc;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	margin: 6px 0px 0 8px;
+	cursor: pointer;
+}
+
+.paid {
+	background: #fd9026;
+	width: 11px;
+	height: 11px;
+	border: none;
+}
 
 .grey {
-	background: #fdf4e9;
+	background-color: #fdf4e9;
 }
 
 thead th {
@@ -413,12 +453,29 @@ td {
 }
 
 table.total {
-	margin-bottom: 20px;
+	margin-bottom: 0px;
 	width: 300px;
+	float: right;
+}
+
+.total td, .total thead th {
+		text-align: right;
+		padding-right: 10px
+}
+
+.total thead {
+	display: none;
+}
+
+.total td {
+	border: 1px solid rgb(255, 235, 216);
 }
 
 table.total td {
-	padding-right: 15px;
+}
+
+table.total tr {
+	background: none!important;
 }
 
 .search_form input[type="search"] {
@@ -428,12 +485,6 @@ table.total td {
 		width: 150px;
 		/*-webkit-appearance: textfield;*/
 }
-
-
-.home .title {
-	font-weight: bold;
-}
-
 
 .excerpt {
 	margin: 15px 0 15px 30px;
@@ -448,7 +499,6 @@ table.total td {
 .light {
 	color: #ccc;
 }
-
 
 /* Landing Page --------------------------------------- */
 
@@ -799,6 +849,14 @@ body.green .grey, body.green .good-alert {
 	background: rgb(245, 247, 240);
 }
 
+body.green table.total .first {
+	background: none;
+}
+
+body.green .total td {
+	border: 1px solid rgb(245, 247, 240);
+}
+
 body.green .calendar {
 	background: url(/images/calendar_green.png) no-repeat;
 	height: 90px;
@@ -832,6 +890,15 @@ body.green input[type="submit"]:hover {
 	box-shadow:0 0 5px #91ac63; 
 }
 
+body.green .paid {
+	background: #87b448;
+	
+}
+
+body.green th.summary {
+	background: rgb(175, 216, 118);
+}
+
 
 /* Teal Color Scheme --------------------------------------- */
 
@@ -852,12 +919,16 @@ body.blue a {
 	color: #4475ad;
 }
 
-body.blue thead th {
+body.blue thead th, .blue .paid {
 	background: #4475ad;
 }
 
 body.blue .grey,  body.blue .good-alert {
 	background: rgb(240, 243, 247);
+}
+
+.blue .total td {
+border: 1px solid rgb(240, 243, 247);
 }
 
 body.blue .calendar {
@@ -875,6 +946,25 @@ body.blue .day {
 	padding: 2px 0 0 0;
 	display: block;
 }
+
+body.blue input[type="submit"] {
+	background-color: rgb(139, 173, 196);
+background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(139, 166, 196)), to(rgb(2, 61, 116))); 
+	background: -webkit-linear-gradient(center top, #91aac7, #205484); 
+	background: -moz-linear-gradient(center top, #91aac7, #205484);
+	background: -ms-linear-gradient(center top, #91aac7, #205484); 
+	background: -o-linear-gradient(center top, #91aac7, #205484);
+
+	text-shadow: 0 -1px 0 #84a2bf;
+	box-shadow: 0 1px 0 0 #84a2bf inset;
+}
+
+body.blue input[type="submit"]:hover {
+	-webkit-box-shadow:0 0 5px #2b68a1; 
+	-moz-box-shadow: 0 0 5px #2b68a1; 
+	box-shadow:0 0 5px #2b68a1; 
+}
+
 
 /* Red Color Scheme --------------------------------------- */
 
@@ -924,7 +1014,3 @@ body.bw .grey, body.bw .good-alert {
 	}
 
 }
-
-
-
-

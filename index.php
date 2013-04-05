@@ -14,8 +14,8 @@ if (!empty($stuff))
 	<table class="main">
 	<thead>
 	<tr class="head">
-	<th></th>
-
+	<th>&nbsp;</th>
+	<th>&nbsp;</th>
 	<th>Name</th>
 	<th>Time</th>
 	<th>Money</th>
@@ -23,7 +23,8 @@ if (!empty($stuff))
 	</tr>
 	</thead>';
 
-
+$unpaid = 0;
+$paid = 0;
 
 foreach ($stuff as $row)
 {
@@ -31,8 +32,25 @@ foreach ($stuff as $row)
 	$expenses = !empty($row['expenseAmount']) ? $row['expenseAmount'] : 0;
 	$money = $expenses + Time::calculateTotal($row['timeAmount'], $row['rate']);
 	echo '<tr>';
-	echo '<td>' . $i . '</td>';
+	echo '<td class="number">' . $i . '</td>';
 	$i++;
+	$paid_status = !empty($row['paid']) ? "paid" : "unpaid";
+	if ( $paid_status == "unpaid" )
+	{
+		$unpaid += $money;
+	}
+	else if ( $paid_status == "paid" )
+	{
+		$paid += $money;
+	}
+
+	echo '<td class="checkboxes"><div class="checkbox ' . $paid_status . '"></div>
+		<div class="info" style="display:none">
+			<div class="clientID">' . $row['clientID'] . '</div>
+			<div class="month">' . strtotime( Time::getPeriod() ) . '
+		</div>
+		
+	</td>';
 
 	echo '<td><a href="/client/?edit=' . $row['clientID'] . '">';
 	echo $row['first'] . ' ' . $row['last'] . '</a></td>';
@@ -62,12 +80,28 @@ foreach ($stuff as $row)
 
 <br />
 <table class="total">
+<thead>
+	<tr>
+	<th>Total</th>
+	<th class="summary">Amount</th>
+	</tr>
+</thead>
 <tr>
-	<td><strong>Total time</strong>:</td>
-	<td><?= Time::roundToHours($time) ?> hours</td>
+	<td class="first">Hours</td>
+	<td><?= Time::roundToHours($time) ?></td>
+</tr>
+<? if ( $paid > 0 ) : ?>
+<tr>
+	<td class="first">Paid invoices</td>
+	<td>$<?= number_format($paid, 2); ?></td>
 </tr>
 <tr>
-	<td><strong>Total money</strong>:</td>
+	<td class="first">Unpaid invoices</td>
+	<td>$<?= number_format($unpaid, 2); ?></td>
+</tr>
+<? endif; ?>
+<tr>
+	<td class="first">Revenue</td>
 	<td>$<?= number_format($totalMoney, 2) ?></td>
 </tr>
 </table>

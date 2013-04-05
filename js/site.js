@@ -17,6 +17,39 @@ function isNumeric(number)
 
 
 jQuery(document).ready(function($) {
+
+	function send_paid( elem, action ) {
+    var content = $(elem).next(".info");
+		var clientID = $(content).find('.clientID').html();
+		var month = $(content).find('.month').html();
+    $.ajax({
+      type: "POST",
+      url: "/ajax/",
+        data: {
+            'clientID': clientID,
+						'month': month,
+						'action': action,
+        },
+
+      success: function(html){
+         //   alert( 'oh yeah!');
+        }
+    });
+	}
+
+
+	$('.checkbox.unpaid').live('click', function()
+	{
+		$(this).addClass('paid').removeClass('unpaid');
+		send_paid( $(this), "insert" );
+	});
+	$('.checkbox.paid').live('click', function()
+	{
+		$(this).removeClass('paid').addClass('unpaid');
+		send_paid( $(this), "delete" );
+
+	});
+
 	if ($('body').is('.logged_out.landing') )
 	{
 		$.backstretch("../images/iStock_000006378858Medium.jpg");

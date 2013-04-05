@@ -18,6 +18,7 @@ require 'class/client.php';
 require 'class/time.php';
 require 'class/expense.php';
 require 'class/task.php';
+require 'class/paid.php';
 
 // Now that we're done calling all the classes, we need to handle all of our conditionals before showing the actual content
 
@@ -36,8 +37,15 @@ else if ( User::logged_in() && Core::isPage('login') )
 
 // If they're updating the month period they're wanting to look at
 if(isset($_POST['monthSelect']))
+{
 	Time::updatePeriod($_POST['monthSelect']);
-
+	if (isset($_POST['in_header']))
+	{
+	header('Location: ' . $_SERVER['HTTP_REFERER']);
+	//header('location: /landing/ ');
+	exit;
+	}
+}
 
 
 // If they're creating a new client or updating an old one
