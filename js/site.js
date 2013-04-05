@@ -1,7 +1,5 @@
 var unload = false;
 
-
-
 function validateEmail(email) { 
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
@@ -10,7 +8,7 @@ function validateEmail(email) {
 function isNumeric(number)
 {
 	if (isNaN(number / 1) == false) {
-    return true;
+		return true;
 	}
 	return false;
 }
@@ -19,26 +17,24 @@ function isNumeric(number)
 jQuery(document).ready(function($) {
 
 	function send_paid( elem, action ) {
-    var content = $(elem).next(".info");
+		var content = $(elem).next(".info");
 		var clientID = $(content).find('.clientID').html();
 		var month = $(content).find('.month').html();
 		// fix for iPads, in which it tries to turn unix timestamp into a telephone number
 		month = month.replace(/(<([^>]+)>)/ig,"");
+		
+		$.ajax({
+			type: "POST",
+			url: "/ajax/",
+			data: {
+				'clientID': clientID,
+				'month': month,
+				'action': action,
+			},
 
-		//alert( month );
-    $.ajax({
-      type: "POST",
-      url: "/ajax/",
-        data: {
-            'clientID': clientID,
-						'month': month,
-						'action': action,
-        },
-
-      success: function(html){
-         //   alert( 'oh yeah!');
-        }
-    });
+			success: function(html){
+			}
+		});
 	}
 
 
