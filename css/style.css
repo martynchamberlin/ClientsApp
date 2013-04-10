@@ -124,8 +124,9 @@ border-radius: 5px;
 	color: #111;
 }
 
-#nav li li a.dead:hover {
-	background: #ccc;
+#nav li li a.dead, #nav li li a.dead:hover {
+	background: none;
+	color: rgb(207, 207, 207);
 	cursor: default;
 }
 

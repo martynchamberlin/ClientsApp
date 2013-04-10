@@ -97,20 +97,20 @@ jQuery(document).ready(function($) {
 				}
 			}
 		},
-			overlayColor: '#333',
-			afterLoad : function() {
-			set_fancy( true );
+		overlayColor: '#333',
+		afterLoad : function() {
+		set_fancy( true );
 
-			this.content = '<form action="/login/" class="popup" method="post"><label for="email">Email</labeL><input type="text" class="normal" class="email" name="email"><input type="hidden" name="login" value="login"><label for="password">Password</label><input type="password" name="password"/><input type="submit" value="Login"></form>'
-			},
-			afterShow : function() {
-				$('.popup').find('input').first().focus();
-			},
-			afterClose : function() {
-				set_fancy( false );
-				go_down();
-			},
-		});
+		this.content = '<form action="/login/" class="popup" method="post"><label for="email">Email</labeL><input type="text" class="normal" class="email" name="email"><input type="hidden" name="login" value="login"><label for="password">Password</label><input type="password" name="password"/><input type="submit" value="Login"></form>'
+		},
+		afterShow : function() {
+			$('.popup').find('input').first().focus();
+		},
+		afterClose : function() {
+			set_fancy( false );
+			go_down();
+		},
+	});
 
 	function go_up()
 	{
@@ -346,7 +346,6 @@ jQuery(document).ready(function($) {
 		}
 	});
 
-	//$(".confs").fancybox();
 	// Give some sanity to the tables
 	$('table').each(function()
 	{
@@ -371,16 +370,6 @@ jQuery(document).ready(function($) {
 		animation:   {opacity:'show',height:'show'},	// fade-in and slide-down animation 
 		dropShadows: false								// disable drop shadows 
 	});
-	
-
-
-	// Thanks to Markdown, it's time for some new jQuery magic
-	/*$('.view .right').each(function()
-	{
-			$(this).find('p').first().css('display', 'inline');
-			$(this).find('p:eq(1)').css('padding-top', '20px');
-			$(this).find('p').last().css('display', 'inline');
-	});*/
 
 	// Get some defauls in there before you call the select2 function!
 	$('input[type=text]').each(function()
@@ -493,8 +482,8 @@ jQuery(document).ready(function($) {
 	// These next two functions are responsible for showing the viewer what's going on
 	function updateSec()
 	{
-			secString = formatSec(sec);
-			$('#seconds').html(secString);
+		secString = formatSec(sec);
+		$('#seconds').html(secString);
 	}
 
 	function updateMin()
