@@ -208,26 +208,39 @@ jQuery(document).ready(function($) {
 	$('form.add-client').submit(function()
 	{
 		var valid = true;
+		var first = $(this).find('input[name="first"]');
+		var last = $(this).find('input[name="last"]');
+		var email = $(this).find('input[name="email"]');
+		var rate = $(this).find('input[name="rate"]');
+		var billing_email = $(this).find('input[name="billing_email"]');
+
 		$(this).find('input').each(function()
 		{
 			$(this).removeClass('error');
-			if ( $(this).val() === "" )
-			{
-				$(this).addClass('error');
-				valid = false;
-			}
-			if ( $(this).is('input[name="email"]') && !validateEmail($(this).val() ) )
-			{
-				$(this).addClass('error');
-				valid = false;
-			}
-			var rate = $('input[name="rate"]');
-			if (! isNumeric( $(rate).val() ) )
-			{
-				$(rate).addClass('error');
-				valid = false;
-			}
 		});
+		/*
+		if ( $(first).val() === "" )
+		{
+			$(first).addClass('error');
+			valid = false;
+		}
+		if ( $(last).val() === "" )
+		{
+			$(last).addClass('error');
+			valid = false;
+		}
+		*/
+		if ( !validateEmail( $(billing_email).val() ) )
+		{
+			$(billing_email).addClass('error');
+			valid = false;
+		}
+		if ( $(rate).val() === "" || ! isNumeric( $(rate).val() ) )
+		{
+			$(rate).addClass('error');
+			valid = false;
+		}
+
 		return valid;
 
 	});

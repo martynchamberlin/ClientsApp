@@ -51,7 +51,7 @@ if(isset($_POST['monthSelect']))
 // If they're creating a new client or updating an old one
 else if(isset($_POST['replaceClient']))
 {
-	$array = array('first', 'last', 'email', 'rate');
+	$array = array('billing_email', 'rate');
 	$errors = Validate::genVal($array);
 	if (empty($errors))
 		Client::replaceClient();

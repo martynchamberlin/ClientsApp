@@ -17,7 +17,7 @@ else if (!isset($_SESSION['print']) && isset($_POST['print']))
 
 ?>
 
-<h1><a href="/client/?edit=<?=$client['clientID']; ?>"><?= $client['first'] . ' ' . $client['last'] ?></a> &#8212; <?= Time::getPeriod('F o') ?></h1>
+<h1><a href="/client/?edit=<?=$client['clientID']; ?>"><?= Client::format_name( $client ) ?></a> &#8212; <?= Time::getPeriod('F o') ?></h1>
 
 <?
 

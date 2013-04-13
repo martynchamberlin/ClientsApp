@@ -25,7 +25,6 @@ if ( $alert )
 
 ?>
 
-
 <form action = "" method="POST" class="account-settings">
 	<div class="both">
 		<label>First Name:</label>
@@ -50,7 +49,7 @@ if ( $alert )
 			<?php if (!empty(User::$create_error_message['email'])){ echo ' <span class="error">'.User::$create_error_message['email'].'</span>'; } ?>
 		</div>
 	</div>
-	
+<div style="display: none">	
 	<div class="both color_scheme">
 		<span class="label">Color Scheme:</span>
 		<div class="right">
@@ -73,7 +72,7 @@ if ( $alert )
 			<br/>
 				</div>
 	</div>
-
+</div>
 	<div class="both">
 		<label>(Optional) New Password:</label>
 		<div class="right">

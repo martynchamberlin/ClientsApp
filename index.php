@@ -52,7 +52,8 @@ foreach ($stuff as $row)
 	</td>';
 
 	echo '<td><a href="/client/?edit=' . $row['clientID'] . '">';
-	echo $row['first'] . ' ' . $row['last'] . '</a></td>';
+	$link = "/client/?edit=" . $row['clientID'];
+	echo Client::format_name( $row, $link ) . '</a></td>';
 
 	echo '<td><a href="/view/?clientID=' . $row['clientID'] . '">';
 	echo Time::roundToHours($row['timeAmount']) . ' hours</td>';

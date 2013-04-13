@@ -107,7 +107,7 @@ foreach ($clientList as $instance)
 	echo '<option value="' . $instance['clientID'] . '"';
 	echo Core::is_page('view') && isset($_GET['clientID']) && $_GET['clientID'] == $instance['clientID'] ? ' selected="selected"' : '';
 	echo '>';
-	echo $instance['first'] . ' ' . $instance['last'];
+	echo Client::format_name( $instance );
 	echo '</option>';
 
 }

@@ -513,11 +513,42 @@ table {
 .client .good-alert {
 	width: 620px;
 	float: right;
-	margin: 124px 0 0 0;
+	margin: 19px 0 0 0;
 }
 
 .client .good-alert.two {
-	margin: 25px 0 0 0;
+	margin: 17px 0 0 0;
+}
+
+span.required {
+	color: #b80000;
+}
+
+/* Clients Page --------------------------------------- */
+
+.clients tr .name a {
+	opacity: 0;
+}
+
+.clients tr:hover .name a {
+	opacity: 1;
+}
+
+.clients .light {
+	text-align: right;
+	float: right;
+}
+
+.clients td {
+	padding: 10px;
+}
+
+.clients .vertical-center {
+	padding: 23px 0 0 10px;
+}
+
+.clients .edit {
+padding: 23px 10px;
 }
 
 /* Task Page --------------------------------------- */
@@ -806,12 +837,15 @@ textarea.hidden {
 .edit textarea {
 	height: 220px;
 }
+
+/*
 .add, .edit {
 	width: 700px;
 	margin: 20px auto;
 	padding: 0 0 20px 0;
 	overflow: hidden;
 }
+*/
 
 .add input[type="submit"], .edit input[type="submit"], .edit .delete a {
 	float: left;
@@ -840,6 +874,20 @@ input[type="file"] {
 
 body.green a {
 	color: #87b448;
+}
+
+body.green td.edit {
+	border-right: 2px solid #e7efd4;
+}
+
+body.green .count {
+border-radius: 50%;
+background: #87b448;
+color: #fff;
+padding: 4px;
+display: block;
+text-align: center;
+margin: 19px 0 0;
 }
 
 body.green thead th {

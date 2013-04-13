@@ -6,6 +6,45 @@ abstract class Client
 	// Flag for ensuring method is only invoked once in page request
 	static $bool_client_list = false;
 	
+	static function format_name( $client, $link = "" )
+	{
+		$output = "";
+		$name = false;
+		if ( ! empty( $client['first'] ) && ! empty( $client['last']) )
+		{
+			if ( !empty( $link ) )
+			{
+				$output .= "<a href=" . $link . ">" . $client['first'] . " " . $client['last'] . "</a>";
+			}
+			else
+			{
+				$output .= $client['first'] . " " . $client['last'];
+
+			}
+			$name = true;
+		}
+
+		if ( !empty( $client['company_name'] ) )
+		{
+			if ( $name )
+			{
+				$output .= " (" . $client['company_name'] . ")";
+			}
+			else
+			{
+				if ( !empty( $link ) )
+				{
+					$output .= "<a href=" . $link . ">" . $client['company_name'] . "</a>";
+				}
+				else
+				{
+					$output .= $client['company_name'];
+				}
+			}
+		}
+		return $output;
+	}
+
 	static function showClientList()
 	{
 		Time::getPeriod();
@@ -15,7 +54,7 @@ abstract class Client
 			$begin = strtotime($period);
 			$end = strtotime('+1 month', $begin);
 
-			$sql = 'SELECT count(DISTINCT L.post_id) as primarySort, count(DISTINCT L2.post_id) as secondarySort, C.first, C.last, C.rate, C.email, C.clientID FROM clients C
+			$sql = 'SELECT count(DISTINCT L.post_id) as primarySort, count(DISTINCT L2.post_id) as secondarySort, C.first, C.last, C.rate, C.email, C.clientID, C.company_name, C.billing_email FROM clients C
 		LEFT JOIN lookup L on C.clientID = L.clientID AND L.date >= ' . $begin . ' AND L.date < ' . $end . '
 
 		LEFT JOIN lookup L2 on C.clientID = L2.clientID 
@@ -45,7 +84,14 @@ abstract class Client
 		// They're updating a client record
 		else if (isset($_POST['clientID'] ) )
 		{
-			$sql = 'UPDATE clients SET first = :first, last = :last, email = :email, rate=:rate WHERE userID = :userID AND clientID = :clientID';
+			$sql = 'UPDATE clients SET 
+				first = :first, 
+				last = :last, 
+				email = :email, 
+				rate=:rate,			
+				billing_email = :billing_email,
+				company_name = :company_name
+				WHERE userID = :userID AND clientID = :clientID';
 			$core = Core::getInstance();
 			$s = $core->pdo->prepare($sql);
 			$s->bindValue('clientID', $clientID);
@@ -54,12 +100,22 @@ abstract class Client
 			$s->bindValue('last', $_POST['last']);
 			$s->bindValue('email', $_POST['email']);
 			$s->bindValue('rate', $_POST['rate']);
+			$s->bindValue(':company_name', $_POST['company_name']);
+			$s->bindValue(':billing_email', $_POST['billing_email']);
 			$s->execute();
 		}
 		// They're creating a new client record
 		else
 		{
-			$sql = 'INSERT INTO clients SET clientID = :clientID, userID = :userID, first = :first, last = :last, email = :email, rate=:rate';
+			$sql = 'INSERT INTO clients SET 
+				clientID = :clientID, 
+				userID = :userID, 
+				first = :first, 
+				last = :last, 
+				email = :email, 
+				rate=:rate,
+				billing_email = :billing_email,
+				company_name = :company_name';
 			$core = Core::getInstance();
 			$s = $core->pdo->prepare($sql);
 			$s->bindValue('clientID', $clientID);
@@ -68,6 +124,8 @@ abstract class Client
 			$s->bindValue('last', $_POST['last']);
 			$s->bindValue('email', $_POST['email']);
 			$s->bindValue('rate', $_POST['rate']);
+			$s->bindValue(':company_name', $_POST['company_name']);
+			$s->bindValue(':billing_email', $_POST['billing_email']);
 			$s->execute();
 		}
 		header('Location: /clients/');
