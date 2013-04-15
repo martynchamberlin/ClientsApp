@@ -2,6 +2,8 @@
 require 'includes.php'; 
 require 'header.php'; 
 
+echo '<h1>' . Time::getPeriod('F') . '’s Clients</h1>';
+
 $stuff = Time::showHomePeriod(); 
 
 if (!empty($stuff))
