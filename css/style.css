@@ -328,7 +328,7 @@ textarea {
 input[type="submit"]  {
 	font: 300 14px/1  'proxima-nova-soft', Helvetica, Arial;
 	margin: 10px 0 30px;
-	background-color: #8BC48B;
+	background-color: #87b448;
 	border: none;
 	border-radius: 3px;
   color: #FFFFFF;
@@ -880,37 +880,7 @@ input.edit {
 	margin-right: 5px;
 	float: left;
 }
-
 	
-/* Add Post --------------------------------------- */
-
-.word_count {
-	margin: 15px 0 0;
-}
-
-textarea.hidden {
-	display: none;
-}
-
-.edit textarea {
-	height: 220px;
-}
-
-.add input[type="submit"], .edit input[type="submit"], .edit .delete a {
-	float: left;
-	margin: 10px 7px 0 0;
-	font: 12px Arial;
-	background: #369 url(//images/nav.png) repeat-x -5px 0px;
-	color: #fff;
-	padding: 10px 15px;
-	border-radius: 5px
-}
-
-.add input[type="submit"]:hover, .edit input[type="submit"]:hover, .edit .delete a:hover {
-	text-decoration: none;
-	color: #fff;
-}
-
 /* Retina Display --------------------------------------- */
 
 @media screen and (min--moz-device-pixel-ratio: 2),
