@@ -2,7 +2,7 @@
 // The lines between "time" and "expense" are blurred since we are constantly wanting to show them together. Despite (or rather, due to) my efforts to keep everything object oriented, I am aware of the confusion.
 abstract class Time
 {
-	static function getPeriod($format = 'F')
+	static function getPeriod($format = 'F Y')
 	{
 		if (!isset($_SESSION['period']))
 		{

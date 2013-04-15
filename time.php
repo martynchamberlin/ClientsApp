@@ -100,7 +100,7 @@ foreach ($taskList as $instance)
 	for ($i = 0; $i < count($months); $i++)
 	{
 	echo '<option ';
-	echo ($months[$i] == Time::getPeriod('F o') && ! $edit || $edit && $months[$i] == date('F o', $time['date'])) ? 'selected="selected" ' : '';
+	echo ($months[$i] == Time::getPeriod() && ! $edit || $edit && $months[$i] == date('F Y', $time['date'])) ? 'selected="selected" ' : '';
 	echo 'value="' . $months[$i] . '">' . $months[$i] . '</option>';
 }
 ?>

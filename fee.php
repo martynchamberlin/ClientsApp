@@ -56,7 +56,7 @@ else
 	for ($i = 0; $i < count($months); $i++)
 	{
 	echo '<option ';
-	echo ($months[$i] == Time::getPeriod('F o') && ! $edit || $edit && $months[$i] == date('F o', $expense['date'])) ? 'selected="selected" ' : '';
+	echo ($months[$i] == Time::getPeriod() && ! $edit || $edit && $months[$i] == date('F Y', $expense['date'])) ? 'selected="selected" ' : '';
 	echo 'value="' . $months[$i] . '">' . $months[$i] . '</option>';
 }
 ?>

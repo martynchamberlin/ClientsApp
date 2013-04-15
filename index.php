@@ -39,7 +39,7 @@ foreach ($stuff as $row)
 	echo '<td class="checkboxes"><div class="checkbox ' . $paid_status . '"><span> ' . $i . '</span></div>
 		<div class="info" style="display:none">
 			<div class="clientID">' . $row['clientID'] . '</div>
-			<div class="month">' . strtotime( Time::getPeriod( 'F o') ) . '</div>
+			<div class="month">' . strtotime( Time::getPeriod() ) . '</div>
 		
 	</td>';
 
