@@ -6,13 +6,16 @@ require 'header.php';
 $clientArray = Time::showSinglePeriod($_GET['clientID']);
 $client = Client::retrieveClient($_GET['clientID']);
 
-if (isset($_SESSION['print']) && isset($_POST['print']))
+if ( isset($_POST['print']) )
 {
-	unset($_SESSION['print']);
-}
-else if (!isset($_SESSION['print']) && isset($_POST['print']))
-{
-	$_SESSION['print'] = 'print';
+	if (! isset($_SESSION['print']) )
+	{
+		$_SESSION['print'] = 'print';
+	}
+	else
+	{
+		unset($_SESSION['print']);
+	}
 }
 
 ?>
@@ -64,7 +67,7 @@ foreach ($clientArray as $row)
 	echo '</div><!-- end .negative-margins--></div><!-- end .right --></div><!-- end .overflow_hidden -->';
 	$lastdate = $date;
 }
-
+$total_money = 0;
 if ( !empty($clientArray))
 {
 echo '<hr/>';
@@ -73,7 +76,7 @@ echo '<h2 class="breakdown">Task breakdown</h2>';
 
 echo '<table class="breakdown">';
 rsort($tasks);
-$total_money = 0;
+
 
 foreach ($tasks as $task)
 {
@@ -102,12 +105,12 @@ if (!empty($expenses))
 	. date('M', $e['date']) . 
 	'</span><span class="day">' . date('j', $e['date']) . '</span></div>
 	
-		<div class="right"><strong>$' . number_format($e['amount'], 2) . '</strong> — ' . $e['comments'] . '';
+		<div class="right"><strong>' . markdown ( '$' . number_format($e['amount'], 2) . '</strong> — ' . $e['comments'] ) . '<div class="negative-margins">';
 		if (!isset($_SESSION['print']))
 		{
 			echo ' <a href="/fee/?expense=' . $e['post_id'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '">(edit)</a> <a href="/delete/?expense=' . $e['post_id'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '" class="delete">(delete)</a>';
 		}
-	echo '</div></div><!-- end .overflow_hidden -->';
+	echo '</div><!-- end .negative-margins --></div></div><!-- end .overflow_hidden -->';
 	$expenseTotal += $e['amount'];
 
 	}
@@ -123,8 +126,8 @@ if (!empty($expenses))
 	</tr>
 </thead>
 
-	<?= $totalTime > 0 ? '<tr><td class="first">Hours</strong></td>
-	<td>' . Time::roundToHours($totalTime) . '</td></tr>': ''; ?>
+	<?= '<tr><td class="first">Hours</strong></td>
+	<td>' . Time::roundToHours($totalTime) . '</td></tr>' ?>
 <tr>
 	<td class="first">Revenue</td>
 	<td>$<?= number_format($total_money, 2); ?></td>

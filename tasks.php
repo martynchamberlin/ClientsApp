@@ -18,8 +18,8 @@ if (empty($tasks) )
 
 <table>
 <thead>
-<tr>	<th>&nbsp;</th>
-
+<tr>
+	<th class="no-name">&nbsp;</th>
 	<th>Task name</th>
 	<th>All time</th>
 	<th><?= Time::getPeriod() ?></th>
@@ -27,7 +27,7 @@ if (empty($tasks) )
 </thead>
 <? foreach ( $tasks as $task ) : static $i = 1; ?>
 	<tr>
-		<td><? echo $i; $i++; ?></td>
+		<td class="vertical-center count-wrap"><div class="count"><span><?= $i++; ?></span></div></td>	
 		<td><a href="/task?edit=<?= $task['taskID']; ?>"><?= $task['taskName']; ?></a></td>
 		<td><?= $task['secondarySort']; ?></td>
 		<td><?= $task['primarySort']; ?></td>

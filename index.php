@@ -15,7 +15,6 @@ if (!empty($stuff))
 	<thead>
 	<tr class="head">
 	<th>&nbsp;</th>
-	<th>&nbsp;</th>
 	<th>Name</th>
 	<th>Time</th>
 	<th>Money</th>
@@ -32,8 +31,6 @@ foreach ($stuff as $row)
 	$expenses = !empty($row['expenseAmount']) ? $row['expenseAmount'] : 0;
 	$money = $expenses + Time::calculateTotal($row['timeAmount'], $row['rate']);
 	echo '<tr>';
-	echo '<td class="number">' . $i . '</td>';
-	$i++;
 	$paid_status = !empty($row['paid']) ? "paid" : "unpaid";
 	if ( $paid_status == "unpaid" )
 	{
@@ -44,7 +41,7 @@ foreach ($stuff as $row)
 		$paid += $money;
 	}
 
-	echo '<td class="checkboxes"><div class="checkbox ' . $paid_status . '"></div>
+	echo '<td class="checkboxes"><div class="checkbox ' . $paid_status . '"><span> ' . $i . '</span></div>
 		<div class="info" style="display:none">
 			<div class="clientID">' . $row['clientID'] . '</div>
 			<div class="month">' . strtotime( Time::getPeriod() ) . '</div>
@@ -74,6 +71,8 @@ foreach ($stuff as $row)
 
 	$time = !isset($time) ? $row['timeAmount'] : $time + $row['timeAmount'];
 	$totalMoney = !isset($totalMoney) ? $money : $totalMoney + $money;
+		$i++;
+
 } ?>
 
 </table>

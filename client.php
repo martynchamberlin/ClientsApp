@@ -23,7 +23,7 @@ else
 ?>
 <h1><? echo (! $edit) ? 'New Client' : Client::format_name( $client ) ?></h1>
 
-<div class="good-alert one">This is the email you'll be sending the invoice to</div>
+<div class="good-alert one">This is the email address to which you'll be sending invoices.</div>
 
 <div class="good-alert two">If you are doing contract work instead of hourly billing with this client, make your hourly rate $0.00 and create one-time fees instead.</div>
 

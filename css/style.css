@@ -214,12 +214,12 @@ color: white;
 
 
 .calendar {
-	background: url(/images/calendar.png?ss) no-repeat;
 	width: 70px;
-	height: 70px;
 	text-align: center;
 	float: left;
 	margin: 0 20px 12px 0;
+	background: url(/images/calendar_green.png) no-repeat;
+	height: 90px;
 }
 
 .month {
@@ -228,12 +228,20 @@ color: white;
 	line-height: 13px;
 	width: 68px;
 	margin: 0 auto;
-	padding: 6px 0 10px 0;
+	padding: 13px 0 10px 0;
 	color: #fff;
+	width: 58px;
+	margin: 0 0 0 4px;
 }
 
 .day {
 	font-size: 25px;
+	color: #8ca852;
+	font-weight: bold;
+	padding: 2px 0 0 0;
+	display: block;
+	width: 58px;
+	margin: 0 0 0 4px;
 }
 
 .view .minutes {
@@ -247,6 +255,7 @@ color: white;
 .view .right {
 	float: right;
 	width: 830px;
+	margin: 7px 0 0 0;
 }
 
 
@@ -319,30 +328,28 @@ textarea {
 input[type="submit"]  {
 	font: 300 14px/1  'proxima-nova-soft', Helvetica, Arial;
 	margin: 10px 0 30px;
-background-color: #8BC48B;
-            background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#8BC48B), to(#027402)); 
-            background: -webkit-linear-gradient(center top, #8BC48B, #027402); 
-            background: -moz-linear-gradient(center top, #8BC48B, #027402);
-            background: -ms-linear-gradient(center top, #8BC48B, #027402); 
-            background: -o-linear-gradient(center top, #8BC48B, #027402);
-            border-color: #038A03 #038A03 #025C02;
-            border-radius: 3px;
-            border-style: solid;
-            border-width: 0px;
-            box-shadow: 0 1px 0 0 #92CE92 inset;
-            color: #FFFFFF;
-						padding: 12px 24px;
-            text-align: center;
-            text-shadow: 0 -1px 0 #038A03;
-            opacity: 0.9;
+	background-color: #8BC48B;
+	border: none;
+	border-radius: 3px;
+  color: #FFFFFF;
+  padding: 12px 24px;
+  text-align: center;
+  opacity: 0.9;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(164, 196, 139)), to(rgb(80, 116, 2))); 
+	background: -webkit-linear-gradient(center top, #a4c48b, #648420); 
+	background: -moz-linear-gradient(center top, #a4c48b, #648420);
+	background: -ms-linear-gradient(center top, #a4c48b, #648420); 
+	background: -o-linear-gradient(center top, #a4c48b, #648420);
+	text-shadow: 0 -1px 0 #648420;
+	box-shadow: 0 1px 0 0 #a4c48b inset;
+
 }
 
 input[type="submit"]:hover {
  opacity: 1; 
-            cursor: pointer;
-            -webkit-box-shadow:0 0 5px #63ac64; 
-            -moz-box-shadow: 0 0 5px #63ac64; 
-            box-shadow:0 0 5px #63ac64; 
+	-webkit-box-shadow:0 0 5px #91ac63; 
+	-moz-box-shadow: 0 0 5px #91ac63; 
+	box-shadow:0 0 5px #91ac63; 
 }
 
 
@@ -369,7 +376,7 @@ h2 {
 
 a {
 	text-decoration: none;
-	color: #ff9100;
+	color: #87b448;
 }
 
 a.current {
@@ -402,6 +409,10 @@ ul em, ol em {
 
 /* Home Page when logged in --------------------------------------- */
 
+.home .main td {
+	padding: 13px 9px 0;
+}
+
 .home td.number {
 	width: 20px;
 }
@@ -414,34 +425,56 @@ ul em, ol em {
 	display: none;
 }
 
-.home .checkboxes {
+.home .main .checkboxes, .count-wrap, .tasks .count-wrap {
 	text-align: center;
+	margin: 0 8px 0 0;
+	padding: 9px;
+}
+
+.home .main .checkboxes {
+	border-right: 2px solid #e7efd4;
+}
+
+.checkbox, .count {
+	border-radius: 50%;
+	display: block;
+	width: 29px;
+	height: 29px;
+	border: 1px solid #ccc;
+	padding: 0;
 }
 
 .checkbox {
-	border: 1px solid #ccc;
-	width: 10px;
-	height: 10px;
-	border-radius: 50%;
-	margin: 6px 0px 0 8px;
 	cursor: pointer;
 }
 
-.paid {
-	background: #fd9026;
-	width: 11px;
-	height: 11px;
-	border: none;
+.checkbox span {
+	padding: 3px 0 0;
+	display: block;
 }
 
+.paid, .count {
+	color: #fff;
+	background: #87b448;
+	border: 1px solid #87b448;
+}
+
+
+@-moz-document url-prefix() { 
+	.checkbox span, .clients .count span, .tasks .count span {
+		padding: 2px 0 0!important;
+	}
+}
+
+
 .grey {
-	background-color: #fdf4e9;
+	background-color: rgb(245, 247, 240);;
 }
 
 thead th {
-	background: #ff9100;
 	text-align: left;
 	color: #fff;
+	background: #87b448;
 }
 
 thead th {
@@ -460,16 +493,13 @@ table.total {
 }
 
 .total td, .total thead th {
-		text-align: right;
-		padding-right: 10px
+	text-align: right;
+	padding-right: 10px;
+	border: 1px solid rgb(245, 247, 240);
 }
 
 .total thead {
 	display: none;
-}
-
-.total td {
-	border: 1px solid rgb(255, 235, 216);
 }
 
 table.total td {
@@ -530,6 +560,19 @@ span.required {
 	opacity: 0;
 }
 
+.clients .count {
+	margin: -4px 0 0;
+}
+
+.clients .count span, .tasks .count span {
+	padding: 3px 0 0;
+	display: block;
+}
+
+.clients td.edit {
+	border-right: 2px solid #e7efd4;
+}
+
 .clients tr:hover .name a {
 	opacity: 1;
 }
@@ -539,7 +582,7 @@ span.required {
 	float: right;
 }
 
-.clients td {
+.clients td, .tasks td {
 	padding: 10px;
 }
 
@@ -558,6 +601,21 @@ padding: 23px 10px;
 	width: 620px;
 	float: right;
 	margin: 70px 0 0;
+}
+
+
+/* Tasks Page --------------------------------------- */
+
+.tasks .no-name {
+	width: 25px;
+}
+
+.tasks td {
+	padding: 13px 10px 0;
+}
+
+.tasks .count-wrap {
+	border-right: 2px solid #e7efd4;
 }
 
 /* Landing Page --------------------------------------- */
@@ -747,7 +805,7 @@ input[type="submit"][value="Stop"]#startstop:hover {
 }
 
 .good-alert {
-	background: #fdf4e9;
+	background: rgb(245, 247, 240);
 	padding: 10px;
 }
 
@@ -838,15 +896,6 @@ textarea.hidden {
 	height: 220px;
 }
 
-/*
-.add, .edit {
-	width: 700px;
-	margin: 20px auto;
-	padding: 0 0 20px 0;
-	overflow: hidden;
-}
-*/
-
 .add input[type="submit"], .edit input[type="submit"], .edit .delete a {
 	float: left;
 	margin: 10px 7px 0 0;
@@ -862,213 +911,19 @@ textarea.hidden {
 	color: #fff;
 }
 
-/* Upload file Input magic --------------------------------------- */
-
-input[type="file"] {
-	margin: 15px 0 5px 0;
-	font: 12px Arial;
-}
-
-
-/* Green Color Scheme --------------------------------------- */
-
-body.green a {
-	color: #87b448;
-}
-
-body.green td.edit {
-	border-right: 2px solid #e7efd4;
-}
-
-body.green .count {
-border-radius: 50%;
-background: #87b448;
-color: #fff;
-padding: 4px;
-display: block;
-text-align: center;
-margin: 19px 0 0;
-}
-
-body.green thead th {
-	background: #87b448;
-}
-
-body.green .grey, body.green .good-alert {
-	background: rgb(245, 247, 240);
-}
-
-body.green table.total .first {
-	background: none;
-}
-
-body.green .total td {
-	border: 1px solid rgb(245, 247, 240);
-}
-
-body.green .calendar {
-	background: url(/images/calendar_green.png) no-repeat;
-	height: 90px;
-}
-
-body.green .month {
-	padding-top: 13px;
-}
-
-body.green .day {
-	color: #8ca852;
-	font-weight: bold;
-	padding: 2px 0 0 0;
-	display: block;
-}
-
-body.green input[type="submit"] {
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(164, 196, 139)), to(rgb(80, 116, 2))); 
-	background: -webkit-linear-gradient(center top, #a4c48b, #648420); 
-	background: -moz-linear-gradient(center top, #a4c48b, #648420);
-	background: -ms-linear-gradient(center top, #a4c48b, #648420); 
-	background: -o-linear-gradient(center top, #a4c48b, #648420);
-
-	text-shadow: 0 -1px 0 #648420;
-	box-shadow: 0 1px 0 0 #a4c48b inset;
-}
-
-body.green input[type="submit"]:hover {
-	-webkit-box-shadow:0 0 5px #91ac63; 
-	-moz-box-shadow: 0 0 5px #91ac63; 
-	box-shadow:0 0 5px #91ac63; 
-}
-
-body.green .paid {
-	background: #87b448;
-	
-}
-
-body.green th.summary {
-	background: rgb(175, 216, 118);
-}
-
-
-/* Teal Color Scheme --------------------------------------- */
-
-body.teal a {
-	color:	rgb(39, 146, 167);
-}
-
-body.teal thead th {
-	background: rgb(72, 163, 180);
-}
-
-body.teal .grey, body.teal .good-alert {
-	background: rgb(242, 247, 250);
-}
-/* Blue Color Scheme --------------------------------------- */
-
-body.blue a {
-	color: #4475ad;
-}
-
-body.blue thead th, .blue .paid {
-	background: #4475ad;
-}
-
-body.blue .grey,  body.blue .good-alert {
-	background: rgb(240, 243, 247);
-}
-
-.blue .total td {
-border: 1px solid rgb(240, 243, 247);
-}
-
-body.blue .calendar {
-	background: url(/images/calendar_blue.png) no-repeat;
-	height: 90px;
-}
-
-body.blue .month {
-	padding-top: 13px;
-}
-
-body.blue .day {
-	color: #4475ad;
-	font-weight: bold;
-	padding: 2px 0 0 0;
-	display: block;
-}
-
-body.blue input[type="submit"] {
-	background-color: rgb(139, 173, 196);
-background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(139, 166, 196)), to(rgb(2, 61, 116))); 
-	background: -webkit-linear-gradient(center top, #91aac7, #205484); 
-	background: -moz-linear-gradient(center top, #91aac7, #205484);
-	background: -ms-linear-gradient(center top, #91aac7, #205484); 
-	background: -o-linear-gradient(center top, #91aac7, #205484);
-
-	text-shadow: 0 -1px 0 #84a2bf;
-	box-shadow: 0 1px 0 0 #84a2bf inset;
-}
-
-body.blue input[type="submit"]:hover {
-	-webkit-box-shadow:0 0 5px #2b68a1; 
-	-moz-box-shadow: 0 0 5px #2b68a1; 
-	box-shadow:0 0 5px #2b68a1; 
-}
-
-body.blue input[type="text"].normal:focus, body.blue textarea:focus, body.blue input[type="password"]:focus {
-    outline: 0;
-    border-color: rgba(142, 167, 197, 0.8);
-    -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(142, 167, 197, 0.6);
-    -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(142, 167, 197, 0.6);
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(142, 167, 197, 0.6);
-}
-
-
-
-/* Red Color Scheme --------------------------------------- */
-
-body.red a {
-	color: rgb(219, 0, 0);
-}
-
-body.red thead th {
-	background: rgb(66, 66, 66);
-}
-
-body.red .grey, body.red .good-alert {
-	background: #f5f5f5;
-}
-
-/* B&W Color Scheme --------------------------------------- */
-
-body.bw a {
-	color: rgb(73, 73, 73);
-	text-decoration: underline;
-}
-
-body.bw thead th {
-	background: rgb(66, 66, 66);
-}
-
-body.bw .grey, body.bw .good-alert {
-	background: #f5f5f5;
-}
-
 /* Retina Display --------------------------------------- */
 
-@media screen and (-webkit-min-device-pixel-ratio: 2) {
+@media screen and (min--moz-device-pixel-ratio: 2),
+only screen and (-o-min-device-pixel-ratio: 2/1),
+only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (min-device-pixel-ratio: 2) {
 	body {
 		background: url(/images/mochaGrunge_@2X.png);
 		background-size: 400px;
 	}
 
-	body.green .calendar {
+	.calendar {
 		background: url(/images/calendar_green_retina.png) no-repeat;
 		background-size: 100%;
 	}
-
-	body.blue .calendar {
-		background: url(/images/calendar_blue_retina.png) no-repeat;
-		background-size: 100%;
-	}
-
 }

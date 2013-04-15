@@ -35,7 +35,7 @@ if (empty($clients) )
 <? foreach ( $clients as $client ) : static $i = 1;?>
 	<tr>
 
-		<td class="vertical-center count"><?= $i++; ?></td>
+		<td class="vertical-center count-wrap"><div class="count"><span><?= $i++; ?></span></div></td>
 		<td class="vertical-center edit"><a href="/client?edit=<?= $client['clientID']; ?>">Edit</a></td>
 
 		<td class="name"><?= $client['company_name']; ?><br/><?= $client['first'] . " " . $client['last'] ?> </td>
