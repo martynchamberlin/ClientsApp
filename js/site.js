@@ -15,6 +15,11 @@ function isNumeric(number)
 
 
 jQuery(document).ready(function($) {
+	
+	$('blockquote').each(function()
+	{
+		$(this).find('*').last().addClass('last');
+	});
 
 	function send_paid( elem, action ) {
 		var content = $(elem).next(".info");
