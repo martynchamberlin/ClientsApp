@@ -68,7 +68,7 @@
 						<a <? if (Core::isPage('tasks')) echo 'class="current" '; ?>href="/tasks/">Tasks</a>
 					</li>		
 					<li class="account-settings">
-						<a href="/account/">Account</a>
+						<a <? if (Core::isPage('account')) echo 'class="current" '; ?> href="/account/">Account</a>
 						<ul>
 					<li class="logout">
 						<a href="/logout/">Logout</a>

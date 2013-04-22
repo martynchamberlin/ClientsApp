@@ -3,7 +3,7 @@
 require 'includes.php'; 
 require 'header.php'; 
 
-$tasks = Task::showTaskList();
+$tasks = Task::showTaskList( true );
 
 echo '<h1>Your Tasks';
 	if ( ! empty( $tasks) ) echo  ' <a href="/task/">(Add New)</a>';
@@ -27,7 +27,7 @@ if (empty($tasks) )
 </thead>
 <? foreach ( $tasks as $task ) : static $i = 1; ?>
 	<tr>
-		<td class="vertical-center count-wrap"><div class="count"><span><?= $i++; ?></span></div></td>	
+		<td class="vertical-center count-wrap"><input type="hidden" value="<?=$task['taskID'];?>" name="taskID"/><div class="count<?= $task['active'] == 1 ? " active" : ""; ?>"><span><?= $i++; ?></span></div></td>	
 		<td><a href="/task?edit=<?= $task['taskID']; ?>"><?= $task['taskName']; ?></a></td>
 		<td><?= $task['secondarySort']; ?></td>
 		<td><?= $task['primarySort']; ?></td>

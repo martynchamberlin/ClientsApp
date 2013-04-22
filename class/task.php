@@ -2,7 +2,7 @@
 
 abstract class Task
 {
-	static function showTaskList()
+	static function showTaskList( $show_all = false )
 	{
 
 		Time::getPeriod();
@@ -11,15 +11,38 @@ abstract class Task
 		$begin = strtotime($period);
 		$end = strtotime('+1 month', $begin);
 
-		$sql = 'SELECT count(DISTINCT L.post_id) as primarySort, count(DISTINCT L2.post_id) as secondarySort, taskName, TA.taskID FROM tasks TA LEFT JOIN times T ON TA.taskID = T.taskID 
+		$sql = 'SELECT count(DISTINCT L.post_id) as primarySort, count(DISTINCT L2.post_id) as secondarySort, taskName, TA.taskID, TA.active FROM tasks TA LEFT JOIN times T ON TA.taskID = T.taskID 
 		LEFT JOIN lookup L on T.lid = L.post_id AND L.date >= ' . $begin . ' AND L.date < ' . $end . ' 
 		LEFT JOIN lookup L2 on T.lid = L2.post_id
-		WHERE TA.userID = ' . $_SESSION['loggedIn']['userID'] . ' 
+		WHERE TA.userID = ' . $_SESSION['loggedIn']['userID'];
+		if ( ! $show_all )
+		{
+			$sql .= ' AND TA.active = 1 ';
+		}
+		$sql .= '
 		GROUP BY TA.taskID 
 		ORDER BY count(L.post_id) DESC, count(L2.post_id) DESC, taskName';
 		$core = Core::getInstance(); 
 		$s = $core->pdo->query($sql);
 		return $s->fetchAll();
+	}
+
+	static function activate( $taskID )
+	{
+		$sql = 'UPDATE tasks SET active="1" WHERE taskID = :taskID';
+		$core = Core::getInstance();
+		$s = $core->pdo->prepare($sql);
+		$s->bindValue('taskID', $taskID);
+		$s->execute();
+	}
+
+	static function deactivate( $taskID )
+	{
+		$sql = 'UPDATE tasks SET active="0" WHERE taskID = :taskID';
+		$core = Core::getInstance();
+		$s = $core->pdo->prepare($sql);
+		$s->bindValue('taskID', $taskID);
+		$s->execute();
 	}
 
 	static function replaceTask()

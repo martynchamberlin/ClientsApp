@@ -3,7 +3,7 @@
 require 'includes.php'; 
 require 'header.php'; 
 
-$clients = Client::showClientList();
+$clients = Client::showClientList( true );
 
 echo '<h1>Your Clients';
 	if ( ! empty( $clients) ) echo  ' <a href="/client/">(Add New)</a>';
@@ -35,7 +35,7 @@ if (empty($clients) )
 <? foreach ( $clients as $client ) : static $i = 1;?>
 	<tr>
 
-		<td class="vertical-center count-wrap"><div class="count"><span><?= $i++; ?></span></div></td>
+		<td class="vertical-center count-wrap"><input type="hidden" value="<?=$client['clientID'];?>" name="clientID"/><div class="count<?= $client['active'] == 1 ? " active" : ""; ?>"><span><?= $i++; ?></span></div></td>
 		<td class="vertical-center edit"><a href="/client?edit=<?= $client['clientID']; ?>">Edit</a></td>
 
 		<td class="name"><?= $client['company_name']; ?><br/><?= $client['first'] . " " . $client['last'] ?> </td>

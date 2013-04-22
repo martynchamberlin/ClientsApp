@@ -1,9 +1,8 @@
 <? 
 require 'includes.php'; 
 
-if (isset($_POST['action']) )
+if (isset($_POST['action']) ) // Handles home page
 {
-	echo 'boo!';
 	if ($_POST['action'] == 'delete')
 	{
 		Paid::delete_paid($_POST['clientID'], $_POST['month']);
@@ -14,19 +13,37 @@ if (isset($_POST['action']) )
 	}
 }
 
+else if ( isset($_POST['clientID'] ) ) // handles /clients/ page
+{
+	if ( $_POST['status'] == "0" )
+	{
+		Client::deactivate( $_POST['clientID'] );
+	}
+	else
+	{
+		Client::activate( $_POST['clientID'] );
+	}
+}
+
+else if ( isset( $_POST['taskID'] ) ) // handles /tasks/ page
+{
+	if ( $_POST['status'] == "0" )
+	{
+		Task::deactivate( $_POST['taskID'] );
+	}
+	else
+	{
+		Task::activate( $_POST['taskID'] );
+	}
+}
+
 /*
-
-
+?>
 <form action="" method="post">
-<input type="text" name="clientID" value="65e852e6d0">
-
-<input type="text" name="action" value="delete">
-<input type="text" name="month" value="1365051600">
+<input type="text" name="ID" value="12">
+<input type="text" name="status" value="0">
 <input type="submit">
 </form>
 
-
 */
-
-?>
 

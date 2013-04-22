@@ -21,6 +21,8 @@ jQuery(document).ready(function($) {
 		$(this).find('*').last().addClass('last');
 	});
 
+
+
 	function send_paid( elem, action ) {
 		var content = $(elem).next(".info");
 		var clientID = $(content).find('.clientID').html();
@@ -42,6 +44,39 @@ jQuery(document).ready(function($) {
 		});
 	}
 
+	function update_client_status( elem, action ) {
+		var clientID = $(elem).closest('td').find('input[name="clientID"]').val();
+
+		$.ajax({
+			type: "POST",
+			url: "/ajax/",
+			data: {
+				'clientID': clientID,
+				'status': action,
+			},
+
+			success: function(html){
+			}
+		});
+	}
+
+	function update_task_status( elem, action ) {
+		var taskID = $(elem).closest('td').find('input[name="taskID"]').val();
+		taskID = taskID.replace(/(<([^>]+)>)/ig,"");
+
+		$.ajax({
+			type: "POST",
+			url: "/ajax/",
+			data: {
+				'taskID': taskID,
+				'status': action,
+			},
+
+			success: function(html){
+			}
+		});
+	}
+
 
 	$('.checkbox.unpaid').live('click', function()
 	{
@@ -52,8 +87,36 @@ jQuery(document).ready(function($) {
 	{
 		$(this).removeClass('paid').addClass('unpaid');
 		send_paid( $(this), "delete" );
-
 	});
+
+	$('.clients .count').click(function()
+	{
+		if ( $(this).is('.active') )
+		{
+			$(this).removeClass('active');
+			update_client_status( $(this), 0 );
+		}
+		else
+		{
+			$(this).addClass('active');
+			update_client_status( $(this), 1 );
+		}
+	});
+
+	$('.tasks .count').click(function()
+	{
+		if ( $(this).is('.active') )
+		{
+			$(this).removeClass('active');
+			update_task_status( $(this), 0 );
+		}
+		else
+		{
+			$(this).addClass('active');
+			update_task_status( $(this), 1 );
+		}
+	});
+
 
 	if ($('body').is('.logged_out.landing') )
 	{

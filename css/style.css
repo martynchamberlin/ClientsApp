@@ -474,7 +474,7 @@ ul em, ol em {
 	padding: 0;
 }
 
-.checkbox {
+.checkbox, .count {
 	cursor: pointer;
 }
 
@@ -483,7 +483,7 @@ ul em, ol em {
 	display: block;
 }
 
-.paid, .count {
+.paid, .count.active {
 	color: #fff;
 	background: #87b448;
 	border: 1px solid #87b448;

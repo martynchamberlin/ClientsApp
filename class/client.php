@@ -45,21 +45,45 @@ abstract class Client
 		return $output;
 	}
 
-	static function showClientList()
+	static function activate( $clientID )
+	{
+		$sql = 'UPDATE clients SET active="1" WHERE clientID = :clientID';
+		$core = Core::getInstance();
+		$s = $core->pdo->prepare($sql);
+		$s->bindValue('clientID', $clientID);
+		$s->execute();
+	}
+
+	static function deactivate( $clientID )
+	{
+		$sql = 'UPDATE clients SET active="0" WHERE clientID = :clientID';
+		$core = Core::getInstance();
+		$s = $core->pdo->prepare($sql);
+		$s->bindValue('clientID', $clientID);
+		$s->execute();
+	}
+
+	static function showClientList( $show_all = false )
 	{
 		Time::getPeriod();
-		if ( ! ( self::$bool_client_list ) )
+		if ( ! self::$bool_client_list || $show_all )
 		{
 			$period = $_SESSION['period'];
 			$begin = strtotime($period);
 			$end = strtotime('+1 month', $begin);
 
-			$sql = 'SELECT count(DISTINCT L.post_id) as primarySort, count(DISTINCT L2.post_id) as secondarySort, C.first, C.last, C.rate, C.email, C.clientID, C.company_name, C.billing_email FROM clients C
+			$sql = 'SELECT count(DISTINCT L.post_id) as primarySort, count(DISTINCT L2.post_id) as secondarySort, C.first, C.last, C.active, C.rate, C.email, C.clientID, C.company_name, C.billing_email FROM clients C
 		LEFT JOIN lookup L on C.clientID = L.clientID AND L.date >= ' . $begin . ' AND L.date < ' . $end . '
 
 		LEFT JOIN lookup L2 on C.clientID = L2.clientID 
 
-		WHERE C.userID = ' . $_SESSION['loggedIn']['userID'] . ' 
+		WHERE C.userID = ' . $_SESSION['loggedIn']['userID'] . '';
+		if ( ! $show_all )
+		{
+			$sql .= ' AND C.active = 1 ';
+		}
+
+		$sql .= '	
 		GROUP BY C.clientID
 		ORDER BY primarySort DESC, secondarySort DESC, last, first';
 			$core = Core::getInstance(); 
