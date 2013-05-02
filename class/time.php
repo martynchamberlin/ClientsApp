@@ -11,6 +11,20 @@ abstract class Time
 		return date($format, strtotime($_SESSION['period']));
 	}
 
+	static function get_month_totals( $time )
+	{
+			$begin = strtotime($time);
+		$end = strtotime('+1 month', $begin);
+
+		$sql = 'SELECT C.rate, if(P.id, P.id, "") as paid, if(sum(T.timeAmount), sum(T.timeAmount), 0) as timeAmount, if(sum(E.amount), sum(E.amount), 0) as expenseAmount FROM clients C INNER JOIN lookup L ON C.clientID = L.clientID LEFT JOIN times T on L.post_id = T.lid AND L.postType = "time" LEFT JOIN expenses E on L.post_id = E.lid AND L.postType = "expense" LEFT JOIN paid P on P.clientID=C.clientID AND P.month >= ' . $begin . ' AND P.month < ' . $end . ' WHERE L.date >= ' . $begin . ' AND L.date < ' . $end . ' AND L.userID = ' . $_SESSION['loggedIn']['userID'] . ' GROUP BY C.clientID';
+	$core = Core::getInstance();
+		$s = $core->pdo->prepare($sql);
+		$s->execute();
+		return $s->fetchAll();
+
+	}
+
+
 	static function getSpecificTime($id)
 	{
 		$sql = 'SELECT * 
@@ -32,7 +46,7 @@ AND L.postType = "time"';
 	}
 	
 	// From now on we're officially ignoring this parameter.
-	static function showMonths($num = 12)
+	static function showMonths($num = 12, $all_years = true)
 	{
 		$months = array();
 		$currentMonth = date('F Y');
@@ -40,6 +54,7 @@ AND L.postType = "time"';
 
 		while ( true )
 		{
+			if ( $all_years === true || date('Y', strtotime($currentMonth) ) == $all_years )
 			array_push($months, $currentMonth);
 
 			if ( $currentMonth == $firstMonth )
@@ -233,7 +248,7 @@ WHERE L.date >= ' . $begin . '
     AND L.userID = ' . $_SESSION['loggedIn']['userID'] . '
 GROUP BY C.clientID
 ORDER BY IF(sum(T.timeAmount), sum(T.timeAmount) * C.rate / 60, 0)  + IF(sum(E.amount), sum(E.amount), 0) DESC, T.timeAmount DESC, C.last DESC';
-		//echo $sql;
+	//	echo $sql;
 		$core = Core::getInstance();
 		$s = $core->pdo->query($sql);
 		return $s->fetchAll();

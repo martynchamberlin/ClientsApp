@@ -60,13 +60,25 @@
 						</ul>
 
 					</li>
-					<li>
+
+
+						<li>
+						<a href="#">View...</a>
+						<ul>
+								<li>
 						<a <? if (Core::isPage('clients')) echo 'class="current" '; ?>href="/clients/">Clients</a>
 					</li>
 				
 					<li>
 						<a <? if (Core::isPage('tasks')) echo 'class="current" '; ?>href="/tasks/">Tasks</a>
 					</li>		
+					<li>
+						<a <? if (Core::isPage('statistics')) echo 'class="current" '; ?>href="/yearly-income/">Income by Year</a>
+					</li>		
+						</ul>
+
+					</li>
+
 					<li class="account-settings">
 						<a <? if (Core::isPage('account')) echo 'class="current" '; ?> href="/account/">Account</a>
 						<ul>
