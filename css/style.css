@@ -417,6 +417,10 @@ a.current {
 	margin: 0 0 25px 20px;
 }
 
+#content ul ul, #content ul ol, #content ol ol, #content ol ul {
+	margin-bottom: 0;
+}
+
 ul br, ol br {
 	display: none;
 }
