@@ -15,7 +15,28 @@ function isNumeric(number)
 
 
 jQuery(document).ready(function($) {
-	
+
+	if ( $('body').is('.task-by-year') || $('body').is('.client-by-year'))
+	{
+		$('select[name="taskList"]').change(function()
+		{
+			var id = $(this).val(); 
+			if ( id !== "")
+			{
+				window.location = '/task-by-year/?taskID=' + id;
+			}
+		});
+		$('select[name="clientList"]').change(function()
+		{
+			var id = $(this).val(); 
+			if ( id !== "")
+			{
+				window.location = '/client-by-year?clientID=' + id;
+			}
+		});
+		$('.new').first().removeClass('new');
+	}
+
 	$('blockquote').each(function()
 	{
 		$(this).find('*').last().addClass('last');
@@ -118,7 +139,7 @@ jQuery(document).ready(function($) {
 	});
 
 
-	if ($('body').is('.logged_out.landing') )
+	if ($('body').is('.logged_out') )
 	{
 		$.backstretch("../images/iStock_000006378858Medium.jpg");
 	}
@@ -286,7 +307,7 @@ jQuery(document).ready(function($) {
 		{
 			$(this).removeClass('error');
 		});
-		/*
+
 		if ( $(first).val() === "" )
 		{
 			$(first).addClass('error');
@@ -297,7 +318,6 @@ jQuery(document).ready(function($) {
 			$(last).addClass('error');
 			valid = false;
 		}
-		*/
 		if ( !validateEmail( $(billing_email).val() ) )
 		{
 			$(billing_email).addClass('error');

@@ -5,13 +5,11 @@ require 'header.php';
 
 $clients = Client::showClientList( true );
 
-echo '<h1>Your Clients';
-	if ( ! empty( $clients) ) echo  ' <a href="/client/">(Add New)</a>';
-echo '</h1>';
+echo '<h1>Your Clients <a href="/client/">(Add New)</a></h1>';
 
 if (empty($clients) )
 {
-	echo "You haven't created any clients yet. <a href=\"/client\">Click here to add one</a>.";
+	echo "<center>You haven't created any clients yet.</center>";
 	exit;
 }
 ?>

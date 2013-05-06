@@ -4,7 +4,7 @@ require 'includes.php';
 require 'header.php'; 
 
 ?>
-<a style="display:none" id="realfancy" href="#"></a>
+
 
 <h1>78.3% of US businesses are run by solo entrepreneurs.</h1>
 <h2>It’s time to get smart about tracking your time.</h2>

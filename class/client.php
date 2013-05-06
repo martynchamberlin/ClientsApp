@@ -5,7 +5,28 @@ abstract class Client
 	static $client_list = array();
 	// Flag for ensuring method is only invoked once in page request
 	static $bool_client_list = false;
-	
+
+	static function history( $clientID )
+	{
+		// Based on 1 year chunks
+		$begin = strtotime( 'Jan 1, ' . substr($_SESSION['period'], -4) );
+		$end = strtotime( "+1 year", $begin );
+		$sql = 'SELECT *, T.id as timeID, E.amount as expenseAmount FROM clients C
+INNER JOIN lookup L ON C.clientID = L.clientID
+LEFT JOIN times T on L.post_id = T.lid AND L.postType = "time"
+LEFT JOIN tasks TA ON T.taskID = TA.taskID
+LEFT JOIN expenses E ON L.post_id = E.lid
+WHERE
+ L.userID = :userID
+AND C.clientID = :clientID AND L.date >= ' . $begin . ' AND L.date < ' . $end . ' ORDER BY L.date ASC, L.post_id ASC';
+		$core = Core::getInstance();
+		$s = $core->pdo->prepare($sql);
+		$s->bindValue('clientID', $clientID);
+		$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
+		$s->execute();
+		return $s->fetchAll();
+	}
+
 	static function format_name( $client, $link = "" )
 	{
 		$output = "";
@@ -47,19 +68,21 @@ abstract class Client
 
 	static function activate( $clientID )
 	{
-		$sql = 'UPDATE clients SET active="1" WHERE clientID = :clientID';
+		$sql = 'UPDATE clients SET active="1" WHERE clientID = :clientID AND userID = :userID';
 		$core = Core::getInstance();
 		$s = $core->pdo->prepare($sql);
 		$s->bindValue('clientID', $clientID);
+		$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
 		$s->execute();
 	}
 
 	static function deactivate( $clientID )
 	{
-		$sql = 'UPDATE clients SET active="0" WHERE clientID = :clientID';
+		$sql = 'UPDATE clients SET active="0" WHERE clientID = :clientID AND userID = :userID';
 		$core = Core::getInstance();
 		$s = $core->pdo->prepare($sql);
 		$s->bindValue('clientID', $clientID);
+		$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
 		$s->execute();
 	}
 
@@ -167,20 +190,13 @@ abstract class Client
 		$s->execute();
 	}
 
-	static function retrieveClient($id, $getTimes = false)
+	static function retrieveClient($id)
 	{
-		if ($getTimes)
-		{
-			$sql = 'SELECT * FROM clients C LEFT JOIN times T on T.clientID = C.clientID WHERE C.clientID = :clientID ORDER BY T.date';
-		}
-		else
-		{
-			$sql = 'SELECT * FROM clients C WHERE C.clientID = :clientID';
-		}
-
+		$sql = 'SELECT * FROM clients C WHERE C.clientID = :clientID AND userID = :userID';
 		$core = Core::getInstance();
 		$s = $core->pdo->prepare($sql);
 		$s->bindValue('clientID', $id);
+		$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
 		$s->execute();
 		return $s->fetch();
 	}

@@ -465,7 +465,7 @@ ul em, ol em {
 	border-right: 2px solid #e7efd4;
 }
 
-.checkbox, .count {
+.checkbox, .count, .circle {
 	border-radius: 50%;
 	display: block;
 	width: 29px;
@@ -483,7 +483,7 @@ ul em, ol em {
 	display: block;
 }
 
-.paid, .count.active {
+.paid, .count.active, .circle {
 	color: #fff;
 	background: #87b448;
 	border: 1px solid #87b448;
@@ -594,7 +594,7 @@ span.required {
 	margin: -4px 0 0;
 }
 
-.clients .count span, .tasks .count span {
+.clients .count span, .tasks .count span, .circle span {
 	padding: 3px 0 0;
 	display: block;
 }
@@ -644,8 +644,31 @@ padding: 23px 10px;
 	padding: 13px 10px 0;
 }
 
-.tasks .count-wrap {
+.tasks .count-wrap, .border.count-wrap {
 	border-right: 2px solid #e7efd4;
+}
+
+
+
+/* Task by year --------------------------------------- */
+
+.task-by-year td {
+	padding: 13px 10px 0;
+}
+
+.task-by-year tr.new {
+	border-top: 2px solid #D7E7B3;
+}
+
+td.border.count-wrap {
+	padding: 9px;
+}
+
+
+/* Client by year --------------------------------------- */
+
+.client-by-year td {
+	padding: 13px 10px 0;
 }
 
 /* Landing Page --------------------------------------- */

@@ -227,7 +227,7 @@ ORDER BY L.date DESC, L.post_id DESC';
 		return $data;
 	}
 
-	// You'll notice that instead of a bunch of fabulous PHP code, we're just doing some fancy SQL querying. This is largely due to my productive conversation with Instructor Crandell. This is easily the most important, complex query in the entire application.
+	// You'll notice that instead of a bunch of fabulous PHP code, we're just doing some fancy SQL querying. This is largely due to my productive conversation with instructor Crandell. This is easily the most important, complex query in the entire application.
 	static function showHomePeriod()
 	{
 		$period = $_SESSION['period'];

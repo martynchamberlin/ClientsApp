@@ -105,6 +105,24 @@ abstract class Task
 		$s->execute();
 		return $s->Fetch();
 	}
+
+	static function history($id)
+	{
+		// Based on 1 year chunks
+		$begin = strtotime( 'Jan 1, ' . substr($_SESSION['period'], -4) );
+		$end = strtotime( "+1 year", $begin );
+		$sql = 'SELECT T.taskName, C.rate, TI.clientID, TI.lid, TI.timeAmount, L.date FROM tasks T 
+		 INNER JOIN times TI ON T.taskID = TI.taskID
+INNER JOIN lookup L ON TI.lid = L.post_id
+INNER JOIN clients C On C.clientID = L.clientID
+WHERE T.taskID = :taskID AND T.userID = :userID AND L.date >= ' . $begin . ' AND L.date < ' . $end . ' ORDER BY L.date ASC';
+		$core = Core::getInstance();
+		$s = $core->pdo->prepare($sql);
+		$s->bindValue('taskID', $id);
+		$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
+		$s->execute();
+		return $s->fetchAll();
+	}
 }
 
 ?>

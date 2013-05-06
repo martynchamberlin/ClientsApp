@@ -6,7 +6,6 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link rel="stylesheet" href="/css/reset.css" type="text/css" media="screen" />
 		<link rel="stylesheet" href="/css/style.css" type="text/css" media="screen" />
-		<link rel="stylesheet" href="/css/select2.css" type="text/css" media="screen" />		
 
 <script type='text/javascript' src='/js/jquery.js'></script>
 <!-- Add jQuery library -->
@@ -22,8 +21,9 @@
 <link rel="stylesheet" href="/fancybox/source/helpers/jquery.fancybox-buttons.css?v=1.0.5" type="text/css" media="screen" />
 <script type="text/javascript" src="/fancybox/source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
 <script type="text/javascript" src="/fancybox/source/helpers/jquery.fancybox-media.js?v=1.0.5"></script>
-
+<script src="/select2-3.3.2/select2.js"></script>
 <link rel="stylesheet" href="/fancybox/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" type="text/css" media="screen" />
+<link rel="stylesheet" href="/select2-3.3.2/select2.css" type="text/css" media="screen" />
 <script type="text/javascript" src="/fancybox/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
 
 		<script src="/js/jquery.text-expander.js"></script>
@@ -32,7 +32,6 @@
 		<script src="/js/backstretch.js"></script>
 		<script src="/js/site.js"></script>
 		<script src="/js/jquery.hotkeys-0.7.9.js"></script>
-		<script src="/js/select2.js"></script>
 		<script type="text/javascript" src="//use.typekit.net/nbv3jkv.js"></script>
 		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 
@@ -73,7 +72,9 @@
 						<a <? if (Core::isPage('tasks')) echo 'class="current" '; ?>href="/tasks/">Tasks</a>
 					</li>		
 					<li>
-						<a <? if (Core::isPage('statistics')) echo 'class="current" '; ?>href="/yearly-income/">Income by Year</a>
+						<a <? if (Core::isPage('statistics')) echo 'class="current" '; ?>href="<?= ! empty($tasks) ? "/yearly-income/\"" : "#\" class=\"dead\"" ?>>Annual Income</a>
+					<a <? if (Core::isPage('statistics')) echo 'class="current" '; ?>href="<?= ! empty($tasks) ? "/task-by-year/\"" : "#\" class=\"dead\"" ?>>Annual Task History</a>
+					<a <? if (Core::isPage('statistics')) echo 'class="current" '; ?>href="<?= ! empty($clients) ? "/client-by-year/\"" : "#\" class=\"dead\"" ?>>Annual Client History</a>
 					</li>		
 						</ul>
 
@@ -132,7 +133,7 @@ foreach ($clientList as $instance)
 
 				</ul>
 		<? else: ?>
-
+<a style="display:none" id="realfancy" href="#"></a>
 	<ul>
 					<li>
 						<a id="home" <? if (Core::isPage('')) echo 'class="current" '; ?>href="/">Clients <strong>App</strong></a>

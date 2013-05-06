@@ -2,10 +2,27 @@
 require 'includes.php'; 
 require 'header.php'; 
 
+if ( empty( $clients ) && empty( $tasks ) )
+{
+	echo '<h1>Welcome!</h1>
+
+	<p>Looks like you\'re new around here, ' . $_SESSION['loggedIn']['first_name'] . '. Let me just give you the quick on how this thing works.</p>
+	
+	<ol><li>First, you\'ll want to create some clients and some suitable tasks to perform on those clients.</li>
+	<li>Second, you\'ll want to get some good use out of those clients and tasks by creating time entries. This is your way of saying, "on this day, I worked for this client on this particular task." You even get to specify how your time was spent.</li>
+	<li>If you don\'t like working by the clock, you can create one-time fees as well.</li>
+	<li>There are several different ways you can slice and dice this data you\'re creating. In fact, the longer you use this application, the more valuable it becomes to you. You\'ll notice there are suitable views for your annual income \'n\' such.</li>
+	<li>Most tables in this app have a circled number on each row. Depending on the view, these do different things. My best advice is just for you to play around with them and see what they do.</li>
+	</ol>
+	
+	<p>Sounds good? Let\'s get started!</p>';
+}
+else
+{
+
 echo '<h1>' . Time::getPeriod('F') . '’s Clients</h1>';
 
 $stuff = Time::showHomePeriod(); 
-
 if (!empty($stuff))
 {
 	echo '
@@ -102,9 +119,9 @@ foreach ($stuff as $row)
 </tr>
 </table>
 <? } else { ?>
-<p>There are no client records for <?= Time::getPeriod() ?>.</p>
-<? } ?>
+<center><p>There are no client records for <?= Time::getPeriod() ?>.</p></center>
+<? } 
 
-
-<? require 'footer.php'; ?>
+}
+require 'footer.php'; ?>
 

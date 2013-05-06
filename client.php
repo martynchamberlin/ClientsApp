@@ -41,10 +41,10 @@ else
 <input type="text" name="rate" id="rate" value="<? echo ($edit) ? $client['rate'] : ''?>"/>
 
 
-<label for="first">First Name (optional)</label>
+<label for="first">First Name <span class="required">*</span></label>
 <input type="text" name="first" value="<? echo ($edit) ? $client['first'] : ''?>" id="first">
 
-<label for="last">Last Name (optional)</label>
+<label for="last">Last Name <span class="required">*</span></label>
 <input type="text" name="last" value="<? echo ($edit) ? $client['last'] : ''?>" id="last">
 
 <label for="email">Their Personal Email (optional)</label>

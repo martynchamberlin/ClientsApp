@@ -5,13 +5,11 @@ require 'header.php';
 
 $tasks = Task::showTaskList( true );
 
-echo '<h1>Your Tasks';
-	if ( ! empty( $tasks) ) echo  ' <a href="/task/">(Add New)</a>';
-echo '</h1>';
+echo '<h1>Your Tasks <a href="/task/">(Add New)</a></h1>';
 
 if (empty($tasks) )
 {
-	echo "You haven't created any tasks yet. <a href=\"/task\">Click here to add one</a>.";
+	echo "<center>You haven't created any tasks yet.</center>";
 	exit;
 }
 ?>
