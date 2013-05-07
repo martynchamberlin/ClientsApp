@@ -155,7 +155,6 @@ AND C.clientID = :clientID AND L.date >= ' . $begin . ' AND L.date < ' . $end . 
 		else
 		{
 			$sql = 'INSERT INTO clients SET 
-				clientID = :clientID, 
 				userID = :userID, 
 				first = :first, 
 				last = :last, 
@@ -165,7 +164,6 @@ AND C.clientID = :clientID AND L.date >= ' . $begin . ' AND L.date < ' . $end . 
 				company_name = :company_name';
 			$core = Core::getInstance();
 			$s = $core->pdo->prepare($sql);
-			$s->bindValue('clientID', $clientID);
 			$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
 			$s->bindValue('first', $_POST['first']);
 			$s->bindValue('last', $_POST['last']);
