@@ -1,5 +1,10 @@
 /* Bare Essentials --------------------------------------- */
 
+.cancel-time {
+	color: #c7c7c7;
+	margin-left: 20px;
+}
+
 blockquote:before {
 	content: '“';
 	font-size: 40px;

@@ -16,6 +16,7 @@ function isNumeric(number)
 
 jQuery(document).ready(function($) {
 
+
 	if ( $('body').is('.task-by-year') || $('body').is('.client-by-year'))
 	{
 		$('select[name="taskList"]').change(function()
@@ -608,11 +609,16 @@ jQuery(document).ready(function($) {
 		return false;
 	});
 	
-
 	
-	$('input[type="submit"][value="Save"]').click(function()
+	$('input[type="submit"][value="Save"], .cancel-time').click(function()
 	{
 		unload = true;
+	});
+
+	$('.cancel-time').click(function()
+	{
+		window.history.back();
+		return false;
 	});
 
 	window.onbeforeunload = function() {

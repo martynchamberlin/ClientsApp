@@ -131,6 +131,7 @@ foreach ($taskList as $instance)
 <label for="accomplish">What did you accomplish?</label>
 <textarea id="accomplish" tabindex="2" name="comments"><?= $edit ? htmlspecialchars($time['comments']) : '' ?></textarea>
 <input type="submit" value="Save">
+<a href="/" class="cancel-time">Cancel</a>
 </form>
 
 <? require 'footer.php'; ?>
