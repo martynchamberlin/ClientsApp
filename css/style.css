@@ -665,8 +665,8 @@ padding: 23px 10px;
 	padding: 13px 10px 0;
 }
 
-.task-by-year tr.new {
-	border-top: 2px solid #D7E7B3;
+.task-by-year tr + tr.new {
+border-top: 50px solid white;
 }
 
 td.border.count-wrap {
@@ -763,9 +763,12 @@ margin: 4px 6px 0 0;
 
 /* Yearly income Page --------------------------------------- */
 
+.yearly-income th {
+padding: 4px 0 4px 17px;
+}
 
 .yearly-income td {
-padding: 13px 0 11px;
+padding: 13px 0 11px 17px;
 }
 
 /* Time Page --------------------------------------- */

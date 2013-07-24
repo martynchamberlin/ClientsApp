@@ -142,11 +142,6 @@ class User
 			$s->execute();
 			return true;
 		}
-		else
-		{
-					echo 'yes!';exit;
-
-}
 	}
 
 	static function delete($data)

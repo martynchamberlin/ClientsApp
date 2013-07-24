@@ -10,12 +10,11 @@ $months = array_reverse($months);
 <table class="">
 <thead>
 	<tr>
-	<th></th>
 	<th>Month</th>
-	<th>Hours</th>
-	<th class="summary">Revenue</th>
+	<th>Monthly Hours</th>
 	<th>Total Hours</th>
-	<th class="summary">Total Revenue</th>
+	<th class="summary">Monthly</th>
+	<th class="summary">Cumulative</th>
 	</tr>
 </thead>
 <?
@@ -28,6 +27,9 @@ foreach ($months as $month)
 {
 $time = 0;
 $total_month_money = 0;
+$unpaid_monthly = 0;
+$paid_monthly = 0;
+
 $stuff = Time::get_month_totals( $month ); 
 
 if (!empty($stuff))
@@ -42,29 +44,30 @@ foreach ($stuff as $row)
 	if ( $paid_status == "unpaid" )
 	{
 		$unpaid += $money;
+		$unpaid_monthly += $money;
 	}
 	else if ( $paid_status == "paid" )
 	{
 		$paid += $money;
+		$paid_monthly += $money;
 	}
 	
 	$time = !isset($time) ? $row['timeAmount'] : $time + $row['timeAmount'];
-	$total_month_money = !isset($total_month_money) ? $money : $total_month_money + $money;
-} 	$total_money += round($total_month_money, 2);
+	$total_month_money = !isset($total_month_money) ? $paid_monthly : $total_month_money + $paid_monthly;
+}
+	$total_money += round($total_month_money, 2);
 	$total_hours += round($time, 2);
 ?>
 
 <tr>
-	<td></td>
 	<td><?= substr($month, 0, -5); ?></td>
 	<td><?= Time::roundToHours($time) ?></td>
-	<td>$<?= number_format($total_month_money, 2) ?></td>
 	<td><?= Time::roundToHours($total_hours); ?></td>
-	<td>$<?= number_format($total_money, 2); ?></td>
+	<td>$<?= number_format($paid_monthly, 2) ?></td>
+	<td>$<?= number_format($paid, 2); ?></td>
 </tr>
 <? } else { ?>
 <tr>
-	<td></td>
 	<td><?= substr($month, 0, -5); ?></td>
 	<td>...</td>
 	<td>...</td>
