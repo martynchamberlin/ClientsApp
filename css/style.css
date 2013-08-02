@@ -42,21 +42,20 @@ body.logged_out.landing {
 }
 
 body {
-	background: url(/images/mochaGrunge.png);
+	background: url(/images/mochaGrunge.png?s);
 }
 
 #wrap {
 	width: 980px;
 	margin: 0px auto;
 	background: white;
-	-webkit-box-shadow: 0 0px 11px rgba(26, 26, 26, 1.0);
-	box-shadow: 0 0px 11px rgba(26, 26, 26, 1.0);
+	box-shadow: 0 0px 11px rgba(163, 127, 106, 1.0);
 	padding: 0 0 30px 0;
 	overflow: hidden;
 }
 
 body {
-	font: 16px/24px 'proxima-nova-soft', Helvetica, Arial; 
+	font: 16px/24px 'museo-slab', Helvetica, Arial; 
 }
 
 table.breakdown td.name {
@@ -314,7 +313,7 @@ hr.orange {
 
 input[type="text"].normal, textarea, input[type="password"] {
 	display: block;
-	font: 16px 'proxima-nova-soft', Arial;
+	font: 16px 'museo-slab', Arial;
 	margin: 0 0 12px 0;
 	width: 230px;
 	border: none;
@@ -362,7 +361,7 @@ textarea {
 }
 
 input[type="submit"]  {
-	font: 300 14px/1  'proxima-nova-soft', Helvetica, Arial;
+	font: 300 14px/1  'museo-slab', Helvetica, Arial;
 	margin: 10px 0 30px;
 	background-color: #87b448;
 	border: none;
@@ -666,7 +665,7 @@ padding: 23px 10px;
 }
 
 .task-by-year tr + tr.new {
-border-top: 50px solid white;
+/*border-top: 50px solid white;*/
 }
 
 td.border.count-wrap {
