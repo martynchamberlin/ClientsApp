@@ -14,7 +14,7 @@ if(isset($_POST['addExpense']))
 
 // If they're modifying a previously entered expense
 else if(isset($_POST['updateExpense']))
-	Expense::updateExpense($_POST['id'], urldecode($_POST['redirect']));
+	Expense::updateExpense( $_POST['id'] );
 
 
 
@@ -45,7 +45,6 @@ if ($edit)
 {
 	echo '<input type="hidden" name="updateExpense"/>';
 	echo '<input type="hidden" name="id" value="' . $_GET['expense'] . '"/>';
-	echo '<input type="hidden" name="redirect" value="' . urlencode($_GET['redirect']) . '"/>';
 }
 else
 	echo '<input type="hidden" name="addExpense"/>';

@@ -347,11 +347,8 @@ select, .select2-container {
 }
 
 input[type="text"].normal:focus, textarea:focus, input[type="password"]:focus {
-    outline: 0;
-    border-color: rgba(115, 189, 78, 0.8);
-    -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(115, 189, 78, 0.6);
-    -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(115, 189, 78, 0.6);
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(115, 189, 78, 0.6);
+   outline: 0;
+   border-color: #a8a8a8;   
 }
 
 textarea {

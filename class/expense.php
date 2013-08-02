@@ -78,7 +78,7 @@ AND L.postType = "expense"';
 		$s->bindValue('post_id', $id);
 		$s->execute();
 
-		header('Location: ' . $redirect);
+		header('Location: /view/?clientID=' . $_POST['clientID'] );
 		exit;
 	}
 
