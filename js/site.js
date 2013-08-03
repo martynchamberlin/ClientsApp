@@ -621,27 +621,54 @@ jQuery(document).ready(function($) {
 		return false;
 	});
 
-	window.onbeforeunload = function() {
+	window.onbeforeunload = function() 
+	{
 		if ($('body').is('.time') && ! unload )
 		{
 			return "Sure you want to leave?\n\nYour time entry will be permanently lost if you do.";
 		}
 	};
-	$(document).bind('keydown', 'ctrl+s', function(){ 
-		unload = true;
-		$('form').submit();
 
+	key.filter = function(event)
+	{
+		var tagName = (event.target || event.srcElement).tagName;
+		//return jQuery('textarea').is(':focus');
+		return true;
+	}
+
+	key('⌘+s, ⌘+enter', function()
+	{
+		unload = true;
+		$('.create-time').submit();
+		return false;
 	});
 
-	$(document).bind('keydown', 'ctrl+n', function(){ window.location = "/time";});
-	$(document).bind('keydown', 'ctrl+w', function(){ window.location = "/";});
-	var postID = $('#noteID').val();
-	var postURL = $('#noteURL').val();
-	$(document).bind('keydown', 'ctrl+e', function(){ window.location = "/edit?id=" + postID; });
-	$(document).bind('keydown', 'ctrl+v', function(){ window.location = "/" + postURL; });
-	var searchForm = $('.search_form input');
-	$(document).bind('keydown', 'ctrl+f', function(){ searchForm.focus(); });
+	if ( $('body').is('.view') )
+	{
+		key('ctrl+e', function()
+		{
+			window.location = $('.right').first().find('.action-buttons a').first().attr('href');
+		});
+	}
 
+	if ( $('body').is('.home') )
+	{
+		key('ctrl+v', function()
+		{
+			window.location = $('a.view-client-time').first().attr('href');
+		});
+	}
+
+
+	key('ctrl+n', function()
+	{
+		window.location = "/time";
+	});
+
+	key('ctrl+w', function()
+	{
+		window.location = "/";
+	});
 	
 	$('textarea').autosize(); 
 

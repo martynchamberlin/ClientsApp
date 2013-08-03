@@ -66,7 +66,7 @@ foreach ($stuff as $row)
 	$link = "/client/?edit=" . $row['clientID'];
 	echo Client::format_name( $row, $link ) . '</a></td>';
 
-	echo '<td><a href="/view/?clientID=' . $row['clientID'] . '">';
+	echo '<td><a class="view-client-time" href="/view/?clientID=' . $row['clientID'] . '">';
 	echo Time::roundToHours($row['timeAmount']) . ' hours</td>';
 	echo '<td>$' . number_format($row['orderBY'], 2) . '</td>';
 

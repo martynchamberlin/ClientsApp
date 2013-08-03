@@ -31,7 +31,7 @@
 		<script type='text/javascript' src='/js/superfish.js'></script>
 		<script src="/js/backstretch.js"></script>
 		<script src="/js/site.js"></script>
-		<script src="/js/jquery.hotkeys-0.7.9.js"></script>
+		<script src="/js/keymaster.js"></script>
 		<script type="text/javascript" src="//use.typekit.net/nbv3jkv.js"></script>
 		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 

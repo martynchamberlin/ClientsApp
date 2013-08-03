@@ -809,6 +809,9 @@ margin: 0 10px 30px 0;
 text-align: center;
 display: block;
 float: left;
+padding-left: 0;
+padding-right: 0;
+width: 81px;
 }
 
 .time input[type="submit"][value="Start"] {
