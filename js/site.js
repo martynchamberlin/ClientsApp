@@ -659,6 +659,10 @@ jQuery(document).ready(function($) {
 		});
 	}
 
+	key('s, space', function()
+	{
+		$('#startstop').trigger('click');
+	});
 
 	key('ctrl+n', function()
 	{
