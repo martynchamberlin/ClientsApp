@@ -661,7 +661,10 @@ jQuery(document).ready(function($) {
 
 	key('s, space', function()
 	{
-		$('#startstop').trigger('click');
+		if ( ! $('input').is(':focus') && ! $('textarea').is(':focus') )
+		{
+			$('#startstop').trigger('click');
+		}
 	});
 
 	key('ctrl+n', function()
