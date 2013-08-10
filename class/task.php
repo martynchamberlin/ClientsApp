@@ -2,7 +2,7 @@
 
 abstract class Task
 {
-	static function showTaskList( $show_all = false )
+	static function showTaskList( $show_all = false, $limit_result_to_first_row = false, $client_id = '')
 	{
 
 		Time::getPeriod();
@@ -11,7 +11,7 @@ abstract class Task
 		$begin = strtotime($period);
 		$end = strtotime('+1 month', $begin);
 
-		$sql = 'SELECT count(DISTINCT L.post_id) as primarySort, count(DISTINCT L2.post_id) as secondarySort, taskName, TA.taskID, TA.active FROM tasks TA LEFT JOIN times T ON TA.taskID = T.taskID 
+		$sql = 'SELECT count(DISTINCT L.post_id) as primarySort, count(DISTINCT L2.post_id) as secondarySort, taskName, T.clientID, TA.taskID, TA.active FROM tasks TA LEFT JOIN times T ON TA.taskID = T.taskID 
 		LEFT JOIN lookup L on T.lid = L.post_id AND L.date >= ' . $begin . ' AND L.date < ' . $end . ' 
 		LEFT JOIN lookup L2 on T.lid = L2.post_id
 		WHERE TA.userID = ' . $_SESSION['loggedIn']['userID'];
@@ -19,9 +19,18 @@ abstract class Task
 		{
 			$sql .= ' AND TA.active = 1 ';
 		}
+		if ( ! empty( $client_id ) )
+		{
+			$sql .= ' AND T.clientID = ' . $client_id;
+		}
+
 		$sql .= '
 		GROUP BY TA.taskID 
 		ORDER BY count(L.post_id) DESC, count(L2.post_id) DESC, taskName';
+		if ( $limit_result_to_first_row === true ) // for ajax
+		{
+			$sql .= ' LIMIT 1';
+		}
 		$core = Core::getInstance(); 
 		$s = $core->pdo->query($sql);
 		return $s->fetchAll();

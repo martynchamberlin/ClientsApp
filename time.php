@@ -20,6 +20,13 @@ else if(isset($_POST['updateTime']))
 		Time::updateTime($_POST['id'], urldecode($_POST['redirect']));
 }
 
+else if ( isset( $_GET['ajax'] ) )
+{
+	$tasks = Task::showTaskList( false, true, $_GET['client_id'] );
+	echo $tasks[0]['taskID'];
+	exit;
+}
+
 require 'header.php'; 
 
 if (isset($_GET['time']))
@@ -40,7 +47,7 @@ else
 
 <h1><? echo $edit ? 'Edit Entry' : 'New Time'; ?></h1>
 
-<form action="" method="post" class="create-time">
+<form action="" method="post" class="create-time ajax">
 <? 
 if ($edit)
 {

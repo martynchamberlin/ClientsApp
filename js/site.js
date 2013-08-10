@@ -16,6 +16,45 @@ function isNumeric(number)
 
 jQuery(document).ready(function($) {
 
+	// Get some defauls in there before you call the select2 function!
+	$('input[type=text]').each(function()
+	{
+		$(this).addClass('normal');
+	});
+
+	$('select').each(function()
+	{
+		$(this).css('width', '200px');
+		if ($(this).is('#nav select'))
+		{
+			$(this).css('width', '140px');
+		}
+	});
+
+	$('select').select2();
+
+
+
+	$('form.ajax select[name="clientID"]').change(function()
+	{
+		var id = $(this).val();
+		$.ajax({
+			type: "GET",
+			url: "/time/",
+			data: {
+				'ajax': '',
+				'client_id': id
+			},
+
+			success: function(html){
+				$('form.ajax select[name="taskID"] option[value="' + html + '"]').attr('selected', 'selected');
+					$('select').select2();
+
+			}
+		});
+	});
+
+
 
 	if ( $('body').is('.task-by-year') || $('body').is('.client-by-year'))
 	{
@@ -473,23 +512,6 @@ jQuery(document).ready(function($) {
 		dropShadows: false								// disable drop shadows 
 	});
 
-	// Get some defauls in there before you call the select2 function!
-	$('input[type=text]').each(function()
-	{
-		$(this).addClass('normal');
-	});
-
-	$('select').each(function()
-	{
-		$(this).css('width', '200px');
-		if ($(this).is('#nav select'))
-		{
-			$(this).css('width', '140px');
-		}
-	});
-
-	$('select').select2();
-
 	$('#getPeriod select').change(function()
 	{
 		$('#getPeriod').submit();
@@ -640,6 +662,7 @@ jQuery(document).ready(function($) {
 	{
 		unload = true;
 		$('.create-time').submit();
+		$('.create-fee').submit();
 		return false;
 	});
 
