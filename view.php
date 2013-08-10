@@ -56,7 +56,7 @@ foreach ($clientArray as $row)
 	'</span><span class="day">' . date('j', $row['date']) . '</span></div>';
 	endif;
 	echo '
-	<div class="right">' . markdown('<strong> ' . $row['taskName'] . '</strong> — ' . $row['comments']) . '
+	<div class="right">' . markdown('<strong> ' . $row['taskName'] . '</strong> — ' . make_links_clickable( $row['comments'] ) ) . '
 	<div class="negative-margins">';
 	if (!isset($_SESSION['print']))
 	{
@@ -105,7 +105,7 @@ if (!empty($expenses))
 	. date('M', $e['date']) . 
 	'</span><span class="day">' . date('j', $e['date']) . '</span></div>
 	
-		<div class="right"><strong>' . markdown ( '$' . number_format($e['amount'], 2) . '</strong> — ' . $e['comments'] ) . '<div class="negative-margins">';
+		<div class="right"><strong>' . markdown ( '$' . number_format($e['amount'], 2) . '</strong> — ' . make_links_clickable( $e['comments'] ) ) . '<div class="negative-margins">';
 		if (!isset($_SESSION['print']))
 		{
 			echo ' <a href="/fee/?expense=' . $e['post_id'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '">(edit)</a> <a href="/delete/?expense=' . $e['post_id'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '" class="delete">(delete)</a>';

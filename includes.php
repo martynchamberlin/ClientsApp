@@ -66,6 +66,14 @@ else if (isset($_POST['replaceTask']))
 		Task::replaceTask();
 }
 
+function make_links_clickable( $code )
+{
+	// This is beautiful but it can't handle complex links ;(
+$code = preg_replace('@(\s|^)(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-1234567890=]*(\?\S+)?[^\.\s])?)?)@', '$1<notextile><a href="$2" target="_blank">$2</a></notextile>', $code);
+	$code = preg_replace('/@([a-zA-Z0-9]+)/', "<a href=\"". Config::home() ."/$1\">@$1</a>", $code);
+	
+	return $code;
+}
 
 
 
