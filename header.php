@@ -48,7 +48,7 @@
 						<a id="home" <? if (Core::isPage('')) echo 'class="current" '; ?>href="/">Clients <strong>App</strong></a>
 					</li>
 					<li>
-						<a href="#">New...</a>
+						<a href="#">+ New</a>
 						<ul>
 							<? $clients = Client::showClientList(); $tasks = Task::showTaskList(); ?>
 							<li ><a href="/<?= ! empty($clients) && !empty($tasks) ? 'time/">' : '#time" class="no-time dead">' ?>Time Log</a></li>
