@@ -450,6 +450,10 @@ jQuery(document).ready(function($) {
 		{
 			unload = false;
 		}
+		if ( valid === true )
+		{
+			$('body #fakewrap').hide( 500 );
+		}
 		return valid;
 	});
 
