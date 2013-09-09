@@ -34,10 +34,9 @@ jQuery(document).ready(function($) {
 	$('select').select2();
 
 
-
-	$('form.ajax select[name="clientID"]').change(function()
+	function toggle_task( obj )
 	{
-		var id = $(this).val();
+		var id = $(obj).val();
 		$.ajax({
 			type: "GET",
 			url: "/time/",
@@ -52,8 +51,16 @@ jQuery(document).ready(function($) {
 
 			}
 		});
+	}
+
+
+
+	$('form.ajax select[name="clientID"]').change(function()
+	{	
+		toggle_task( $(this) );
 	});
 
+	toggle_task( 'form.ajax select[name="clientID"]' );
 
 
 	if ( $('body').is('.task-by-year') || $('body').is('.client-by-year'))
