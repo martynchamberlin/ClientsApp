@@ -42,7 +42,8 @@ body.logged_out.landing {
 }
 
 body {
-	background: url(/images/mochaGrunge.png?s);
+	background-image: url(/images/mochaGrunge.png?s);
+	background-attachment: fixed;
 }
 
 #wrap {
@@ -960,7 +961,7 @@ only screen and (-o-min-device-pixel-ratio: 2/1),
 only screen and (-webkit-min-device-pixel-ratio: 2),
 only screen and (min-device-pixel-ratio: 2) {
 	body {
-		background: url(/images/mochaGrunge_@2X.png);
+		background-image: url(/images/mochaGrunge_@2X.png);
 		background-size: 400px;
 	}
 
