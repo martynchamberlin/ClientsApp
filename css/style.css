@@ -80,6 +80,29 @@ border-bottom: 1px solid rgb(228, 228, 228);
 	padding-left:0;
 }
 
+.logged_in #nav .first {
+border-radius: 50%;
+width: 44px;
+height: 44px;
+border: 1px solid #C6DA97;
+}
+
+.logged_in #nav li.first a {
+	color: #87B448;
+text-align: center;
+width: 44px;
+font-weight: bold;
+}
+
+.logged_in #nav .first:hover {
+	background: #87b448;
+	border: 1px solid #87b448;
+}
+
+.logged_in #nav li.first a:hover {
+	color: #fff;
+}
+
 #nav li {
 	list-style-type: none;
 	float: left;
@@ -476,7 +499,7 @@ ul em, ol em {
 	display: block;
 	width: 29px;
 	height: 29px;
-	border: 1px solid #ccc;
+	border: 1px solid #C6DA97;
 	padding: 0;
 }
 
@@ -679,6 +702,15 @@ td.border.count-wrap {
 
 /* Landing Page --------------------------------------- */
 
+sup {
+font-size: 12px;
+margin-top: -8px;
+padding: 3px;
+vertical-align: top;
+font-weight: 300;
+display: inline-block;
+}
+
 .landing h1, .landing h2 {
 	text-align: center;
 }
@@ -688,18 +720,38 @@ td.border.count-wrap {
 	padding: 0 0 35px 0;
 }
 
+.landing #content {
+padding: 0 90px;
+}
+
+.landing #wrap {
+	padding: 0 0 60px 0
+}
+
 .landing .left {
-	width: 500px;
+	width: 450px;
 	float: left;
+	margin: 49px 0 0;
 }
 
 .landing .right {
-	width: 376px;
 	float: right;
+	padding: 44px 66px 3px;
+	width: 185px;
+}
+
+.landing h3 {
+padding: 10px 0;
+font-size: 20px;
 }
 
 .landing .right form {
-	padding: 35px 66px 3px;
+
+}
+
+.landing .both {
+	clear: both;
+	overflow: hidden;
 }
 
 #home {
@@ -707,6 +759,23 @@ td.border.count-wrap {
 	font-weight: 300;
 }
 
+.landing .citation {
+clear: both;
+color: rgb(184, 184, 184);
+border-top: 1px solid #ddd;
+padding: 10px;
+margin: 70px 0 0;
+overflow: hidden;
+}
+
+.citation sup {
+	font-size: 8px;
+}
+
+.citation a {
+	color: rgb(184, 184, 184);
+	text-decoration: underline;
+}
 
 /* Login Page --------------------------------------- */
 

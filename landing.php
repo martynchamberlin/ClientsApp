@@ -6,8 +6,10 @@ require 'header.php';
 ?>
 
 
-<h1>78.3% of US businesses are run by solo entrepreneurs.</h1>
+<h1>Over 75% of Small Businesses Are Run by Solo Entrepreneurs<sup>1</sup></h1>
 <h2>It’s time to get smart about tracking your time.</h2>
+
+<div class="both">
 <div class="left">
 <p>Clients <strong>App</strong> is a web-based time tracking tool that allows you to keep track of the <em>what</em> and the <em>when</em> of your freelance projects. It’s built by a solo entrepreneur who grew frustrated with the bloated, antequated alternatives out there. Here’s some features that’ll make you use this app on a daily basis:</p>
 <ul>
@@ -17,11 +19,12 @@ require 'header.php';
 	<li>Sort by your most popular clients</li>
 </ul>
 
-<p>Creating an account to the right just takes thirty seconds »</p>
+<p>Creating an account to the right just takes thirty seconds</p>
 
 </div>
 
 <div class="right">
+<h3>Sign up!</h3>
 <form action="/signup/" method="post" class="signup">
 <input type="text" autocomplete="off" name="first_name" placeholder="first name">
 <input type="text" autocomplete="off" name="last_name" placeholder="last name">
@@ -33,6 +36,9 @@ require 'header.php';
 </form>
 
 </div>
+</div>
+
+<div class="citation"><sup>1</sup>2012 statistic from the <a href="http://www.sba.gov/sites/default/files/FAQ_Sept_2012.pdf">U.S. Small Business Administration</a></div>
 
 <? require 'footer.php'; ?>
 

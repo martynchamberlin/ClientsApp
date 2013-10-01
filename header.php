@@ -45,7 +45,7 @@
 		<? if ( User::logged_in() === true ) : ?>
 				<ul>
 					<li class="first">
-						<a id="home" <? if (Core::isPage('')) echo 'class="current" '; ?>href="/">Clients <strong>App</strong></a>
+						<a id="home" <? if (Core::isPage('')) echo 'class="current" '; ?>href="/"><?php if ( ! User::logged_in() ) { ?>Clients <strong>App</strong><?php } else { echo 'C'; } ?></a>
 					</li>
 					<li>
 						<a href="#">+ New</a>
