@@ -96,7 +96,9 @@ color: #87B448;
 text-align: center;
 width: 29px;
 font-weight: bold;
-padding: 4px 0;}
+padding: 9px 12px 12px;
+margin: -6px -12px;
+}
 
 .logged_in #nav .first:hover {
 	background: #87b448;
