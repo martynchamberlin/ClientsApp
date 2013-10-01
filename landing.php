@@ -38,7 +38,7 @@ require 'header.php';
 </div>
 </div>
 
-<div class="citation"><sup>1</sup>2012 statistic from the <a href="http://www.sba.gov/sites/default/files/FAQ_Sept_2012.pdf">U.S. Small Business Administration</a></div>
+<div class="citation"><sup>1</sup>2012 statistic from the <a href="http://www.sba.gov/sites/default/files/FAQ_Sept_2012.pdf" target="_blank">U.S. Small Business Administration</a></div>
 
 <? require 'footer.php'; ?>
 
