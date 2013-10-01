@@ -55,6 +55,10 @@ body {
 	overflow: hidden;
 }
 
+.landing #wrap, .logged_out #wrap {
+	box-shadow: 0 0px 11px rgba(116, 116, 116, 1.0);
+}
+
 body {
 	font: 16px/24px 'museo-slab', Helvetica, Arial; 
 }
