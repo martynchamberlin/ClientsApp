@@ -82,24 +82,24 @@ border-bottom: 1px solid rgb(228, 228, 228);
 
 .logged_in #nav .first {
 border-radius: 50%;
-width: 44px;
-height: 44px;
+width: 29px;
+height: 29px;
 border: 1px solid #C6DA97;
-}
+margin: 7px 9px;}
 
 .logged_in #nav li.first a {
-	color: #87B448;
+color: #87B448;
 text-align: center;
-width: 44px;
+width: 29px;
 font-weight: bold;
-}
+padding: 4px 0;}
 
 .logged_in #nav .first:hover {
 	background: #87b448;
 	border: 1px solid #87b448;
 }
 
-.logged_in #nav li.first a:hover {
+.logged_in #nav li.first:hover a {
 	color: #fff;
 }
 
