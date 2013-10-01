@@ -135,7 +135,7 @@ foreach ($taskList as $instance)
 <div class="seconds">:&nbsp;<span id="seconds"></span></div>
 
 </div>
-<label for="accomplish">What did you accomplish?</label>
+<label for="accomplish">What have you accomplished?</label>
 <textarea id="accomplish" tabindex="2" name="comments"><?= $edit ? htmlspecialchars($time['comments']) : '' ?></textarea>
 <input type="submit" value="Save">
 <a href="/" class="cancel-time">Cancel</a>
