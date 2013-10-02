@@ -7,8 +7,11 @@
 		<link rel="stylesheet" href="/css/reset.css" type="text/css" media="screen" />
 		<link rel="stylesheet" href="/css/style.css" type="text/css" media="screen" />
 
-<script type='text/javascript' src='/js/jquery.js'></script>
 <!-- Add jQuery library -->
+<script type='text/javascript' src='/js/jquery.js'></script>
+
+<!-- Add hoverIntent plugin, used explicitly in Superfish plugin -->
+<script type='text/javascript' src='/js/hoverIntent.js'></script>
 
 <!-- Add mousewheel plugin (this is optional) -->
 <script type="text/javascript" src="/fancybox/lib/jquery.mousewheel-3.0.6.pack.js"></script>
@@ -62,7 +65,7 @@
 
 
 						<li>
-						<a href="#">View...</a>
+						<a href="#">Overview</a>
 						<ul>
 								<li>
 						<a <? if (Core::isPage('clients')) echo 'class="current" '; ?>href="/clients/">Clients</a>
@@ -81,7 +84,7 @@
 					</li>
 
 					<li class="account-settings">
-						<a <? if (Core::isPage('account')) echo 'class="current" '; ?> href="/account/">Account</a>
+						<a <? if (Core::isPage('account')) echo 'class="current" '; ?> href="/account/">Settings</a>
 						<ul>
 					<li class="logout">
 						<a href="/logout/">Logout</a>
