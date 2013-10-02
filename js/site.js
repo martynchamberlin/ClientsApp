@@ -452,7 +452,7 @@ jQuery(document).ready(function($) {
 		}
 		if ( valid === true )
 		{
-			$('body #fakewrap').hide( 500 );
+			$('body #fakewrap').animate({marginTop: -1200, }, 500 );
 		}
 		return valid;
 	});
