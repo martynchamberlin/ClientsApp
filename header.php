@@ -38,7 +38,7 @@
 		<script type="text/javascript" src="//use.typekit.net/nbv3jkv.js"></script>
 		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 
-	<link rel="shortcut icon" href="/images/favicon.ico?v=005" />	
+	<link rel="shortcut icon" href="/images/favicon.ico?v=006" />	
 
 	</head>
 	<body class="<?= core::get_page_url() . " " . User::get_color_scheme() . " "; echo User::logged_in() ? "logged_in" : "logged_out"; ?>">
