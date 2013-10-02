@@ -91,14 +91,14 @@ border-bottom: 1px solid rgb(228, 228, 228);
 	padding-left:0;
 }
 
-.logged_in #nav .first {
+#nav .first {
 border-radius: 50%;
 width: 29px;
 height: 29px;
 border: 1px solid #C6DA97;
 margin: 7px 21px 7px 9px}
 
-.logged_in #nav li.first a {
+#nav li.first a {
 color: #87B448;
 text-align: center;
 width: 29px;
@@ -106,13 +106,12 @@ font-weight: bold;
 padding: 9px 12px 12px;
 margin: -6px -12px;
 }
-
-.logged_in #nav .first:hover {
+#nav .first:hover {
 	background: #87b448;
 	border: 1px solid #87b448;
 }
 
-.logged_in #nav li.first:hover a {
+#nav li.first:hover a {
 	color: #fff;
 }
 

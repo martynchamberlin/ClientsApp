@@ -48,7 +48,7 @@
 		<? if ( User::logged_in() === true ) : ?>
 				<ul>
 					<li class="first">
-						<a id="home" <? if (Core::isPage('')) echo 'class="current" '; ?>href="/"><?php if ( ! User::logged_in() ) { ?>Clients <strong>App</strong><?php } else { echo 'C'; } ?></a>
+						<a id="home" <? if (Core::isPage('')) echo 'class="current" '; ?>href="/">C</a>
 					</li>
 					<li>
 						<a href="#">+ New</a>
@@ -138,8 +138,8 @@ foreach ($clientList as $instance)
 		<? else: ?>
 <a style="display:none" id="realfancy" href="#"></a>
 	<ul>
-					<li>
-						<a id="home" <? if (Core::isPage('')) echo 'class="current" '; ?>href="/">Clients <strong>App</strong></a>
+					<li class="first">
+						<a id="home" <? if (Core::isPage('')) echo 'class="current" '; ?>href="/">C</a>
 					<li class="login">
 						<a href="/login/" class="fancybox">Login</a>
 					</li>
