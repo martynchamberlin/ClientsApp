@@ -281,8 +281,9 @@ jQuery(document).ready(function($) {
 
 	// Make the Fancybox happen automatically if ?logout=true in URL
 	if(window.location.href.indexOf("logout") > -1) 
-	{
-		$('.fancybox').trigger('click');
+	{	
+		$('#wrap').css('margin-top',  '-' + parseInt($('#wrap').outerHeight() + 20 ) + 'px');
+		$('#realfancy').trigger('click');
 	}
 
 	// Validate the stuff when they try logging in
