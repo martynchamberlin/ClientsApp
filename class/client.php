@@ -190,9 +190,10 @@ AND C.clientID = :clientID AND L.date >= ' . $begin . ' AND L.date < ' . $end . 
 
 	static function retrieveClient($id)
 	{
-		$sql = 'SELECT * FROM clients C WHERE C.clientID = :clientID AND userID = :userID';
+		$sql = 'SELECT * FROM clients C WHERE C.clientID = :clientID AND (userID = :userID OR billing_email = :email)';
 		$core = Core::getInstance();
 		$s = $core->pdo->prepare($sql);
+		$s->bindValue('email', $_SESSION['loggedIn']['email']);
 		$s->bindValue('clientID', $id);
 		$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
 		$s->execute();

@@ -25,13 +25,14 @@ require 'class/paid.php';
 // If they're not logged in, send them to the login page
 if ( ! User::logged_in() && (!Core::isPage('login') && !Core::isPage('landing') && ! Core::isPage('signup')) )
 {
-	header('location: /landing/ ');
+	header('location: /landing/?logout&redirect=' . $_SERVER['REQUEST_URI'] );
 	exit;
 }
 
 else if ( User::logged_in() && Core::isPage('login') )
 {
-	header('location: / ');
+	$redirect = isset( $_POST['redirect-login'] ) ? $_POST['redirect-login'] : "";
+	header('location: ' .Config::home() . $redirect);
 	exit;
 }	
 

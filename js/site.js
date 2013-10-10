@@ -236,8 +236,14 @@ jQuery(document).ready(function($) {
 		overlayColor: '#333',
 		afterLoad : function() {
 		set_fancy( true );
+		
+		var redirect = "";
+		if ($('input[name="redirect-login"]').length > 0 )
+		{
+			redirect = '<input type="hidden" name="redirect-login" value="' + $('input[name="redirect-login"]').val() + '">'
+		}
 
-		this.content = '<form action="/login/" class="popup" method="post"><label for="email">Email</labeL><input type="text" class="normal" class="email" name="email"><input type="hidden" name="login" value="login"><label for="password">Password</label><input type="password" name="password"/><input type="submit" value="Login"></form>'
+		this.content = '<form action="/login/" class="popup" method="post"><label for="email">Email</labeL><input type="text" class="normal" class="email" name="email"><input type="hidden" name="login" value="login"><label for="password">Password</label>' + redirect + '<input type="password" name="password"/><input type="submit" value="Login"></form>'
 		},
 		afterShow : function() {
 			$('.popup').find('input').first().focus();

@@ -216,7 +216,7 @@ INNER JOIN times T on L.post_id = T.lid AND L.postType = "time"
 LEFT JOIN tasks TA ON T.taskID = TA.taskID
 WHERE L.date >= ' . $begin . ' 
 		AND L.date < ' . $end . ' 
-    AND L.userID = ' . $_SESSION['loggedIn']['userID'] . '
+    AND (L.userID = ' . $_SESSION['loggedIn']['userID'] . '  OR C.billing_email = "' . $_SESSION['loggedIn']['email'] . '")
 AND C.clientID = "' . $id . '"
 ORDER BY L.date DESC, L.post_id DESC';
 //ORDER BY TA.taskName, L.date';

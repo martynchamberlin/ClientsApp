@@ -5,7 +5,6 @@ require 'header.php';
 
 $clientArray = Time::showSinglePeriod($_GET['clientID']);
 $client = Client::retrieveClient($_GET['clientID']);
-
 if ( isset($_POST['print']) )
 {
 	if (! isset($_SESSION['print']) )
@@ -58,7 +57,7 @@ foreach ($clientArray as $row)
 	echo '
 	<div class="right">' . markdown('<strong> ' . $row['taskName'] . '</strong> — ' . make_links_clickable( $row['comments'] ) ) . '
 	<div class="negative-margins">';
-	if (!isset($_SESSION['print']))
+	if (!isset($_SESSION['print']) && $_SESSION['loggedIn']['userID'] == $row['userID'] )
 	{
 		echo '<div class="action-buttons"> <a href="/time/?time=' . $row['post_id'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '">(edit)</a> <a href="/delete/?time=' . $row['post_id'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '" class="delete">(delete)</a></div>';
 	}
@@ -106,7 +105,7 @@ if (!empty($expenses))
 	'</span><span class="day">' . date('j', $e['date']) . '</span></div>
 	
 		<div class="right"><strong>' . markdown ( '$' . number_format($e['amount'], 2) . '</strong> — ' . make_links_clickable( $e['comments'] ) ) . '<div class="negative-margins">';
-		if (!isset($_SESSION['print']))
+		if (!isset($_SESSION['print'])  && $_SESSION['loggedIn']['userID'] == $row['userID'] )
 		{
 			echo ' <a href="/fee/?expense=' . $e['post_id'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '">(edit)</a> <a href="/delete/?expense=' . $e['post_id'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '" class="delete">(delete)</a>';
 		}
@@ -135,7 +134,7 @@ if (!empty($expenses))
 </table>
 <hr/>
 <form action="" method="post">
-<input type="submit" name="print" value="Toggle Print"/>
+<!--<input type="submit" name="print" value="Toggle Print"/>-->
 </form>
 
 

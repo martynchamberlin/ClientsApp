@@ -42,6 +42,7 @@
 
 	</head>
 	<body class="<?= core::get_page_url() . " " . User::get_color_scheme() . " "; echo User::logged_in() ? "logged_in" : "logged_out"; ?>">
+	<?php if ( isset($_GET['redirect'] ) ) { echo '<input type="hidden" name="redirect-login" value="' . $_GET['redirect'] . '">'; } ?>
 		<div id="fakewrap">
 		<div id="wrap">
 	<div id="nav">
