@@ -105,7 +105,7 @@ if (!empty($expenses))
 	'</span><span class="day">' . date('j', $e['date']) . '</span></div>
 	
 		<div class="right"><strong>' . markdown ( '$' . number_format($e['amount'], 2) . '</strong> — ' . make_links_clickable( $e['comments'] ) ) . '<div class="negative-margins">';
-		if (!isset($_SESSION['print'])  && $_SESSION['loggedIn']['userID'] == $row['userID'] )
+		if (!isset($_SESSION['print'])  && $_SESSION['loggedIn']['userID'] == isset( $row ) ? $row['userID'] : 'asdf' )
 		{
 			echo ' <a href="/fee/?expense=' . $e['post_id'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '">(edit)</a> <a href="/delete/?expense=' . $e['post_id'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '" class="delete">(delete)</a>';
 		}
