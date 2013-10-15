@@ -1,4 +1,15 @@
 /* Bare Essentials --------------------------------------- */
+
+*, *:focus {
+	outline: none;
+}
+
+body .select2-container-active .select2-choice,
+body .select2-container-active .select2-choices {
+	border: 1px solid #aaaaaa;
+	box-shadow: none;
+}
+
 body .select2-results .select2-highlighted {
 	background: #87B448
 }
