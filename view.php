@@ -47,7 +47,7 @@ foreach ($clientArray as $row)
 	$totalTime = !isset($totalTime) ? $row['timeAmount'] : $totalTime + $row['timeAmount'];
 
 	echo '<div class="overflow_hidden">';
-	if ($lastdate != $date): 
+	if ( date('D', (int)$lastdate) != date('D', (int)$date ) ): 
 	echo'
 
 	<div class="calendar"><span class="month">'

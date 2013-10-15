@@ -76,74 +76,48 @@ AND L.postType = "time"';
 	}
  
 	static function addTime()
-	{		
-		
+	{	
+		/** 
+		 * If today is the day that the time log occured (which will 
+		 * be true 99% of the time for most users) then let's get a more
+		 * accurate time stamp. Who knows, we might use it for something
+		 * in the future.
+		 */
+		$date = strtotime($_POST['daySelect'] . ' ' . $_POST['monthSelect']);
+		if ( $date == strtotime( "today" ) )
+		{	
+			$date = time();
+		}
 		$core = Core::getInstance();
 
-		$sql = 'SELECT * FROM times T
-			INNER JOIN lookup L
-				ON T.lid = L.post_id
-			WHERE
-			T.clientID = :clientID AND
-			T.userID = :userID AND
-			T.taskID = :taskID AND
-			L.date = :date';
+		$sql = 'INSERT INTO lookup SET 
+			userID = :userID, 
+			clientID = :clientID, 
+			date = :date, 
+			postType = "time"';
 		$s = $core->pdo->prepare($sql);
-		$s->bindValue('taskID', $_POST['taskID']);
+		$s->bindValue('date', $date);
 		$s->bindValue('clientID', $_POST['clientID']);
 		$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
-		$s->bindValue('date', strtotime($_POST['daySelect'] . ' ' . $_POST['monthSelect']));
 		$s->execute();
-		$row = $s->fetch();
-		if ( $s->rowCount() > 0 )
-		{
-			$comments = trim($row['comments']);
-			$comments .= "\n\n" . $_POST['comments'];
-			$time = $row['timeAmount'];
-			$time += $_POST['timeAmount'];
-			$sql = 'UPDATE times SET 
-				comments = :comments,
-				timeAmount = :timeAmount
-					WHERE 
-				lid = :lid';
-			$s = $core->pdo->prepare($sql);
-			$s->bindValue('comments', $comments);
-			$s->bindValue('timeAmount', $time);
-			$s->bindValue('lid', $row['lid']);
-			$s->execute();
-		}
-		else
-		{
+		$post_id = $core->pdo->lastInsertId();
 
-			$sql = 'INSERT INTO lookup SET 
-				userID = :userID, 
-				clientID = :clientID, 
-				date = :date, 
-				postType = "time"';
-			$s = $core->pdo->prepare($sql);
-			$s->bindValue('date', strtotime($_POST['daySelect'] . ' ' . $_POST['monthSelect']));
-			$s->bindValue('clientID', $_POST['clientID']);
-			$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
-			$s->execute();
-			$post_id = $core->pdo->lastInsertId();
-
-			$sql = 'INSERT INTO times SET 
-				clientID = :clientID, 
-				userID = :userID, 
-				timeAmount = :timeAmount,
-				taskID = :taskID,
-				lid = :lid,
-				comments = :comments';
-			$core = Core::getInstance();
-			$s = $core->pdo->prepare($sql);
-			$s->bindValue('clientID', $_POST['clientID']);
-			$s->bindValue('lid', $post_id);
-			$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
-			$s->bindValue('timeAmount', $_POST['timeAmount']);
-			$s->bindValue('taskID', $_POST['taskID']);
-			$s->bindValue('comments', $_POST['comments']);
-			$s->execute();
-		}
+		$sql = 'INSERT INTO times SET 
+			clientID = :clientID, 
+			userID = :userID, 
+			timeAmount = :timeAmount,
+			taskID = :taskID,
+			lid = :lid,
+			comments = :comments';
+		$core = Core::getInstance();
+		$s = $core->pdo->prepare($sql);
+		$s->bindValue('clientID', $_POST['clientID']);
+		$s->bindValue('lid', $post_id);
+		$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
+		$s->bindValue('timeAmount', $_POST['timeAmount']);
+		$s->bindValue('taskID', $_POST['taskID']);
+		$s->bindValue('comments', $_POST['comments']);
+		$s->execute();
 		header('Location: /view/?clientID=' . $_POST['clientID']);
 		exit;
 	}
