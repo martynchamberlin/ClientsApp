@@ -6,7 +6,7 @@ require 'header.php';
 if (isset($_POST['email']) && User::create($_POST) === true)
 {
 	echo '<h1>Account successfully created</h1>';
-	echo '<p>Click <a href="#" class="fancybox">here</a> to log in</p>';
+	echo '<center><p>Click <a href="#" class="fancybox">here</a> to log in</p></center>';
 	exit;
 }
 
