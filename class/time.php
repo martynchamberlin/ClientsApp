@@ -168,6 +168,19 @@ AND L.postType = "time"';
 
 	static function updateTime($id, $redirect = '/')
 	{
+		if ( isset( $_POST['daySelect'] ) )
+		{
+			$created_today = true;
+			$date = strtotime($_POST['daySelect'] . ' ' . $_POST['monthSelect']);
+			if ( $date == strtotime( "today" ) )
+			{	
+				$date = time();
+			}
+		}
+		else
+		{
+			$created_today = false;
+		}
 		$sql = 'UPDATE times SET 
 			clientID = :clientID, 
 			timeAmount = :timeAmount, 
@@ -185,12 +198,18 @@ AND L.postType = "time"';
 		$s->execute();
 
 		$sql = 'UPDATE lookup SET 
-			clientID = :clientID, 
-			date = :date 
-			WHERE postType = "time" AND post_id = :id AND userID = :userID';
+			clientID = :clientID';
+		if ( $created_today )
+		{
+			$sql .= ', date = :date';
+		}
+		$sql .= ' WHERE postType = "time" AND post_id = :id AND userID = :userID';
 		
 		$s = $core->pdo->prepare($sql);
-		$s->bindValue('date', strtotime($_POST['daySelect'] . ' ' . $_POST['monthSelect']));
+		if ( $created_today )
+		{
+			$s->bindValue('date', $date);
+		}
 		$s->bindValue('clientID', $_POST['clientID']);
 		$s->bindValue('id', $id);
 		$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
@@ -235,7 +254,7 @@ LEFT JOIN tasks TA ON T.taskID = TA.taskID
 WHERE L.date >= ' . $begin . ' 
 		AND L.date < ' . $end . ' 
     AND (L.userID = ' . $_SESSION['loggedIn']['userID'] . '  OR C.billing_email = "' . $_SESSION['loggedIn']['email'] . '")
-AND C.clientID = "' . $id . '"
+AND L.clientID = "' . $id . '"
 ORDER BY L.date DESC, L.post_id DESC';
 //ORDER BY TA.taskName, L.date';
 //echo $sql;

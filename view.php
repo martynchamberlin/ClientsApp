@@ -61,7 +61,27 @@ foreach ($clientArray as $row)
 	{
 		echo '<div class="action-buttons"> <a href="/time/?time=' . $row['post_id'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '">(edit)</a> <a href="/delete/?time=' . $row['post_id'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '" class="delete">(delete)</a></div>';
 	}
-	echo '<span class="minutes"> ' . $time . ' minutes</span>';
+	echo '<span class="minutes">' . $time . " minute";
+	if ( $time != 1 )
+	{
+		echo 's';
+	}
+	/** 
+	 * In order for us to show when this time entry was saved, the entry
+	 * (1) must be created since we built out this new functionality, and
+	 * (2) they must not have first created it for today and then updated it
+	 * to be a different day. In such a situation the application saves 
+	 * the timestamp at midnight for that different day. Displaying this to 
+	 * the user creates no value for them, so we suppress.
+	 *
+	 * What's one flaw with this suppression? The rare case scenario where 
+	 * a user saves an entry at exactly midnight. 
+	 */
+	if ( $date > 1381813200 && $date % 60 * 60 * 24 != 0 )
+	{
+		echo ', ' . date( 'g:i a', $date );
+	}
+	echo '</span>';
 
 	echo '</div><!-- end .negative-margins--></div><!-- end .right --></div><!-- end .overflow_hidden -->';
 	$lastdate = $date;

@@ -97,12 +97,23 @@ foreach ($taskList as $instance)
 	echo $instance['taskName'];
 	echo '</option>';
 }
+
+if ( date('ldFY', $time['date'] ) == date('ldFY' ) )
+{
+	$created_today = true;
+}
+else
+{
+	$created_today = false;
+}
+
+
 ?>
 </select>
 </div><!-- end .left -->
 <div class="right">
 <label for="first">Year/Month</label>
-<select name="monthSelect" tabindex="1001">
+<select name="monthSelect" tabindex="1001" <?php if ( $edit && ! $created_today ) echo 'disabled'; ?>>
 	<? $months = Time::showMonths(12);
 	for ($i = 0; $i < count($months); $i++)
 	{
@@ -115,7 +126,7 @@ foreach ($taskList as $instance)
 
 <label for="daySelect">Day</label>
 
-<select name="daySelect" id="daySelect" tabindex="1002">
+<select name="daySelect" id="daySelect" tabindex="1002" <?php if ( $edit && ! $created_today ) echo 'disabled'; ?>>
 
 <?php	for ($i = 1; $i <= 31; $i++)
 	{
