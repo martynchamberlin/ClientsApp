@@ -46,7 +46,7 @@ if ( Config::ssl() )
 }
 
 
-else if ( User::logged_in() && Core::is_page('login') )
+if ( User::logged_in() && Core::is_page('login') )
 {
 	$redirect = isset( $_POST['redirect-login'] ) ? $_POST['redirect-login'] : "";
 	header('location: ' .Config::home() . $redirect);

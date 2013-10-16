@@ -743,7 +743,7 @@ jQuery(document).ready(function($) {
 
 	var h1 = $(this).find('h1').html();
 	var h1 = h1.replace(/(<([^>]+)>)/ig,"");
-	if ( ! is_page('landing') )
+	if ( ! $('body').is('.logged_out') )
 	{
 		document.title = h1;
 	}
