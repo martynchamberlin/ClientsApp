@@ -1,7 +1,13 @@
 <?
 
 session_start();
-date_default_timezone_set('America/North_Dakota/Beulah');
+$time_zone = get_user_meta( 'timezone' );
+if ( empty( $time_zone ) )
+{
+	$time_zone = 'America/North_Dakota/Beulah';
+}
+date_default_timezone_set( $time_zone );
+
 if (!empty($_POST))
 {
 	foreach ($_POST as $key=>$value)
@@ -9,6 +15,18 @@ if (!empty($_POST))
 		$_POST[$key] = stripslashes($value);
 	}
 }
+function get_user_meta( $meta )
+{	
+	if ( isset( $_SESSION['loggedIn'][$meta] ) )
+	{
+		return $_SESSION['loggedIn'][$meta];
+	}
+	else 
+	{
+		return "";
+	}
+}
+
 require 'markdown.php';
 require 'class/user.php';
 require 'class/config.php';
@@ -22,14 +40,26 @@ require 'class/paid.php';
 
 // Now that we're done calling all the classes, we need to handle all of our conditionals before showing the actual content
 
-// If they're not logged in, send them to the login page
-if ( ! User::logged_in() && (!Core::isPage('login') && !Core::isPage('landing') && ! Core::isPage('signup')) )
+if ( Config::ssl() )
 {
-	header('location: /landing/?logout&redirect=' . $_SERVER['REQUEST_URI'] );
-	exit;
+	Validate::check_ssl();
 }
 
-else if ( User::logged_in() && Core::isPage('login') )
+// If they're not logged in, send them to the login page
+if ( ! User::logged_in() )
+{
+	if ( Core::is_home() )
+	{
+		header( 'location: /landing/' );
+	}
+	else if ( ! Core::is_page( 'login' ) && !Core::is_page( 'landing' ) && ! Core::is_page( 'signup' ) && ! Core::is_home() )
+	{
+		header( 'location: /landing/?logout&redirect=' . $_SERVER['REQUEST_URI'] );
+		exit;
+	}	
+}
+
+else if ( User::logged_in() && Core::is_page('login') )
 {
 	$redirect = isset( $_POST['redirect-login'] ) ? $_POST['redirect-login'] : "";
 	header('location: ' .Config::home() . $redirect);

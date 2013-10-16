@@ -2,7 +2,50 @@
 require 'includes.php'; 
 require 'header.php'; 
 
-if ( empty( $clients ) && empty( $tasks ) )
+if ( isset( $_POST['set_timezone'] ) && ! empty( $_POST['timezone'] ) )
+{
+	$data = $_SESSION['loggedIn'];
+	$data['timezone'] = $_POST['timezone'];
+	$data['password'] = "";
+	User::update( $data );
+}
+
+
+$timezone = get_user_meta( 'timezone' );
+if ( empty( $timezone ) )
+{
+
+	echo '<h1>What time zone are you in?</h1>
+
+	<p>Hi ' . get_user_meta( 'first_name' ) . ',</p>
+	
+	<p>We\'ve been making incremental improvements to ClientsApp and one of the most important ways you can help is by telling us what time zone you\'re in. This will apply to all time-sensitive data you enter into this app, ensuring you have a customized yet consistent experience. Just select your location from the dropdown below and click save.</p>
+
+	<p>If you\'re traveling abroad, you can always update this setting from your Settings page. Just remember to change it back when you return!</p>
+	
+';
+	
+	$time_zones = Time::timezones();
+	echo '<form action="" class="setting_timezone" method="post">
+	<input type="hidden" name="set_timezone">
+	<select name="timezone">
+	<option value="">-- select --</option>';
+	foreach ( $time_zones as $key=>$val )
+	{
+		echo '<option value="' . $key . "\">" . $val . "</option>";
+	}
+	echo '</select>
+	<input type="submit" value="Save">
+	</form>
+	
+		<div class="hint light"><p>Having difficulty locating your time zone? If you live in the United States, you want one of the following.<br/> Just paste the value into the dropdown and you\'ll pull it right up.</p>
+	<ul><li><strong>PST</strong>: America/Phoenix</li>
+	<li><strong>MST</strong>: America/Denver</li>
+	<li><strong>CST</strong>: America/Chicago</li>
+	<li><strong>EST</strong>: America/Detroit</li>
+	</ul></div>';
+}
+else if ( empty( $clients ) && empty( $tasks ) )
 {
 	echo '<h1>Welcome!</h1>
 

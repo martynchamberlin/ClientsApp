@@ -191,11 +191,6 @@ jQuery(document).ready(function($) {
 		$.backstretch("../images/iStock_000006378858Medium.jpg");
 	}
 
-	setTimeout(function()
-	{
-		$('.account p.good-alert').fadeOut(1000);
-	}, 1000);
-
 	// When they want to delete their account
 	$('.cancel').click(function()
 	{
@@ -468,28 +463,36 @@ jQuery(document).ready(function($) {
 	$('form.account-settings').submit(function()
 	{
 		var valid = true;
-		$(this).find('input').each(function()
+		var password = $('input[name="password"]');
+		var firstname = $('input[name="first_name"]');
+		var lastname = $('input[name="last_name"]');
+		var email = $('input[name="email"]');
+	
+		$('form.account-settings').removeClass('error');
+
+		if ( $(firstname).val() === "" ) 
 		{
-			$(this).removeClass('error');
-			if ( $(this).val() === "" && ! $(this).is('input[type="password"]'))
-			{
-				$(this).addClass('error');
-				valid = false;
-			}
+			$(firstname).addClass('error');
+			valid = false;
+		}
 
-			if ( $(this).is('input[name="email"]') && !validateEmail($(this).val() ) )
-			{
-				$(this).addClass('error');
-				valid = false;
-			}
+		if ( $(lastname).val() === "" ) 
+		{
+			$(lastname).addClass('error');
+			valid = false;
+		}
 
-			if ( $(this).is('input[name="password"]') && $(this).val().length < 8 &&$(this).val().length > 0 )
-			{
-				$(this).addClass('error');
-				valid = false;
-			}
+		if ( $(email).val() === "" || ! validateEmail( $(email).val() ) ) 
+		{
+			$(email).addClass('error');
+			valid = false;
+		}
 
-		});
+		if ( $(password).val().length < 8 &&$(password).val().length > 0 )
+		{
+			$(password).addClass('error');
+			valid = false;
+		}
 
 		return valid;
 	});

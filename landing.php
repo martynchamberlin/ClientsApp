@@ -11,15 +11,15 @@ require 'header.php';
 
 <div class="both">
 <div class="left">
-<p>Clients <strong>App</strong> is a web-based time tracking tool that allows you to keep track of the <em>what</em> and the <em>when</em> of your freelance projects. It’s built by a solo entrepreneur who grew frustrated with the bloated, antequated alternatives out there. Here’s some features that’ll make you use this app on a daily basis:</p>
+<p>ClientsApp is a web-based time tracking tool that allows you to keep track of the <em>what</em> and the <em>when</em> of your freelance projects. It’s built by a solo entrepreneur who grew frustrated with the bloated, antequated alternatives out there. Here’s some features that’ll make you use this app on a daily basis:</p>
 <ul>
 	<li>Create new clients, new times, new tasks, and new fees</li>
 	<li>Keep track of your total money and hours each month</li>
-	<li>Live javascript timer ticks every second you work</li>
-	<li>Sort by your most popular clients</li>
+	<li>Sort by your most popular clients and tasks</li>
+	<li>View monthly and annual logs at a glance</li>
 </ul>
 
-<p>Creating an account to the right just takes thirty seconds</p>
+<p>Creating a free account takes just ten seconds.</p>
 
 </div>
 

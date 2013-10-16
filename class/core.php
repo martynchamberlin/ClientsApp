@@ -28,10 +28,10 @@ class Core
 		}
 		return self::$instance;
 	}
-
-	static function isPage($string)
+	
+	static function is_home()
 	{
-		return self::is_page($string);
+		return Core::get_page_url() == 'home' ? true : false;
 	}
 
 	static function is_page($string)

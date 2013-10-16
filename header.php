@@ -41,7 +41,7 @@
 	<link rel="shortcut icon" href="/images/favicon.ico?v=006" />	
 
 	</head>
-	<body class="<?= core::get_page_url() . " " . User::get_color_scheme() . " "; echo User::logged_in() ? "logged_in" : "logged_out"; ?>">
+	<body class="<?= core::get_page_url() . " "; echo User::logged_in() ? "logged_in" : "logged_out"; ?>">
 	<?php if ( isset($_GET['redirect'] ) ) { echo '<input type="hidden" name="redirect-login" value="' . $_GET['redirect'] . '">'; } ?>
 		<div id="fakewrap">
 		<div id="wrap">
@@ -49,7 +49,7 @@
 		<? if ( User::logged_in() === true ) : ?>
 				<ul>
 					<li class="first">
-						<a id="home" <? if (Core::isPage('')) echo 'class="current" '; ?>href="/">C</a>
+						<a id="home" <? if (Core::is_page('')) echo 'class="current" '; ?>href="/">C</a>
 					</li>
 					<li>
 						<a href="#">+ New</a>
@@ -69,23 +69,23 @@
 						<a href="#">Overview</a>
 						<ul>
 								<li>
-						<a <? if (Core::isPage('clients')) echo 'class="current" '; ?>href="/clients/">Clients</a>
+						<a <? if (Core::is_page('clients')) echo 'class="current" '; ?>href="/clients/">Clients</a>
 					</li>
 				
 					<li>
-						<a <? if (Core::isPage('tasks')) echo 'class="current" '; ?>href="/tasks/">Tasks</a>
+						<a <? if (Core::is_page('tasks')) echo 'class="current" '; ?>href="/tasks/">Tasks</a>
 					</li>		
 					<li>
-						<a <? if (Core::isPage('statistics')) echo 'class="current" '; ?>href="<?= ! empty($tasks) ? "/yearly-income/\"" : "#\" class=\"dead\"" ?>>Annual Income</a>
-					<a <? if (Core::isPage('statistics')) echo 'class="current" '; ?>href="<?= ! empty($tasks) ? "/task-by-year/\"" : "#\" class=\"dead\"" ?>>Annual Task History</a>
-					<a <? if (Core::isPage('statistics')) echo 'class="current" '; ?>href="<?= ! empty($clients) ? "/client-by-year/\"" : "#\" class=\"dead\"" ?>>Annual Client History</a>
+						<a <? if (Core::is_page('statistics')) echo 'class="current" '; ?>href="<?= ! empty($tasks) ? "/yearly-income/\"" : "#\" class=\"dead\"" ?>>Annual Income</a>
+					<a <? if (Core::is_page('statistics')) echo 'class="current" '; ?>href="<?= ! empty($tasks) ? "/task-by-year/\"" : "#\" class=\"dead\"" ?>>Annual Task History</a>
+					<a <? if (Core::is_page('statistics')) echo 'class="current" '; ?>href="<?= ! empty($clients) ? "/client-by-year/\"" : "#\" class=\"dead\"" ?>>Annual Client History</a>
 					</li>		
 						</ul>
 
 					</li>
 
 					<li class="account-settings">
-						<a <? if (Core::isPage('account')) echo 'class="current" '; ?> href="/account/">Settings</a>
+						<a <? if (Core::is_page('account')) echo 'class="current" '; ?> href="/account/">Settings</a>
 						<ul>
 					<li class="logout">
 						<a href="/logout/">Logout</a>
@@ -140,7 +140,7 @@ foreach ($clientList as $instance)
 <a style="display:none" id="realfancy" href="#"></a>
 	<ul>
 					<li class="first">
-						<a id="home" <? if (Core::isPage('')) echo 'class="current" '; ?>href="/">C</a>
+						<a id="home" <? if (Core::is_page('')) echo 'class="current" '; ?>href="/">C</a>
 					<li class="login">
 						<a href="/login/" class="fancybox">Login</a>
 					</li>

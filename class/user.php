@@ -9,22 +9,6 @@ class User
 	static $login_error_message = array();
 	static $create_error_message = array();
 
-	static function color_scheme( $color )
-	{
-		return isset($_SESSION['loggedIn']['color_scheme'])	&& $_SESSION['loggedIn']['color_scheme'] == $color;
-	}
-	
-	static function get_color_scheme()
-	{
-		if (isset($_SESSION['loggedIn']['color_scheme']))
-		{
-			return $_SESSION['loggedIn']['color_scheme'];
-		}
-		else 
-		{
-			return "default";
-		}
-	}
 	// for when they're first creating their account
 	static function sanitize(& $data)
 	{
@@ -196,13 +180,13 @@ class User
 			last_name = :last_name,
 			email = :email,
 			password = :password,
-			color_scheme = :color_scheme
+			timezone = :timezone
 			WHERE email = :formerEmail';
 			$s = $pdo->prepare($sql);
 			$s->bindValue(':email', $data['email']);
 			$s->bindValue(':password', $data['password']);
-			$s->bindValue(':color_scheme', $data['color_scheme']);
 			$s->bindValue(':last_name', $data['last_name']);
+			$s->bindValue(':timezone', $data['timezone']);
 			$s->bindValue(':first_name', $data['first_name']);
 			$s->bindValue(':formerEmail', $_SESSION['loggedIn']['email']);
 			$s->execute();
