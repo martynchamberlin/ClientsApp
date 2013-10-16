@@ -45,19 +45,6 @@ if ( Config::ssl() )
 	Validate::check_ssl();
 }
 
-// If they're not logged in, send them to the login page
-if ( ! User::logged_in() )
-{
-	if ( Core::is_home() )
-	{
-		header( 'location: /landing/' );
-	}
-	else if ( ! Core::is_page( 'login' ) && !Core::is_page( 'landing' ) && ! Core::is_page( 'signup' ) && ! Core::is_home() )
-	{
-		header( 'location: /landing/?logout&redirect=' . $_SERVER['REQUEST_URI'] );
-		exit;
-	}	
-}
 
 else if ( User::logged_in() && Core::is_page('login') )
 {

@@ -61,7 +61,7 @@ margin: 0 0 25px 0;
 }
 
 
-body.logged_out.landing {
+body.logged_out {
 	background: none;
 }
 
@@ -728,53 +728,49 @@ td.border.count-wrap {
 /* Landing Page --------------------------------------- */
 
 sup {
-font-size: 12px;
-margin-top: -8px;
-padding: 3px;
-vertical-align: top;
-font-weight: 300;
-display: inline-block;
+	font-size: 12px;
+	margin-top: -8px;
+	padding: 3px;
+	vertical-align: top;
+	font-weight: 300;
+	display: inline-block;
 }
 
-.landing h1, .landing h2 {
+.home.logged_out h1, .home.logged_out h2 {
 	text-align: center;
 }
 
 
-.landing h2 {
+.home.logged_out h2 {
 	padding: 0 0 35px 0;
 }
 
-.landing #content {
+.home.logged_out #content {
 padding: 0 90px;
 }
 
-.landing #wrap {
+.home.logged_out #wrap {
 	padding: 0 0 60px 0
 }
 
-.landing .left {
+.home.logged_out .left {
 	width: 450px;
 	float: left;
 	margin: 49px 0 0;
 }
 
-.landing .right {
+.home.logged_out .right {
 	float: right;
 	padding: 44px 66px 3px;
 	width: 185px;
 }
 
-.landing h3 {
-padding: 10px 0;
-font-size: 20px;
+.home.logged_out h3 {
+	padding: 10px 0;
+	font-size: 20px;
 }
 
-.landing .right form {
-
-}
-
-.landing .both {
+.home.logged_out .both {
 	clear: both;
 	overflow: hidden;
 }
@@ -784,13 +780,13 @@ font-size: 20px;
 	font-weight: 300;
 }
 
-.landing .citation {
-clear: both;
-color: rgb(184, 184, 184);
-border-top: 1px solid #ddd;
-padding: 10px;
-margin: 70px 0 0;
-overflow: hidden;
+.home.logged_out .citation {
+	clear: both;
+	color: rgb(184, 184, 184);
+	border-top: 1px solid #ddd;
+	padding: 10px;
+	margin: 70px 0 0;
+	overflow: hidden;
 }
 
 .citation sup {

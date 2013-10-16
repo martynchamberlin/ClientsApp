@@ -2,6 +2,6 @@
 
 session_start();
 session_destroy();
-header('Location: /landing/?logout');
+header('Location: /?logout');
 exit;
 
