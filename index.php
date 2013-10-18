@@ -5,7 +5,7 @@ require 'header.php';
 // If they're not logged in and trying to access a sensitive page
 if ( ! User::logged_in() )
 {
-	if ( ! Core::is_page( 'login' ) && !Core::is_page( 'landing' ) && ! Core::is_page( 'signup' ) && ! Core::is_home() )
+	if ( ! Core::is_page( 'login' ) && ! Core::is_page( 'signup' ) && ! Core::is_home() )
 	{
 		header( 'location: /?logout&redirect=' . $_SERVER['REQUEST_URI'] );
 		exit;

@@ -60,7 +60,6 @@ if(isset($_POST['monthSelect']))
 	if (isset($_POST['in_header']))
 	{
 	header('Location: ' . $_SERVER['HTTP_REFERER']);
-	//header('location: /landing/ ');
 	exit;
 	}
 }
