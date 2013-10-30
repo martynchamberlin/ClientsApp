@@ -47,7 +47,7 @@ else
 
 <h1><? echo $edit ? 'Edit Entry' : 'New Time'; ?></h1>
 
-<form action="" method="post" class="create-time ajax">
+<form action="" method="post" class="create-time ajax <? echo $edit ? 'edit' : 'new'; ?>">
 <? 
 if ($edit)
 {
@@ -142,7 +142,9 @@ else
 
 <label for="minutes">Time amount (minutes : seconds)</label>
 <div class="both">
-<input type="submit" value="Start" id="startstop"><input type="text" tabindex="1" name="timeAmount" id="minutes" value="<?= $edit ? $time['timeAmount'] : ''?>"/>
+<input type="submit" value="Start" id="startstop"><input type="text" tabindex="1" name="faketimeAmount" disabled id="minutes" value="<?= $edit ? $time['timeAmount'] : ''?>"/>
+<input type="hidden" name="timeAmount" value="<?= $edit ? $time['timeAmount'] * 60 : '0'?>"/>
+<input type="hidden" name="startTime" value="0">
 <div class="seconds">:&nbsp;<span id="seconds"></span></div>
 
 </div>

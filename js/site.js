@@ -60,7 +60,7 @@ jQuery(document).ready(function($) {
 		toggle_task( $(this) );
 	});
 
-	toggle_task( 'form.ajax select[name="clientID"]' );
+	toggle_task( 'form.ajax.new select[name="clientID"]' );
 
 
 	if ( $('body').is('.task-by-year') || $('body').is('.client-by-year'))
@@ -434,6 +434,9 @@ jQuery(document).ready(function($) {
 	// Validate the Create a Time form
 	$('form.create-time').submit(function()
 	{
+		updateTimeAmount();
+		var minutes = parseInt($('input[name="timeAmount"]').val()) / 60;
+		var minutes = Math.ceil(minutes);
 		$(this).find('textarea').removeClass('error');
 		var valid = true;
 		var timeAmount = $(this).find('input[name="timeAmount"]');
@@ -454,6 +457,7 @@ jQuery(document).ready(function($) {
 		}
 		if ( valid === true )
 		{
+			$('input[name="timeAmount"]').val( minutes );
 			$('body #fakewrap').hide( 500 );
 		}
 		return valid;
@@ -591,6 +595,8 @@ jQuery(document).ready(function($) {
 
 	function startTimer() {
 		setMin();
+		var ts = Math.round((new Date()).getTime() / 1000);
+		$('input[name="startTime"]').val( ts );
 		if (! timer)
 		{
 			interval = setInterval(tick, 1000);
@@ -601,6 +607,7 @@ jQuery(document).ready(function($) {
 	function stopTimer()
 	{
 		clearInterval(interval);
+		updateTimeAmount();
 		timer = false;
 	}
 
@@ -636,6 +643,21 @@ jQuery(document).ready(function($) {
 		$('#minutes').val(min);
 	}
 
+	function updateTimeAmount()
+	{
+		var startTime = $('input[name="startTime"]').val();
+		/** 
+		 * When would startTime NOT be greater than zero? When the 
+		 * user hits the submit button without ever hitting the Stop
+		 * button
+		 */
+		if ( startTime > 0 )
+		{
+			var ts = Math.round((new Date()).getTime() / 1000);
+			var delta = ts - $('input[name="startTime"]').val();
+			$('input[name="timeAmount"]').val( parseInt( $('input[name="timeAmount"]').val() ) + delta );
+		}
+	}
 
 	$('#startstop').click(function()
 	{
