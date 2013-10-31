@@ -25,7 +25,7 @@ if ( isset($_POST['print']) )
 
 $totalTime = 0;
 $tasks = array();
-$lastdate = "";
+$lastdate = 0;
 foreach ($clientArray as $row)
 {
 	if (!isset($tasks[$row['taskID']]))
@@ -47,7 +47,7 @@ foreach ($clientArray as $row)
 	$totalTime = !isset($totalTime) ? $row['timeAmount'] : $totalTime + $row['timeAmount'];
 
 	echo '<div class="overflow_hidden">';
-	if ( date('d', (int)$lastdate) != date('d', (int)$date ) ): 
+	if ( date('d', (int)$lastdate) != date('d', (int)$date ) || $lastdate == 0 ): 
 	echo'
 
 	<div class="calendar"><span class="month">'
