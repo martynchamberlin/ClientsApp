@@ -293,14 +293,27 @@ color: white;
 	margin: 0 0 2px 0;
 }
 .negative-margins {
-	margin: -25px 0 0;
+	margin: -25px 0 10px;
 }
-
+.action-buttons {
+	display: inline;
+}
+.negative-margins a {
+	color: #ccc;
+	text-decoration: underline;
+}
+.negative-margins a:hover {
+	color: #87B448;
+}
 .view .left-column {
 	float: left;
 	min-width: 150px;
 }
 
+.clearboth {
+	height: 16px;
+	clear: both;
+}
 
 /* Calendar Idea -----------------------------------*/
 

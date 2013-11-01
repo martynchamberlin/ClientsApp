@@ -45,22 +45,29 @@ foreach ($clientArray as $row)
 	$date = $row['date'];
 
 	$totalTime = !isset($totalTime) ? $row['timeAmount'] : $totalTime + $row['timeAmount'];
-
-	echo '<div class="overflow_hidden">';
-	if ( date('d', (int)$lastdate) != date('d', (int)$date ) || $lastdate == 0 ): 
+	if ( date('d', (int)$lastdate) != date('d', (int)$date ) || $lastdate == 0 )
+	{
+		$newday = true;
+		if ( $lastdate != 0 )
+			echo '<div class="clearboth"></div>';
+	}
+	else
+	{
+		$newday = false;
+	}
+	echo '<div class="entry">';
+	if ( $newday )
+	{
 	echo'
 
 	<div class="calendar"><span class="month">'
 	. date('M', $row['date']) . 
 	'</span><span class="day">' . date('j', $row['date']) . '</span></div>';
-	endif;
+	}
 	echo '
 	<div class="right">' . markdown('<strong> ' . $row['taskName'] . '</strong> — ' . make_links_clickable( $row['comments'] ) ) . '
 	<div class="negative-margins">';
-	if (!isset($_SESSION['print']) && $_SESSION['loggedIn']['userID'] == $row['userID'] )
-	{
-		echo '<div class="action-buttons"> <a href="/time/?time=' . $row['post_id'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '">(edit)</a> <a href="/delete/?time=' . $row['post_id'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '" class="delete">(delete)</a></div>';
-	}
+
 	echo '<span class="minutes">' . $time . " minute";
 	if ( $time != 1 )
 	{
@@ -82,7 +89,10 @@ foreach ($clientArray as $row)
 		echo ', ' . date( 'g:i a', $date );
 	}
 	echo '</span>';
-
+	if (!isset($_SESSION['print']) && $_SESSION['loggedIn']['userID'] == $row['userID'] )
+	{
+		echo '<div class="action-buttons"> <a href="/time/?time=' . $row['post_id'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '">edit</a> <a href="/delete/?time=' . $row['post_id'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '" class="delete">delete</a></div>';
+	}
 	echo '</div><!-- end .negative-margins--></div><!-- end .right --></div><!-- end .overflow_hidden -->';
 	$lastdate = $date;
 }
@@ -127,7 +137,7 @@ if (!empty($expenses))
 		<div class="right"><strong>' . markdown ( '$' . number_format($e['amount'], 2) . '</strong> — ' . make_links_clickable( $e['comments'] ) ) . '<div class="negative-margins">';
 		if (!isset($_SESSION['print'])  && $_SESSION['loggedIn']['userID'] == isset( $row ) ? $row['userID'] : 'asdf' )
 		{
-			echo ' <a href="/fee/?expense=' . $e['post_id'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '">(edit)</a> <a href="/delete/?expense=' . $e['post_id'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '" class="delete">(delete)</a>';
+			echo ' <a href="/fee/?expense=' . $e['post_id'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '">edit</a> <a href="/delete/?expense=' . $e['post_id'] . '&redirect=' . urlencode($_SERVER['REQUEST_URI']) . '" class="delete">delete</a>';
 		}
 	echo '</div><!-- end .negative-margins --></div></div><!-- end .overflow_hidden -->';
 	$expenseTotal += $e['amount'];
