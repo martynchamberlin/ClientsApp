@@ -168,6 +168,7 @@ AND L.postType = "time"';
 
 	static function updateTime($id, $redirect = '/')
 	{
+		/*
 		if ( isset( $_POST['daySelect'] ) )
 		{
 			$created_today = true;
@@ -181,6 +182,7 @@ AND L.postType = "time"';
 		{
 			$created_today = false;
 		}
+		*/
 		$sql = 'UPDATE times SET 
 			clientID = :clientID, 
 			timeAmount = :timeAmount, 
@@ -199,17 +201,21 @@ AND L.postType = "time"';
 
 		$sql = 'UPDATE lookup SET 
 			clientID = :clientID';
+		/*
 		if ( $created_today )
 		{
 			$sql .= ', date = :date';
 		}
+		*/
 		$sql .= ' WHERE postType = "time" AND post_id = :id AND userID = :userID';
 		
 		$s = $core->pdo->prepare($sql);
+		/*
 		if ( $created_today )
 		{
 			$s->bindValue('date', $date);
 		}
+		*/
 		$s->bindValue('clientID', $_POST['clientID']);
 		$s->bindValue('id', $id);
 		$s->bindValue('userID', $_SESSION['loggedIn']['userID']);
