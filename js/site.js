@@ -60,8 +60,10 @@ jQuery(document).ready(function($) {
 		toggle_task( $(this) );
 	});
 
-	toggle_task( 'form.ajax.new select[name="clientID"]' );
-
+	if ( $('form.ajax.new').length > 0 )
+	{
+		toggle_task( 'form.ajax.new select[name="clientID"]' );
+	}
 
 	if ( $('body').is('.task-by-year') || $('body').is('.client-by-year'))
 	{
