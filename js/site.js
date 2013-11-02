@@ -657,13 +657,25 @@ jQuery(document).ready(function($) {
 		{
 			var ts = Math.round((new Date()).getTime() / 1000);
 			var delta = ts - $('input[name="startTime"]').val();
-			$('input[name="timeAmount"]').val( $('input[name="timeAmount"]').val() + delta );
+			$('input[name="timeAmount"]').val( $('input[name="timeAmount"]').val() - 2 + 2 + delta );
 		}
 	}
 
+	/** 
+	 * This function gives us the ability to let the user manaully update
+	 * the time amount. I've simply been needing this feature too much
+	 * today.
+	 * 
+	 * Woops, okay here's the bug with this: user starts clock. 
+	 * 5 minutes later, user updates the value of timeAmount.
+	 * This inc
+
+	 */
 	$('#minutes').change(function()
 	{
 		$('input[name="timeAmount"]').val( $(this).val() * 60 );
+		var ts = Math.round((new Date()).getTime() / 1000);
+		$('input[name="startTime"]').val( ts );
 	});
 
 	$('#startstop').click(function()

@@ -79,6 +79,24 @@ body {
 	overflow: hidden;
 }
 
+#special-entry-content {
+width: 669px;
+margin: 0 auto 40px;
+}
+
+#special-entry-content h1 {
+border-bottom: 1px solid #DDD;
+width: 670px;
+margin: 32px auto 30px;
+padding: 0 0 30px;
+display: block;
+overflow: hidden;
+}
+
+#special-entry-content h2 {
+	margin: 0 0 14px 0;
+}
+
 .landing #wrap, .logged_out #wrap {
 	box-shadow: 0 0px 11px rgba(116, 116, 116, 1.0);
 }
