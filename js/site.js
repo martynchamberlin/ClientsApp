@@ -445,8 +445,8 @@ jQuery(document).ready(function($) {
 		$(timeAmount).removeClass('error');
 		if ($(timeAmount).val() === "" || ! isNumeric ( $(timeAmount).val() ) )
 		{
-				$(timeAmount).addClass('error');
-				valid = false;
+				//$(timeAmount).addClass('error');
+				//valid = false;
 		}
 		if ($(this).find('textarea').val() === "" )
 		{	
@@ -657,9 +657,14 @@ jQuery(document).ready(function($) {
 		{
 			var ts = Math.round((new Date()).getTime() / 1000);
 			var delta = ts - $('input[name="startTime"]').val();
-			$('input[name="timeAmount"]').val( parseInt( $('input[name="timeAmount"]').val() ) + delta );
+			$('input[name="timeAmount"]').val( $('input[name="timeAmount"]').val() + delta );
 		}
 	}
+
+	$('#minutes').change(function()
+	{
+		$('input[name="timeAmount"]').val( $(this).val() * 60 );
+	});
 
 	$('#startstop').click(function()
 	{
